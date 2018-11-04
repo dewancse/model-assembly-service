@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<model xmlns="http://www.cellml.org/cellml/1.1#" xmlns:cmeta="http://www.cellml.org/metadata/1.0#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqs="http://www.cellml.org/bqs/1.0#" xmlns:semsim="http://www.bhi.washington.edu/SemSim#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" name="weinstein_1995" cmetaid="weinstein_1995">
+<model xmlns="http://www.cellml.org/cellml/1.1#" xmlns:cmeta="http://www.cellml.org/metadata/1.0#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqs="http://www.cellml.org/bqs/1.0#" xmlns:semsim="http://www.bhi.washington.edu/SemSim#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" name="weinstein_1995" cmeta:id="weinstein_1995">
   <documentation xmlns="http://cellml.org/tmp-documentation">
     <article>
       <articleinfo>
@@ -81,16 +81,16 @@
     <unit prefix="centi" units="metre" />
   </units>
   <component name="environment">
-    <variable cmetaid="environment.time" name="time" public_interface="out" units="second" />
+    <variable cmeta:id="environment.time" name="time" public_interface="out" units="second" />
   </component>
   <component name="Concentrations">
-    <variable cmetaid="Concentrations.C_ext_Na" initial_value="140" name="C_ext_Na" public_interface="out" units="mM" />
-    <variable cmetaid="Concentrations.C_ext_H" initial_value="4.95e-2" name="C_ext_H" public_interface="out" units="mM" />
-    <variable cmetaid="Concentrations.C_ext_NH4" initial_value="0.2" name="C_ext_NH4" public_interface="out" units="mM" />
-    <variable cmetaid="Concentrations.C_int_Na" initial_value="19.6" name="C_int_Na" public_interface="out" units="mM" />
-    <variable cmetaid="Concentrations.C_int_H" initial_value="1e-3" name="C_int_H" public_interface="out" units="mM" />
-    <variable cmetaid="Concentrations.C_int_NH4" initial_value="0.23" name="C_int_NH4" public_interface="out" units="mM" />
-    <variable cmetaid="Concentrations.time" name="time" public_interface="in" units="second" />
+    <variable cmeta:id="Concentrations.C_ext_Na" initial_value="140" name="C_ext_Na" public_interface="out" units="mM" />
+    <variable cmeta:id="Concentrations.C_ext_H" initial_value="4.95e-2" name="C_ext_H" public_interface="out" units="mM" />
+    <variable cmeta:id="Concentrations.C_ext_NH4" initial_value="0.2" name="C_ext_NH4" public_interface="out" units="mM" />
+    <variable cmeta:id="Concentrations.C_int_Na" initial_value="19.6" name="C_int_Na" public_interface="out" units="mM" />
+    <variable cmeta:id="Concentrations.C_int_H" initial_value="1e-3" name="C_int_H" public_interface="out" units="mM" />
+    <variable cmeta:id="Concentrations.C_int_NH4" initial_value="0.23" name="C_int_NH4" public_interface="out" units="mM" />
+    <variable cmeta:id="Concentrations.time" name="time" public_interface="in" units="second" />
     <math xmlns="http://www.w3.org/1998/Math/MathML">
       <apply>
         <eq />
@@ -106,39 +106,39 @@
     </math>
   </component>
   <component name="NHE3_Parameters">
-    <variable cmetaid="NHE3_Parameters.XTxP0_NHE3_Na" initial_value="1.6e-3" name="XTxP0_NHE3_Na" public_interface="out" units="nmol_per_s_per_cm2" />
-    <variable cmetaid="NHE3_Parameters.XTxP0_NHE3_H" initial_value="0.48e-3" name="XTxP0_NHE3_H" public_interface="out" units="nmol_per_s_per_cm2" />
-    <variable cmetaid="NHE3_Parameters.XTxP0_NHE3_NH4" initial_value="1.6e-3" name="XTxP0_NHE3_NH4" public_interface="out" units="nmol_per_s_per_cm2" />
-    <variable cmetaid="NHE3_Parameters.K_NHE3_Na" initial_value="0.03e3" name="K_NHE3_Na" public_interface="out" units="mM" />
-    <variable cmetaid="NHE3_Parameters.K_NHE3_H" initial_value="72e-6" name="K_NHE3_H" public_interface="out" units="mM" />
-    <variable cmetaid="NHE3_Parameters.K_NHE3_NH4" initial_value="0.027e3" name="K_NHE3_NH4" public_interface="out" units="mM" />
+    <variable cmeta:id="NHE3_Parameters.XTxP0_NHE3_Na" initial_value="1.6e-3" name="XTxP0_NHE3_Na" public_interface="out" units="nmol_per_s_per_cm2" />
+    <variable cmeta:id="NHE3_Parameters.XTxP0_NHE3_H" initial_value="0.48e-3" name="XTxP0_NHE3_H" public_interface="out" units="nmol_per_s_per_cm2" />
+    <variable cmeta:id="NHE3_Parameters.XTxP0_NHE3_NH4" initial_value="1.6e-3" name="XTxP0_NHE3_NH4" public_interface="out" units="nmol_per_s_per_cm2" />
+    <variable cmeta:id="NHE3_Parameters.K_NHE3_Na" initial_value="0.03e3" name="K_NHE3_Na" public_interface="out" units="mM" />
+    <variable cmeta:id="NHE3_Parameters.K_NHE3_H" initial_value="72e-6" name="K_NHE3_H" public_interface="out" units="mM" />
+    <variable cmeta:id="NHE3_Parameters.K_NHE3_NH4" initial_value="0.027e3" name="K_NHE3_NH4" public_interface="out" units="mM" />
   </component>
   <component name="NHE3">
-    <variable cmetaid="NHE3.C_ext_Na" name="C_ext_Na" public_interface="in" units="mM" />
-    <variable cmetaid="NHE3.C_ext_H" name="C_ext_H" public_interface="in" units="mM" />
-    <variable cmetaid="NHE3.C_ext_NH4" name="C_ext_NH4" public_interface="in" units="mM" />
-    <variable cmetaid="NHE3.C_int_Na" name="C_int_Na" public_interface="in" units="mM" />
-    <variable cmetaid="NHE3.C_int_H" name="C_int_H" public_interface="in" units="mM" />
-    <variable cmetaid="NHE3.C_int_NH4" name="C_int_NH4" public_interface="in" units="mM" />
-    <variable cmetaid="NHE3.XTxP0_NHE3_Na" name="XTxP0_NHE3_Na" public_interface="in" units="nmol_per_s_per_cm2" />
-    <variable cmetaid="NHE3.XTxP0_NHE3_H" name="XTxP0_NHE3_H" public_interface="in" units="nmol_per_s_per_cm2" />
-    <variable cmetaid="NHE3.XTxP0_NHE3_NH4" name="XTxP0_NHE3_NH4" public_interface="in" units="nmol_per_s_per_cm2" />
-    <variable cmetaid="NHE3.XTxP_NHE3_Na" name="XTxP_NHE3_Na" units="nmol_per_s_per_cm2" />
-    <variable cmetaid="NHE3.XTxP_NHE3_H" name="XTxP_NHE3_H" units="nmol_per_s_per_cm2" />
-    <variable cmetaid="NHE3.XTxP_NHE3_NH4" name="XTxP_NHE3_NH4" units="nmol_per_s_per_cm2" />
-    <variable cmetaid="NHE3.K_NHE3_Na" name="K_NHE3_Na" public_interface="in" units="mM" />
-    <variable cmetaid="NHE3.K_NHE3_H" name="K_NHE3_H" public_interface="in" units="mM" />
-    <variable cmetaid="NHE3.K_NHE3_NH4" name="K_NHE3_NH4" public_interface="in" units="mM" />
-    <variable cmetaid="NHE3.alpha_ext_Na" name="alpha_ext_Na" units="dimensionless" />
-    <variable cmetaid="NHE3.beta_ext_H" name="beta_ext_H" units="dimensionless" />
-    <variable cmetaid="NHE3.gamma_ext_NH4" name="gamma_ext_NH4" units="dimensionless" />
-    <variable cmetaid="NHE3.alpha_int_Na" name="alpha_int_Na" units="dimensionless" />
-    <variable cmetaid="NHE3.beta_int_H" name="beta_int_H" units="dimensionless" />
-    <variable cmetaid="NHE3.gamma_int_NH4" name="gamma_int_NH4" units="dimensionless" />
-    <variable cmetaid="NHE3.sum_NHE3" name="sum_NHE3" units="nmol_per_s_per_cm2" />
-    <variable cmetaid="NHE3.J_NHE3_Na" name="J_NHE3_Na" public_interface="out" units="nmol_per_s_per_cm2" />
-    <variable cmetaid="NHE3.J_NHE3_H" name="J_NHE3_H" public_interface="out" units="nmol_per_s_per_cm2" />
-    <variable cmetaid="NHE3.J_NHE3_NH4" name="J_NHE3_NH4" public_interface="out" units="nmol_per_s_per_cm2" />
+    <variable cmeta:id="NHE3.C_ext_Na" name="C_ext_Na" public_interface="in" units="mM" />
+    <variable cmeta:id="NHE3.C_ext_H" name="C_ext_H" public_interface="in" units="mM" />
+    <variable cmeta:id="NHE3.C_ext_NH4" name="C_ext_NH4" public_interface="in" units="mM" />
+    <variable cmeta:id="NHE3.C_int_Na" name="C_int_Na" public_interface="in" units="mM" />
+    <variable cmeta:id="NHE3.C_int_H" name="C_int_H" public_interface="in" units="mM" />
+    <variable cmeta:id="NHE3.C_int_NH4" name="C_int_NH4" public_interface="in" units="mM" />
+    <variable cmeta:id="NHE3.XTxP0_NHE3_Na" name="XTxP0_NHE3_Na" public_interface="in" units="nmol_per_s_per_cm2" />
+    <variable cmeta:id="NHE3.XTxP0_NHE3_H" name="XTxP0_NHE3_H" public_interface="in" units="nmol_per_s_per_cm2" />
+    <variable cmeta:id="NHE3.XTxP0_NHE3_NH4" name="XTxP0_NHE3_NH4" public_interface="in" units="nmol_per_s_per_cm2" />
+    <variable cmeta:id="NHE3.XTxP_NHE3_Na" name="XTxP_NHE3_Na" units="nmol_per_s_per_cm2" />
+    <variable cmeta:id="NHE3.XTxP_NHE3_H" name="XTxP_NHE3_H" units="nmol_per_s_per_cm2" />
+    <variable cmeta:id="NHE3.XTxP_NHE3_NH4" name="XTxP_NHE3_NH4" units="nmol_per_s_per_cm2" />
+    <variable cmeta:id="NHE3.K_NHE3_Na" name="K_NHE3_Na" public_interface="in" units="mM" />
+    <variable cmeta:id="NHE3.K_NHE3_H" name="K_NHE3_H" public_interface="in" units="mM" />
+    <variable cmeta:id="NHE3.K_NHE3_NH4" name="K_NHE3_NH4" public_interface="in" units="mM" />
+    <variable cmeta:id="NHE3.alpha_ext_Na" name="alpha_ext_Na" units="dimensionless" />
+    <variable cmeta:id="NHE3.beta_ext_H" name="beta_ext_H" units="dimensionless" />
+    <variable cmeta:id="NHE3.gamma_ext_NH4" name="gamma_ext_NH4" units="dimensionless" />
+    <variable cmeta:id="NHE3.alpha_int_Na" name="alpha_int_Na" units="dimensionless" />
+    <variable cmeta:id="NHE3.beta_int_H" name="beta_int_H" units="dimensionless" />
+    <variable cmeta:id="NHE3.gamma_int_NH4" name="gamma_int_NH4" units="dimensionless" />
+    <variable cmeta:id="NHE3.sum_NHE3" name="sum_NHE3" units="nmol_per_s_per_cm2" />
+    <variable cmeta:id="NHE3.J_NHE3_Na" name="J_NHE3_Na" public_interface="out" units="nmol_per_s_per_cm2" />
+    <variable cmeta:id="NHE3.J_NHE3_H" name="J_NHE3_H" public_interface="out" units="nmol_per_s_per_cm2" />
+    <variable cmeta:id="NHE3.J_NHE3_NH4" name="J_NHE3_NH4" public_interface="out" units="nmol_per_s_per_cm2" />
     <math xmlns="http://www.w3.org/1998/Math/MathML">
       <apply>
         <eq />

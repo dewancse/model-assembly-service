@@ -23,3 +23,19 @@ for index in range(len(modelEntityList)):
 
 for component in componentList:
     print(component)
+
+# find cellml model version 1.0 or 2.0
+# import requests
+# from xml.dom import pulldom
+#
+# workspaceURL = 'https://models.physiomeproject.org/workspace/267/rawfile/HEAD/'
+# r = requests.get(workspaceURL + 'weinstein_1995.cellml')
+#
+# doc = pulldom.parseString(r.text)
+# for event, node in doc:
+#     if event == pulldom.START_ELEMENT and node.tagName == 'model':
+#         # access directly by attribute name
+#         print(node.getAttribute('xmlns:cmeta'))
+#         # loop through to access all attributes
+#         for index in range(node.attributes.length):
+#             print('name:', node.attributes.item(index).name, ' value:', node.attributes.item(index).value)
