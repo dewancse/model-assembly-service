@@ -1,4 +1,4 @@
-from libcellml import Model, Printer
+from libcellml import Model, Printer, Component, ImportSource
 
 # Instantiate a model
 m = Model()
@@ -13,18 +13,12 @@ m.setName(modelName)
 
 print("Model: ", m, "\nModel Id: ", m.getId(), "\nModel Name: ", m.getName())
 
-# serialize and print a model
-printer = Printer()
-model = printer.printModel(m)
-
-print("\nModel:\n", model)
-
-# write in a file
-f = open("model.xml", "w")
-f.write(model)
+# add component
+c = Component()
+m.addComponent(c)
 
 # pre-generated JSON model recipe
-combinedMembrane = [
+modelRecipe = [
     {
         "med_fma": "http://purl.obolibrary.org/obo/FMA_84666",
         "med_pr": "http://purl.obolibrary.org/obo/PR_P55018",
@@ -302,8 +296,48 @@ combinedMembrane = [
     }
 ];
 
-print("combinedMembrane: ", combinedMembrane)
+print("\nModel recipe: ", modelRecipe)
 
-for item in combinedMembrane:
-    print("model_entity:", item['model_entity'], "model_entity2:", item['model_entity2'], "model_entity3:",
-          item['model_entity3'])
+# import component
+workspaceURL = "https://models.physiomeproject.org/workspace/267/rawfile/HEAD/"
+
+
+# instantiate source url and create an imported component
+def instantiateComponent(sourceUrl, componentName):
+    imp = ImportSource()
+    imp.setUrl(sourceUrl)
+
+    importedComponent = Component()
+    importedComponent.setName(componentName)
+    importedComponent.setSourceComponent(imp, componentName)
+
+    m.addComponent(importedComponent)
+
+
+# user-defined function for components instantiation
+def processItem(item):
+    cellmlModelName = item[0:item.find('#')]
+    componentVariable = item[item.find('#') + 1:len(item)]
+    componentName = componentVariable[:componentVariable.find('.')]
+    sourceUrl = workspaceURL + cellmlModelName
+    instantiateComponent(sourceUrl, componentName)
+
+
+# iterate through model recipe to import components from source models
+for item in modelRecipe:
+    if item['model_entity'] != "":
+        processItem(item['model_entity'])
+    if item['model_entity2'] != "":
+        processItem(item['model_entity2'])
+    if item['model_entity3'] != "":
+        processItem(item['model_entity3'])
+
+# serialize and print a model
+printer = Printer()
+model = printer.printModel(m)
+
+print("\nModel:", model)
+
+# write in a file
+f = open("model.xml", "w")
+f.write(model)

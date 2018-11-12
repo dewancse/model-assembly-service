@@ -1,2 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<model xmlns="http://www.cellml.org/cellml/2.0#" name="modelName" id="modelID"/>
+<model xmlns="http://www.cellml.org/cellml/2.0#" name="modelName" id="modelID">
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="total_transepithelial_sodium_flux" name="total_transepithelial_sodium_flux"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="mc_chloride_flux" name="mc_chloride_flux"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="solute_concentrations" name="solute_concentrations"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="total_transepithelial_potassium_flux" name="total_transepithelial_potassium_flux"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="solute_concentrations" name="solute_concentrations"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="sc_chloride_flux" name="sc_chloride_flux"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="mc_sodium_flux" name="mc_sodium_flux"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="mc_potassium_flux" name="mc_potassium_flux"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="solute_concentrations" name="solute_concentrations"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="sc_potassium_flux" name="sc_potassium_flux"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="sc_potassium_flux" name="sc_potassium_flux"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="ms_chloride_flux" name="ms_chloride_flux"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="ms_sodium_flux" name="ms_sodium_flux"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="ms_potassium_flux" name="ms_potassium_flux"/>
+    </import>
+    <component/>
+</model>
