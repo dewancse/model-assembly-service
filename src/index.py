@@ -1,4 +1,4 @@
-from libcellml import Model, Printer, Component, ImportSource
+from libcellml import Model, Printer, Component, ImportSource, Variable, Units
 
 # Instantiate a model
 m = Model()
@@ -12,10 +12,6 @@ modelName = "modelName"
 m.setName(modelName)
 
 print("Model: ", m, "\nModel Id: ", m.getId(), "\nModel Name: ", m.getName())
-
-# add component
-c = Component()
-m.addComponent(c)
 
 # pre-generated JSON model recipe
 modelRecipe = [
@@ -331,6 +327,105 @@ for item in modelRecipe:
         processItem(item['model_entity2'])
     if item['model_entity3'] != "":
         processItem(item['model_entity3'])
+
+# lumen component
+lumen = Component()
+lumen.setName("lumen")
+
+# variable
+lumen_v = Variable()
+
+# id - component.variable
+lumen_v.setId("lumen.C_ext_Na")
+
+# initial value
+lumen_v.setInitialValue("140")
+
+# name
+lumen_v.setName("C_ext_Na")
+
+# interface - public or private or public_and_private
+lumen_v.setInterfaceType("public")
+
+# units
+lumen_u = Units()
+lumen_u.setName("mM")
+lumen_v.setUnits(lumen_u)
+
+# add variable to lumen component
+lumen.addVariable(lumen_v)
+
+# math
+lumen_math = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\">" \
+             "<apply>" \
+             "<eq/>" \
+             "<ci>C</ci>" \
+             "<apply>" \
+             "<plus/>" \
+             "<ci>A</ci>" \
+             "<ci>B</ci>" \
+             "</apply>" \
+             "</apply>" \
+             "</math>"
+
+lumen.appendMath(lumen_math)
+
+# add lumen component to the model
+m.addComponent(lumen)
+
+# cytosol component
+cytosol = Component()
+cytosol.setName("cytosol")
+
+# variable
+cytosol_v = Variable()
+
+# id - component.variable
+cytosol_v.setId("cytosol.C_ext_Na")
+
+# initial value
+cytosol_v.setInitialValue("140")
+
+# name
+cytosol_v.setName("C_ext_Na")
+
+# interface - public or private or public_and_private
+cytosol_v.setInterfaceType("public")
+
+# units
+cytosol_u = Units()
+cytosol_u.setName("mM")
+cytosol_v.setUnits(cytosol_u)
+
+# add variable to lumen component
+cytosol.addVariable(cytosol_v)
+
+# math
+cytosol_math = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\">" \
+               "<apply>" \
+               "<eq/>" \
+               "<ci>C</ci>" \
+               "<apply>" \
+               "<plus/>" \
+               "<ci>A</ci>" \
+               "<ci>B</ci>" \
+               "</apply>" \
+               "</apply>" \
+               "</math>"
+
+cytosol.appendMath(cytosol_math)
+
+# add cytosol component to the model
+m.addComponent(cytosol)
+
+# interstitial fluid component
+interstitial = Component()
+interstitial.setName("interstitialFluid")
+m.addComponent(interstitial)
+
+# add equivalence - mapping connections
+v = Variable()
+v.addEquivalence(lumen_v, cytosol_v)
 
 # serialize and print a model
 printer = Printer()
