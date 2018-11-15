@@ -6,7 +6,7 @@
     </import>
     <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
             xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="total_transepithelial_potassium_flux" name="total_transepithelial_potassium_flux"/>
+        <component component_ref="mc_chloride_flux" name="mc_chloride_flux"/>
     </import>
     <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
             xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -14,19 +14,11 @@
     </import>
     <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
             xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="sc_chloride_flux" name="sc_chloride_flux"/>
-    </import>
-    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="mc_chloride_flux" name="mc_chloride_flux"/>
+        <component component_ref="total_transepithelial_potassium_flux" name="total_transepithelial_potassium_flux"/>
     </import>
     <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
             xmlns:xlink="http://www.w3.org/1999/xlink">
         <component component_ref="mc_potassium_flux" name="mc_potassium_flux"/>
-    </import>
-    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="solute_concentrations" name="solute_concentrations"/>
     </import>
     <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
             xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -42,7 +34,11 @@
     </import>
     <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
             xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="ms_chloride_flux" name="ms_chloride_flux"/>
+        <component component_ref="sc_chloride_flux" name="sc_chloride_flux"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="solute_concentrations" name="solute_concentrations"/>
     </import>
     <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
             xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -56,8 +52,13 @@
             xmlns:xlink="http://www.w3.org/1999/xlink">
         <component component_ref="sc_potassium_flux" name="sc_potassium_flux"/>
     </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="ms_chloride_flux" name="ms_chloride_flux"/>
+    </import>
     <component name="lumen">
         <variable name="C_ext_Na" units="mM" initial_value="140" interface="public" id="lumen.C_ext_Na"/>
+        <variable name="C_int_Na" units="mM" initial_value="150" interface="public" id="lumen.C_int_Na"/>
         <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
                 <eq/>
@@ -72,6 +73,7 @@
     </component>
     <component name="cytosol">
         <variable name="C_ext_Na" units="mM" initial_value="140" interface="public" id="cytosol.C_ext_Na"/>
+        <variable name="C_c_Na" units="mM" initial_value="150" interface="public" id="cytosol.C_c_Na"/>
         <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
                 <eq/>
@@ -87,5 +89,6 @@
     <component name="interstitialFluid"/>
     <connection component_1="lumen" component_2="cytosol">
         <map_variables variable_1="C_ext_Na" variable_2="C_ext_Na"/>
+        <map_variables variable_1="C_int_Na" variable_2="C_c_Na"/>
     </connection>
 </model>

@@ -334,26 +334,36 @@ lumen.setName("lumen")
 
 # variable
 lumen_v = Variable()
+lumen_v2 = Variable()
 
 # id - component.variable
 lumen_v.setId("lumen.C_ext_Na")
+lumen_v2.setId("lumen.C_int_Na")
 
 # initial value
 lumen_v.setInitialValue("140")
+lumen_v2.setInitialValue("150")
 
 # name
 lumen_v.setName("C_ext_Na")
+lumen_v2.setName("C_int_Na")
 
 # interface - public or private or public_and_private
 lumen_v.setInterfaceType("public")
+lumen_v2.setInterfaceType("public")
 
 # units
 lumen_u = Units()
 lumen_u.setName("mM")
 lumen_v.setUnits(lumen_u)
 
+lumen_u2 = Units()
+lumen_u2.setName("mM")
+lumen_v2.setUnits(lumen_u2)
+
 # add variable to lumen component
 lumen.addVariable(lumen_v)
+lumen.addVariable(lumen_v2)
 
 # math
 lumen_math = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\">" \
@@ -379,26 +389,36 @@ cytosol.setName("cytosol")
 
 # variable
 cytosol_v = Variable()
+cytosol_v2 = Variable()
 
 # id - component.variable
 cytosol_v.setId("cytosol.C_ext_Na")
+cytosol_v2.setId("cytosol.C_c_Na")
 
 # initial value
 cytosol_v.setInitialValue("140")
+cytosol_v2.setInitialValue("150")
 
 # name
 cytosol_v.setName("C_ext_Na")
+cytosol_v2.setName("C_c_Na")
 
 # interface - public or private or public_and_private
 cytosol_v.setInterfaceType("public")
+cytosol_v2.setInterfaceType("public")
 
 # units
 cytosol_u = Units()
 cytosol_u.setName("mM")
 cytosol_v.setUnits(cytosol_u)
 
+cytosol_u2 = Units()
+cytosol_u2.setName("mM")
+cytosol_v2.setUnits(cytosol_u2)
+
 # add variable to lumen component
 cytosol.addVariable(cytosol_v)
+cytosol.addVariable(cytosol_v2)
 
 # math
 cytosol_math = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\">" \
@@ -426,6 +446,7 @@ m.addComponent(interstitial)
 # add equivalence - mapping connections
 v = Variable()
 v.addEquivalence(lumen_v, cytosol_v)
+v.addEquivalence(lumen_v2, cytosol_v2)
 
 # serialize and print a model
 printer = Printer()
