@@ -1,4 +1,7 @@
-from libcellml import Model, Printer, Component, ImportSource, Variable, Units
+# from libcellml import Model, Printer, Component, ImportSource, Parser, Variable, Units
+import requests
+from libcellml import *
+from miscellaneous import *
 
 # Instantiate a model
 m = Model()
@@ -299,154 +302,241 @@ workspaceURL = "https://models.physiomeproject.org/workspace/267/rawfile/HEAD/"
 
 
 # instantiate source url and create an imported component
-def instantiateComponent(sourceUrl, componentName):
+def instantiateImportedComponent(sourceurl, component):
     imp = ImportSource()
-    imp.setUrl(sourceUrl)
+    imp.setUrl(sourceurl)
 
     importedComponent = Component()
-    importedComponent.setName(componentName)
-    importedComponent.setSourceComponent(imp, componentName)
+    importedComponent.setName(component)
+    importedComponent.setSourceComponent(imp, component)
 
     m.addComponent(importedComponent)
 
 
 # user-defined function for components instantiation
-def processItem(item):
-    cellmlModelName = item[0:item.find('#')]
-    componentVariable = item[item.find('#') + 1:len(item)]
-    componentName = componentVariable[:componentVariable.find('.')]
-    sourceUrl = workspaceURL + cellmlModelName
-    instantiateComponent(sourceUrl, componentName)
+def processModelEntity(modelentity):
+    cellmlmodelname = modelentity[0:modelentity.find('#')]
+    componentandvariable = modelentity[modelentity.find('#') + 1:len(modelentity)]
+    component = componentandvariable[:componentandvariable.find('.')]
+    sourceurl = workspaceURL + cellmlmodelname
+    instantiateImportedComponent(sourceurl, component)
 
 
 # iterate through model recipe to import components from source models
 for item in modelRecipe:
     if item['model_entity'] != "":
-        processItem(item['model_entity'])
+        processModelEntity(item['model_entity'])
     if item['model_entity2'] != "":
-        processItem(item['model_entity2'])
+        processModelEntity(item['model_entity2'])
     if item['model_entity3'] != "":
-        processItem(item['model_entity3'])
+        processModelEntity(item['model_entity3'])
+
+
+def addImportedComponent(modelentity, compartment):
+    componentandvariable = modelentity[modelentity.find('#') + 1:len(modelentity)]
+    nameofcomponent = componentandvariable[:componentandvariable.find('.')]
+    compartment.addComponent(m.getComponent(nameofcomponent))
+
+    # modelname = modelentity[0:modelentity.find('#')]
+    # r = requests.get(workspaceURL + modelname)
+    #
+    # p = Parser()
+    # importedModel = p.parseModel(r.text)
+    # c = importedModel.getComponent(nameofcomponent)
+    # v = c.getVariable(1)
+    # print("name:", v.getName(), "units:", v.getUnits(), "initial_value:", v.getInitialValue(), "interface:",
+    #       v.getInterfaceType(), "id:", v.getId())
+
+
+# epithelial component
+epithelial = Component()
+epithelial.setName("epithelial")
 
 # lumen component
 lumen = Component()
 lumen.setName("lumen")
 
-# variable
-lumen_v = Variable()
-lumen_v2 = Variable()
-
-# id - component.variable
-lumen_v.setId("lumen.C_ext_Na")
-lumen_v2.setId("lumen.C_int_Na")
-
-# initial value
-lumen_v.setInitialValue("140")
-lumen_v2.setInitialValue("150")
-
-# name
-lumen_v.setName("C_ext_Na")
-lumen_v2.setName("C_int_Na")
-
-# interface - public or private or public_and_private
-lumen_v.setInterfaceType("public")
-lumen_v2.setInterfaceType("public")
-
-# units
-lumen_u = Units()
-lumen_u.setName("mM")
-lumen_v.setUnits(lumen_u)
-
-lumen_u2 = Units()
-lumen_u2.setName("mM")
-lumen_v2.setUnits(lumen_u2)
-
-# add variable to lumen component
-lumen.addVariable(lumen_v)
-lumen.addVariable(lumen_v2)
-
-# math
-lumen_math = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\">" \
-             "<apply>" \
-             "<eq/>" \
-             "<ci>C</ci>" \
-             "<apply>" \
-             "<plus/>" \
-             "<ci>A</ci>" \
-             "<ci>B</ci>" \
-             "</apply>" \
-             "</apply>" \
-             "</math>"
-
-lumen.appendMath(lumen_math)
-
-# add lumen component to the model
-m.addComponent(lumen)
-
 # cytosol component
 cytosol = Component()
 cytosol.setName("cytosol")
 
-# variable
-cytosol_v = Variable()
-cytosol_v2 = Variable()
-
-# id - component.variable
-cytosol_v.setId("cytosol.C_ext_Na")
-cytosol_v2.setId("cytosol.C_c_Na")
-
-# initial value
-cytosol_v.setInitialValue("140")
-cytosol_v2.setInitialValue("150")
-
-# name
-cytosol_v.setName("C_ext_Na")
-cytosol_v2.setName("C_c_Na")
-
-# interface - public or private or public_and_private
-cytosol_v.setInterfaceType("public")
-cytosol_v2.setInterfaceType("public")
-
-# units
-cytosol_u = Units()
-cytosol_u.setName("mM")
-cytosol_v.setUnits(cytosol_u)
-
-cytosol_u2 = Units()
-cytosol_u2.setName("mM")
-cytosol_v2.setUnits(cytosol_u2)
-
-# add variable to lumen component
-cytosol.addVariable(cytosol_v)
-cytosol.addVariable(cytosol_v2)
-
-# math
-cytosol_math = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\">" \
-               "<apply>" \
-               "<eq/>" \
-               "<ci>C</ci>" \
-               "<apply>" \
-               "<plus/>" \
-               "<ci>A</ci>" \
-               "<ci>B</ci>" \
-               "</apply>" \
-               "</apply>" \
-               "</math>"
-
-cytosol.appendMath(cytosol_math)
-
-# add cytosol component to the model
-m.addComponent(cytosol)
-
 # interstitial fluid component
-interstitial = Component()
-interstitial.setName("interstitialFluid")
-m.addComponent(interstitial)
+interstitialfluid = Component()
+interstitialfluid.setName("interstitialfluid")
 
-# add equivalence - mapping connections
-v = Variable()
-v.addEquivalence(lumen_v, cytosol_v)
-v.addEquivalence(lumen_v2, cytosol_v2)
+# encapsulation of epithelial component
+# create lumen components inside epithelial component
+for item in modelRecipe:
+    if item["source_fma"] == lumen_fma or item["sink_fma"] == lumen_fma:
+        addImportedComponent(item["model_entity"], lumen)
+    if item["source_fma2"] != "" and item["source_fma2"] == lumen_fma or item["sink_fma2"] == lumen_fma:
+        addImportedComponent(item["model_entity2"], lumen)
+    if item["source_fma3"] != "" and item["source_fma3"] == lumen_fma or item["sink_fma3"] == lumen_fma:
+        addImportedComponent(item["model_entity3"], lumen)
+
+# add lumen component to epithelial component
+epithelial.addComponent(lumen)
+
+# create cytosol components inside epithelial component
+for item in modelRecipe:
+    if item["source_fma"] == cytosol_fma or item["sink_fma"] == cytosol_fma:
+        addImportedComponent(item["model_entity"], cytosol)
+    if item["source_fma2"] != '' and item['source_fma2'] == cytosol_fma or item['sink_fma2'] == cytosol_fma:
+        addImportedComponent(item["model_entity2"], cytosol)
+    if item["source_fma3"] != '' and item["source_fma3"] == cytosol_fma or item["sink_fma3"] == cytosol_fma:
+        addImportedComponent(item["model_entity3"], cytosol)
+
+# add cytosol component to epithelial component
+epithelial.addComponent(cytosol)
+
+# create interstitial fluid components inside epithelial component
+for item in modelRecipe:
+    if item["source_fma"] == interstitialfluid_fma or item["sink_fma"] == interstitialfluid_fma:
+        addImportedComponent(item["model_entity"], interstitialfluid)
+    if item["source_fma2"] != "" and item["source_fma2"] == interstitialfluid_fma or item[
+        "sink_fma2"] == interstitialfluid_fma:
+        addImportedComponent(item["model_entity2"], interstitialfluid)
+    if item["source_fma3"] != "" and item["source_fma3"] == interstitialfluid_fma or item[
+        "sink_fma3"] == interstitialfluid_fma:
+        addImportedComponent(item["model_entity3"], interstitialfluid)
+
+# add interstitial component to epithelial component
+epithelial.addComponent(interstitialfluid)
+
+# add epithelial component to model
+m.addComponent(epithelial)
+
+# A sample sparql query execution
+from SPARQLWrapper import SPARQLWrapper, JSON
+
+sparql = SPARQLWrapper(sparqlendpoint)
+sparql.setQuery(concentrationQuery)
+
+sparql.setReturnFormat(JSON)
+results = sparql.query().convert()
+
+for result in results["results"]["bindings"]:
+    print(result["modelEntity"]["value"])
+
+# # lumen component
+# lumen = Component()
+# lumen.setName("lumen")
+#
+# # variable
+# lumen_v = Variable()
+# lumen_v2 = Variable()
+#
+# # id - component.variable
+# lumen_v.setId("lumen.C_ext_Na")
+# lumen_v2.setId("lumen.C_int_Na")
+#
+# # initial value
+# lumen_v.setInitialValue("140")
+# lumen_v2.setInitialValue("150")
+#
+# # name
+# lumen_v.setName("C_ext_Na")
+# lumen_v2.setName("C_int_Na")
+#
+# # interface - public or private or public_and_private
+# lumen_v.setInterfaceType("public")
+# lumen_v2.setInterfaceType("public")
+#
+# # units
+# lumen_u = Units()
+# lumen_u.setName("mM")
+# lumen_v.setUnits(lumen_u)
+#
+# lumen_u2 = Units()
+# lumen_u2.setName("mM")
+# lumen_v2.setUnits(lumen_u2)
+#
+# # add variable to lumen component
+# lumen.addVariable(lumen_v)
+# lumen.addVariable(lumen_v2)
+#
+# # math
+# lumen_math = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\">" \
+#              "<apply>" \
+#              "<eq/>" \
+#              "<ci>C</ci>" \
+#              "<apply>" \
+#              "<plus/>" \
+#              "<ci>A</ci>" \
+#              "<ci>B</ci>" \
+#              "</apply>" \
+#              "</apply>" \
+#              "</math>"
+#
+# lumen.appendMath(lumen_math)
+#
+# # add lumen component to the model
+# m.addComponent(lumen)
+
+# # cytosol component
+# cytosol = Component()
+# cytosol.setName("cytosol")
+#
+# # variable
+# cytosol_v = Variable()
+# cytosol_v2 = Variable()
+#
+# # id - component.variable
+# cytosol_v.setId("cytosol.C_ext_Na")
+# cytosol_v2.setId("cytosol.C_c_Na")
+#
+# # initial value
+# cytosol_v.setInitialValue("140")
+# cytosol_v2.setInitialValue("150")
+#
+# # name
+# cytosol_v.setName("C_ext_Na")
+# cytosol_v2.setName("C_c_Na")
+#
+# # interface - public or private or public_and_private
+# cytosol_v.setInterfaceType("public")
+# cytosol_v2.setInterfaceType("public")
+#
+# # units
+# cytosol_u = Units()
+# cytosol_u.setName("mM")
+# cytosol_v.setUnits(cytosol_u)
+#
+# cytosol_u2 = Units()
+# cytosol_u2.setName("mM")
+# cytosol_v2.setUnits(cytosol_u2)
+#
+# # add variable to lumen component
+# cytosol.addVariable(cytosol_v)
+# cytosol.addVariable(cytosol_v2)
+#
+# # math
+# cytosol_math = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\">" \
+#                "<apply>" \
+#                "<eq/>" \
+#                "<ci>C</ci>" \
+#                "<apply>" \
+#                "<plus/>" \
+#                "<ci>A</ci>" \
+#                "<ci>B</ci>" \
+#                "</apply>" \
+#                "</apply>" \
+#                "</math>"
+#
+# cytosol.appendMath(cytosol_math)
+#
+# # add cytosol component to the model
+# m.addComponent(cytosol)
+
+# # interstitial fluid component
+# interstitial = Component()
+# interstitial.setName("interstitialFluid")
+# m.addComponent(interstitial)
+
+# # add equivalence - mapping connections
+# v = Variable()
+# v.addEquivalence(lumen_v, cytosol_v)
+# v.addEquivalence(lumen_v2, cytosol_v2)
 
 # serialize and print a model
 printer = Printer()

@@ -59,49 +59,39 @@
     <component name="environment">
         <variable name="time" units="second" interface="public" id="environment.time"/>
     </component>
-    <group>
-        <relationship_ref relationship="encapsulation"/>
+    <encapsulation>
         <component_ref component="epithelial">
-            <group>
-                <relationship_ref relationship="encapsulation"/>
-                <component_ref component="lumen">
-                    <component_ref component="total_transepithelial_sodium_flux"/>
-                    <component_ref component="solute_concentrations"/>
-                    <component_ref component="total_transepithelial_potassium_flux"/>
-                    <component_ref component="mc_sodium_flux"/>
-                    <component_ref component="mc_chloride_flux"/>
-                    <component_ref component="mc_potassium_flux"/>
-                    <component_ref component="ms_sodium_flux"/>
-                    <component_ref component="ms_chloride_flux"/>
-                    <component_ref component="ms_potassium_flux"/>
-                </component_ref>
-            </group>
-            <group>
-                <relationship_ref relationship="encapsulation"/>
-                <component_ref component="cytosol">
-                    <component_ref component="total_transepithelial_sodium_flux"/>
-                    <component_ref component="solute_concentrations"/>
-                    <component_ref component="total_transepithelial_potassium_flux"/>
-                    <component_ref component="mc_sodium_flux"/>
-                    <component_ref component="mc_chloride_flux"/>
-                    <component_ref component="mc_potassium_flux"/>
-                    <component_ref component="sc_potassium_flux"/>
-                    <component_ref component="sc_chloride_flux"/>
-                </component_ref>
-            </group>
-            <group>
-                <relationship_ref relationship="encapsulation"/>
-                <component_ref component="interstitialfluid">
-                    <component_ref component="solute_concentrations"/>
-                    <component_ref component="sc_potassium_flux"/>
-                    <component_ref component="sc_chloride_flux"/>
-                    <component_ref component="ms_sodium_flux"/>
-                    <component_ref component="ms_chloride_flux"/>
-                    <component_ref component="ms_potassium_flux"/>
-                </component_ref>
-            </group>
+            <component_ref component="lumen">
+                <component_ref component="total_transepithelial_sodium_flux"/>
+                <component_ref component="solute_concentrations"/>
+                <component_ref component="total_transepithelial_potassium_flux"/>
+                <component_ref component="mc_sodium_flux"/>
+                <component_ref component="mc_chloride_flux"/>
+                <component_ref component="mc_potassium_flux"/>
+                <component_ref component="ms_sodium_flux"/>
+                <component_ref component="ms_chloride_flux"/>
+                <component_ref component="ms_potassium_flux"/>
+            </component_ref>
+            <component_ref component="cytosol">
+                <component_ref component="total_transepithelial_sodium_flux"/>
+                <component_ref component="solute_concentrations"/>
+                <component_ref component="total_transepithelial_potassium_flux"/>
+                <component_ref component="mc_sodium_flux"/>
+                <component_ref component="mc_chloride_flux"/>
+                <component_ref component="mc_potassium_flux"/>
+                <component_ref component="sc_potassium_flux"/>
+                <component_ref component="sc_chloride_flux"/>
+            </component_ref>
+            <component_ref component="interstitialfluid">
+                <component_ref component="solute_concentrations"/>
+                <component_ref component="sc_potassium_flux"/>
+                <component_ref component="sc_chloride_flux"/>
+                <component_ref component="ms_sodium_flux"/>
+                <component_ref component="ms_chloride_flux"/>
+                <component_ref component="ms_potassium_flux"/>
+            </component_ref>
         </component_ref>
-    </group>
+    </encapsulation>
     <component name="lumen">
         <variable name="C_m_Na" units="mM" initial_value="1" interface="public" id="lumen.C_m_Na"/>
         <variable name="C_m_Cl" units="mM" initial_value="1" interface="public" id="lumen.C_m_Cl"/>
