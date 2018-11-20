@@ -279,6 +279,9 @@ modelRecipe = [
     }
 ];
 
+# PMR sparql endpoint
+sparqlendpoint = "https://models.physiomeproject.org/pmr2_virtuoso_search"
+
 # import component
 workspaceURL = "https://models.physiomeproject.org/workspace/267/rawfile/HEAD/"
 
@@ -287,11 +290,18 @@ lumen_fma = "http://purl.obolibrary.org/obo/FMA_74550"
 cytosol_fma = "http://purl.obolibrary.org/obo/FMA_66836"
 interstitialfluid_fma = "http://purl.obolibrary.org/obo/FMA_9673"
 
-# PMR sparql endpoint
-sparqlendpoint = "https://models.physiomeproject.org/pmr2_virtuoso_search"
+
+# user-defined function to instantiate a time component and its variable attributes
+def createTimeComponent(v, component):
+    v.setName("time")
+    v.setUnits("second")
+    v.setInterfaceType("public")
+    v.setId(component.getName() + "." + v.getName())
+
+    component.addVariable(v)
 
 
-# concentration sparql
+# concentration sparql to get a result for a given FMA and CHEBI
 def concentrationSparql(fma, chebi):
     return "PREFIX semsim: <http://www.bhi.washington.edu/SemSim#>" \
            "PREFIX ro: <http://www.obofoundry.org/ro/ro.owl#>" \
@@ -307,7 +317,7 @@ def concentrationSparql(fma, chebi):
            "}"
 
 
-# instantiate source url and create an imported component
+# instantiate source url and create an imported component in the new model
 def instantiateImportedComponent(sourceurl, component, m):
     imp = ImportSource()
     imp.setUrl(sourceurl)
@@ -319,52 +329,10 @@ def instantiateImportedComponent(sourceurl, component, m):
     m.addComponent(importedComponent)
 
 
-# user-defined function for components instantiation
+# process model entities and source models' urls
 def processModelEntity(modelentity, m):
-    cellmlmodelname = modelentity[0:modelentity.find('#')]
-    componentandvariable = modelentity[modelentity.find('#') + 1:len(modelentity)]
-    component = componentandvariable[:componentandvariable.find('.')]
-    sourceurl = workspaceURL + cellmlmodelname
+    cellml_model_name = modelentity[0:modelentity.find('#')]
+    component_variable = modelentity[modelentity.find('#') + 1:len(modelentity)]
+    component = component_variable[:component_variable.find('.')]
+    sourceurl = workspaceURL + cellml_model_name
     instantiateImportedComponent(sourceurl, component, m)
-
-# import requests
-# from xml.dom import pulldom
-#
-# modelEntityList = ['weinstein_1995.cellml#Concentrations.C_ext_Na', 'mackenzie_1996.cellml#NBC_current.J_Na']
-# componentList = []
-#
-# for index in range(len(modelEntityList)):
-#     workspaceURL = 'https://models.physiomeproject.org/workspace/267/rawfile/HEAD/'
-#     modelName = modelEntityList[index][0:modelEntityList[index].find('#')]
-#     r = requests.get(workspaceURL + modelName)
-#
-#     # extract name of component from a cellml model entity
-#     componentVariable = modelEntityList[index][modelEntityList[index].find('#') + 1:len(modelEntityList[index])]
-#     componentName = componentVariable[:componentVariable.find('.')]
-#
-#     # traverse xml dom, find above component name, and pull that including its children
-#     doc = pulldom.parseString(r.text)
-#     for event, node in doc:
-#         if event == pulldom.START_ELEMENT and node.tagName == 'component':
-#             if node.getAttribute('name') == componentName:
-#                 doc.expandNode(node)
-#                 componentList.insert(index, node.toxml())
-#
-# for component in componentList:
-#     print(component)
-
-# find cellml model version 1.0 or 2.0
-# import requests
-# from xml.dom import pulldom
-#
-# workspaceURL = 'https://models.physiomeproject.org/workspace/267/rawfile/HEAD/'
-# r = requests.get(workspaceURL + 'weinstein_1995.cellml')
-#
-# doc = pulldom.parseString(r.text)
-# for event, node in doc:
-#     if event == pulldom.START_ELEMENT and node.tagName == 'model':
-#         # access directly by attribute name
-#         print(node.getAttribute('xmlns:cmeta'))
-#         # loop through to access all attributes
-#         for index in range(node.attributes.length):
-#             print('name:', node.attributes.item(index).name, ' value:', node.attributes.item(index).value)
