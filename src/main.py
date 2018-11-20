@@ -1,352 +1,134 @@
-# from libcellml import Model, Printer, Component, ImportSource, Parser, Variable, Units
 import requests
-from libcellml import *
 from miscellaneous import *
+from SPARQLWrapper import SPARQLWrapper, JSON
 
 # Instantiate a model
 m = Model()
 
 # model ID
-modelId = "modelID"
+modelId = "epithelialModelID"
 m.setId(modelId)
 
 # model name
-modelName = "modelName"
+modelName = "epithelialModel"
 m.setName(modelName)
 
 print("Model: ", m, "\nModel Id: ", m.getId(), "\nModel Name: ", m.getName())
 
-# pre-generated JSON model recipe
-modelRecipe = [
-    {
-        "med_fma": "http://purl.obolibrary.org/obo/FMA_84666",
-        "med_pr": "http://purl.obolibrary.org/obo/PR_P55018",
-        "med_pr_text": "solute carrier family 12 member 3 (rat)",
-        "med_pr_text_syn": "TSC",
-        "model_entity": "chang_fujita_b_1999.cellml#total_transepithelial_sodium_flux.J_mc_Na",
-        "model_entity2": "chang_fujita_b_1999.cellml#solute_concentrations.J_mc_Cl",
-        "model_entity3": "",
-        "protein_name": "http://purl.obolibrary.org/obo/CL_0000066",
-        "sink_fma": "http://purl.obolibrary.org/obo/FMA_66836",
-        "sink_fma2": "http://purl.obolibrary.org/obo/FMA_66836",
-        "sink_fma3": "",
-        "solute_chebi": "http://purl.obolibrary.org/obo/CHEBI_29101",
-        "solute_chebi2": "http://purl.obolibrary.org/obo/CHEBI_17996",
-        "solute_chebi3": "",
-        "solute_text": "Na+",
-        "solute_text2": "Cl-",
-        "solute_text3": "",
-        "source_fma": "http://purl.obolibrary.org/obo/FMA_74550",
-        "source_fma2": "http://purl.obolibrary.org/obo/FMA_74550",
-        "source_fma3": "",
-        "variable_text": "J_mc_Na",
-        "variable_text2": "J_mc_Cl",
-        "variable_text3": ""
-    },
-    {
-        "med_fma": "http://purl.obolibrary.org/obo/FMA_84666",
-        "med_pr": "http://purl.obolibrary.org/obo/PR_Q63633",
-        "med_pr_text": "solute carrier family 12 member 5 (rat)",
-        "med_pr_text_syn": "Q63633",
-        "model_entity": "chang_fujita_b_1999.cellml#solute_concentrations.J_mc_Cl",
-        "model_entity2": "chang_fujita_b_1999.cellml#total_transepithelial_potassium_flux.J_mc_K",
-        "model_entity3": "",
-        "protein_name": "http://purl.obolibrary.org/obo/CL_0000066",
-        "sink_fma": "http://purl.obolibrary.org/obo/FMA_66836",
-        "sink_fma2": "http://purl.obolibrary.org/obo/FMA_66836",
-        "sink_fma3": "",
-        "solute_chebi": "http://purl.obolibrary.org/obo/CHEBI_17996",
-        "solute_chebi2": "http://purl.obolibrary.org/obo/CHEBI_29103",
-        "solute_chebi3": "",
-        "solute_text": "Cl-",
-        "solute_text2": "K+",
-        "solute_text3": "",
-        "source_fma": "http://purl.obolibrary.org/obo/FMA_74550",
-        "source_fma2": "http://purl.obolibrary.org/obo/FMA_74550",
-        "source_fma3": "",
-        "variable_text": "J_mc_Cl",
-        "variable_text2": "J_mc_K",
-        "variable_text3": ""
-    },
-    {
-        "med_fma": "http://purl.obolibrary.org/obo/FMA_84666",
-        "med_pr": "http://purl.obolibrary.org/obo/PR_P37089",
-        "med_pr_text": "amiloride-sensitive sodium channel subunit alpha (rat)",
-        "med_pr_text_syn": "RENAC",
-        "model_entity": "chang_fujita_b_1999.cellml#mc_sodium_flux.G_mc_Na",
-        "model_entity2": "",
-        "model_entity3": "",
-        "protein_name": "http://purl.obolibrary.org/obo/CL_0000066",
-        "sink_fma": "http://purl.obolibrary.org/obo/FMA_66836",
-        "sink_fma2": "channel",
-        "sink_fma3": "channel",
-        "solute_chebi": "http://purl.obolibrary.org/obo/CHEBI_29101",
-        "solute_chebi2": "channel",
-        "solute_chebi3": "channel",
-        "solute_text": "Na+",
-        "solute_text2": "channel",
-        "solute_text3": "channel",
-        "source_fma": "http://purl.obolibrary.org/obo/FMA_74550",
-        "source_fma2": "channel",
-        "source_fma3": "channel",
-        "variable_text": "G_mc_Na",
-        "variable_text2": "channel",
-        "variable_text3": "channel"
-    },
-    {
-        "med_fma": "http://purl.obolibrary.org/obo/FMA_84666",
-        "med_pr": "http://purl.obolibrary.org/obo/PR_Q06393",
-        "med_pr_text": "chloride channel protein ClC-Ka (rat)",
-        "med_pr_text_syn": "CLCNK1",
-        "model_entity": "chang_fujita_b_1999.cellml#mc_chloride_flux.G_mc_Cl",
-        "model_entity2": "",
-        "model_entity3": "",
-        "protein_name": "http://purl.obolibrary.org/obo/CL_0000066",
-        "sink_fma": "http://purl.obolibrary.org/obo/FMA_66836",
-        "sink_fma2": "channel",
-        "sink_fma3": "channel",
-        "solute_chebi": "http://purl.obolibrary.org/obo/CHEBI_17996",
-        "solute_chebi2": "channel",
-        "solute_chebi3": "channel",
-        "solute_text": "Cl-",
-        "solute_text2": "channel",
-        "solute_text3": "channel",
-        "source_fma": "http://purl.obolibrary.org/obo/FMA_74550",
-        "source_fma2": "channel",
-        "source_fma3": "channel",
-        "variable_text": "G_mc_Cl",
-        "variable_text2": "channel",
-        "variable_text3": "channel"
-    },
-    {
-        "med_fma": "http://purl.obolibrary.org/obo/FMA_84666",
-        "med_pr": "http://purl.obolibrary.org/obo/PR_P15387",
-        "med_pr_text": "potassium voltage-gated channel subfamily B member 1 (rat)",
-        "med_pr_text_syn": "P15387",
-        "model_entity": "chang_fujita_b_1999.cellml#mc_potassium_flux.G_mc_K",
-        "model_entity2": "",
-        "model_entity3": "",
-        "protein_name": "http://purl.obolibrary.org/obo/CL_0000066",
-        "sink_fma": "http://purl.obolibrary.org/obo/FMA_66836",
-        "sink_fma2": "channel",
-        "sink_fma3": "channel",
-        "solute_chebi": "http://purl.obolibrary.org/obo/CHEBI_29103",
-        "solute_chebi2": "channel",
-        "solute_chebi3": "channel",
-        "solute_text": "K+",
-        "solute_text2": "channel",
-        "solute_text3": "channel",
-        "source_fma": "http://purl.obolibrary.org/obo/FMA_74550",
-        "source_fma2": "channel",
-        "source_fma3": "channel",
-        "variable_text": "G_mc_K",
-        "variable_text2": "channel",
-        "variable_text3": "channel"
-    },
-    {
-        "med_fma": "http://purl.obolibrary.org/obo/FMA_84669",
-        "med_pr": "http://purl.obolibrary.org/obo/PR_P06685",
-        "med_pr_text": "sodium/potassium-transporting ATPase subunit alpha-1 (rat)",
-        "med_pr_text_syn": "P06685",
-        "model_entity": "chang_fujita_b_1999.cellml#solute_concentrations.J_sc_Na",
-        "model_entity2": "chang_fujita_b_1999.cellml#sc_potassium_flux.J_sc_K",
-        "model_entity3": "",
-        "protein_name": "http://purl.obolibrary.org/obo/CL_0000066",
-        "sink_fma": "http://purl.obolibrary.org/obo/FMA_9673",
-        "sink_fma2": "http://purl.obolibrary.org/obo/FMA_66836",
-        "sink_fma3": "",
-        "solute_chebi": "http://purl.obolibrary.org/obo/CHEBI_29101",
-        "solute_chebi2": "http://purl.obolibrary.org/obo/CHEBI_29103",
-        "solute_chebi3": "",
-        "solute_text": "Na+",
-        "solute_text2": "K+",
-        "solute_text3": "",
-        "source_fma": "http://purl.obolibrary.org/obo/FMA_66836",
-        "source_fma2": "http://purl.obolibrary.org/obo/FMA_9673",
-        "source_fma3": "",
-        "variable_text": "J_sc_Na",
-        "variable_text2": "J_sc_K",
-        "variable_text3": ""
-    },
-    {
-        "med_fma": "http://purl.obolibrary.org/obo/FMA_84669",
-        "med_pr": "http://purl.obolibrary.org/obo/PR_Q06393",
-        "med_pr_text": "chloride channel protein ClC-Ka (rat)",
-        "med_pr_text_syn": "CLCNK1",
-        "model_entity": "chang_fujita_b_1999.cellml#sc_chloride_flux.G_sc_Cl",
-        "model_entity2": "",
-        "model_entity3": "",
-        "protein_name": "http://purl.obolibrary.org/obo/CL_0000066",
-        "sink_fma": "http://purl.obolibrary.org/obo/FMA_66836",
-        "sink_fma2": "channel",
-        "sink_fma3": "channel",
-        "solute_chebi": "http://purl.obolibrary.org/obo/CHEBI_17996",
-        "solute_chebi2": "channel",
-        "solute_chebi3": "channel",
-        "solute_text": "Cl-",
-        "solute_text2": "channel",
-        "solute_text3": "channel",
-        "source_fma": "http://purl.obolibrary.org/obo/FMA_9673",
-        "source_fma2": "channel",
-        "source_fma3": "channel",
-        "variable_text": "G_sc_Cl",
-        "variable_text2": "channel",
-        "variable_text3": "channel"
-    },
-    {
-        "med_fma": "http://purl.obolibrary.org/obo/FMA_84669",
-        "med_pr": "http://purl.obolibrary.org/obo/PR_P15387",
-        "med_pr_text": "potassium voltage-gated channel subfamily B member 1 (rat)",
-        "med_pr_text_syn": "P15387",
-        "model_entity": "chang_fujita_b_1999.cellml#sc_potassium_flux.G_sc_K",
-        "model_entity2": "",
-        "model_entity3": "",
-        "protein_name": "http://purl.obolibrary.org/obo/CL_0000066",
-        "sink_fma": "http://purl.obolibrary.org/obo/FMA_66836",
-        "sink_fma2": "channel",
-        "sink_fma3": "channel",
-        "solute_chebi": "http://purl.obolibrary.org/obo/CHEBI_29103",
-        "solute_chebi2": "channel",
-        "solute_chebi3": "channel",
-        "solute_text": "K+",
-        "solute_text2": "channel",
-        "solute_text3": "channel",
-        "source_fma": "http://purl.obolibrary.org/obo/FMA_9673",
-        "source_fma2": "channel",
-        "source_fma3": "channel",
-        "variable_text": "G_sc_K",
-        "variable_text2": "channel",
-        "variable_text3": "channel"
-    },
-    {
-        "med_fma": "http://purl.obolibrary.org/obo/FMA_67394",
-        "med_pr": "http://purl.obolibrary.org/obo/PR_Q9Z0S6",
-        "med_pr_text": "claudin-10 (mouse)",
-        "med_pr_text_syn": "CLDN10A",
-        "model_entity": "chang_fujita_b_1999.cellml#ms_sodium_flux.G_ms_Na",
-        "model_entity2": "",
-        "model_entity3": "",
-        "protein_name": "http://purl.obolibrary.org/obo/CL_0000066",
-        "sink_fma": "http://purl.obolibrary.org/obo/FMA_9673",
-        "sink_fma2": "diffusiveflux",
-        "sink_fma3": "diffusiveflux",
-        "solute_chebi": "http://purl.obolibrary.org/obo/CHEBI_29101",
-        "solute_chebi2": "diffusiveflux",
-        "solute_chebi3": "diffusiveflux",
-        "solute_text": "Na+",
-        "solute_text2": "diffusiveflux",
-        "solute_text3": "diffusiveflux",
-        "source_fma": "http://purl.obolibrary.org/obo/FMA_74550",
-        "source_fma2": "diffusiveflux",
-        "source_fma3": "diffusiveflux",
-        "variable_text": "G_ms_Na",
-        "variable_text2": "diffusiveflux",
-        "variable_text3": "diffusiveflux"
-    },
-    {
-        "med_fma": "http://purl.obolibrary.org/obo/FMA_67394",
-        "med_pr": "http://purl.obolibrary.org/obo/PR_O35054",
-        "med_pr_text": "claudin-4 (mouse)",
-        "med_pr_text_syn": "CPETR1",
-        "model_entity": "chang_fujita_b_1999.cellml#ms_chloride_flux.G_ms_Cl",
-        "model_entity2": "",
-        "model_entity3": "",
-        "protein_name": "http://purl.obolibrary.org/obo/CL_0000066",
-        "sink_fma": "http://purl.obolibrary.org/obo/FMA_9673",
-        "sink_fma2": "diffusiveflux",
-        "sink_fma3": "diffusiveflux",
-        "solute_chebi": "http://purl.obolibrary.org/obo/CHEBI_17996",
-        "solute_chebi2": "diffusiveflux",
-        "solute_chebi3": "diffusiveflux",
-        "solute_text": "Cl-",
-        "solute_text2": "diffusiveflux",
-        "solute_text3": "diffusiveflux",
-        "source_fma": "http://purl.obolibrary.org/obo/FMA_74550",
-        "source_fma2": "diffusiveflux",
-        "source_fma3": "diffusiveflux",
-        "variable_text": "G_ms_Cl",
-        "variable_text2": "diffusiveflux",
-        "variable_text3": "diffusiveflux"
-    },
-    {
-        "med_fma": "http://purl.obolibrary.org/obo/FMA_67394",
-        "med_pr": "http://purl.obolibrary.org/obo/PR_F1LZ52",
-        "med_pr_text": "kelch-like protein 3 (rat)",
-        "med_pr_text_syn": "F1LZ52",
-        "model_entity": "chang_fujita_b_1999.cellml#ms_potassium_flux.G_ms_K",
-        "model_entity2": "",
-        "model_entity3": "",
-        "protein_name": "http://purl.obolibrary.org/obo/CL_0000066",
-        "sink_fma": "http://purl.obolibrary.org/obo/FMA_9673",
-        "sink_fma2": "diffusiveflux",
-        "sink_fma3": "diffusiveflux",
-        "solute_chebi": "http://purl.obolibrary.org/obo/CHEBI_29103",
-        "solute_chebi2": "diffusiveflux",
-        "solute_chebi3": "diffusiveflux",
-        "solute_text": "K+",
-        "solute_text2": "diffusiveflux",
-        "solute_text3": "diffusiveflux",
-        "source_fma": "http://purl.obolibrary.org/obo/FMA_74550",
-        "source_fma2": "diffusiveflux",
-        "source_fma3": "diffusiveflux",
-        "variable_text": "G_ms_K",
-        "variable_text2": "diffusiveflux",
-        "variable_text3": "diffusiveflux"
-    }
-];
-
-print("\nModel recipe: ", modelRecipe)
-
-# import component
-workspaceURL = "https://models.physiomeproject.org/workspace/267/rawfile/HEAD/"
-
-
-# instantiate source url and create an imported component
-def instantiateImportedComponent(sourceurl, component):
-    imp = ImportSource()
-    imp.setUrl(sourceurl)
-
-    importedComponent = Component()
-    importedComponent.setName(component)
-    importedComponent.setSourceComponent(imp, component)
-
-    m.addComponent(importedComponent)
-
-
-# user-defined function for components instantiation
-def processModelEntity(modelentity):
-    cellmlmodelname = modelentity[0:modelentity.find('#')]
-    componentandvariable = modelentity[modelentity.find('#') + 1:len(modelentity)]
-    component = componentandvariable[:componentandvariable.find('.')]
-    sourceurl = workspaceURL + cellmlmodelname
-    instantiateImportedComponent(sourceurl, component)
-
-
 # iterate through model recipe to import components from source models
 for item in modelRecipe:
     if item['model_entity'] != "":
-        processModelEntity(item['model_entity'])
+        processModelEntity(item['model_entity'], m)
     if item['model_entity2'] != "":
-        processModelEntity(item['model_entity2'])
+        processModelEntity(item['model_entity2'], m)
     if item['model_entity3'] != "":
-        processModelEntity(item['model_entity3'])
+        processModelEntity(item['model_entity3'], m)
 
 
-def addImportedComponent(modelentity, compartment):
+def addImportedComponent(modelentity, fma, chebi, compartment):
     componentandvariable = modelentity[modelentity.find('#') + 1:len(modelentity)]
     nameofcomponent = componentandvariable[:componentandvariable.find('.')]
+    nameofvariable = componentandvariable[componentandvariable.find('.') + 1:]
     compartment.addComponent(m.getComponent(nameofcomponent))
 
-    # modelname = modelentity[0:modelentity.find('#')]
-    # r = requests.get(workspaceURL + modelname)
-    #
-    # p = Parser()
-    # importedModel = p.parseModel(r.text)
-    # c = importedModel.getComponent(nameofcomponent)
-    # v = c.getVariable(1)
-    # print("name:", v.getName(), "units:", v.getUnits(), "initial_value:", v.getInitialValue(), "interface:",
-    #       v.getInterfaceType(), "id:", v.getId())
+    # sparql
+    query = concentrationSparql(fma, chebi)
 
+    sparql = SPARQLWrapper(sparqlendpoint)
+    sparql.setQuery(query)
+
+    sparql.setReturnFormat(JSON)
+    results = sparql.query().convert()
+
+    # load this cellml model
+    modelname = modelentity[0:modelentity.find('#')]
+    r = requests.get(workspaceURL + modelname)
+
+    # parse the string representation of the model to access by libcellml
+    p = Parser()
+    importedModel = p.parseModel(r.text)
+
+    for result in results["results"]["bindings"]:
+        model_entity = result["modelEntity"]["value"]
+        model_name = model_entity[0:model_entity.find('#')]
+
+        flag = False
+        flag_concentration = False
+        if model_name == modelname:
+            component_variable = model_entity[model_entity.find('#') + 1:len(model_entity)]
+            name_of_component = component_variable[:component_variable.find('.')]
+            name_of_variable = component_variable[component_variable.find('.') + 1:]
+
+            # iteratively checking a flux and its associated concentration variable in a component
+            c = importedModel.getComponent(name_of_component)
+
+            i = 0
+            while c.getVariable(i) != None:
+                v_flux = c.getVariable(i)
+                # if flux variable exists then find its associated concentration variable
+                if v_flux.getName() == nameofvariable:
+                    flag = True
+                    break
+                i += 1
+
+            # find a concentration variable of the associated flux variable in the same component
+            if flag == True:
+                c = importedModel.getComponent(name_of_component)
+                i = 1
+                while c.getVariable(i) != None:
+                    v_cons = c.getVariable(i)
+                    if v_cons.getName() == name_of_variable:
+                        # concentration variable
+                        if compartment.getVariable(v_cons.getName()) == None:
+                            v = Variable()
+                            v.setName(v_cons.getName())
+                            v.setUnits(v_cons.getUnits())
+                            v.setInitialValue(v_cons.getInitialValue())
+                            v.setInterfaceType(v_cons.getInterfaceType())
+                            v.setId(compartment.getName() + "." + v_cons.getName())
+
+                            compartment.addVariable(v)
+
+                            print("name:", v_cons.getName(), "units:", v_cons.getUnits(), "initial_value:",
+                                  v_cons.getInitialValue(),
+                                  "interface:", v_cons.getInterfaceType(), "id:", v_cons.getId())
+
+                        # flux variable
+                        if compartment.getVariable(v_flux.getName()) == None:
+                            v = Variable()
+                            v.setName(v_flux.getName())
+                            v.setUnits(v_flux.getUnits())
+                            v.setInitialValue(v_flux.getInitialValue())
+                            v.setInterfaceType(v_flux.getInterfaceType())
+                            v.setId(compartment.getName() + "." + v_flux.getName())
+
+                            compartment.addVariable(v)
+
+                            print("name:", v_flux.getName(), "units:", v_flux.getUnits(), "initial_value:",
+                                  v_flux.getInitialValue(),
+                                  "interface:", v_flux.getInterfaceType(), "id:", v_flux.getId())
+
+                        flag_concentration = True
+                        break
+
+                    i += 1
+
+            if flag_concentration == True:
+                break
+
+    # print(result["modelEntity"]["value"])
+
+
+# environment component
+environment = Component()
+environment.setName("environment")
+v_e = Variable()
+v_e.setName("time")
+v_e.setUnits("second")
+v_e.setInterfaceType("public")
+v_e.setId(environment.getName() + "." + v_e.getName())
+environment.addVariable(v_e)
+m.addComponent(environment)
 
 # epithelial component
 epithelial = Component()
@@ -367,176 +149,175 @@ interstitialfluid.setName("interstitialfluid")
 # encapsulation of epithelial component
 # create lumen components inside epithelial component
 for item in modelRecipe:
-    if item["source_fma"] == lumen_fma or item["sink_fma"] == lumen_fma:
-        addImportedComponent(item["model_entity"], lumen)
-    if item["source_fma2"] != "" and item["source_fma2"] == lumen_fma or item["sink_fma2"] == lumen_fma:
-        addImportedComponent(item["model_entity2"], lumen)
-    if item["source_fma3"] != "" and item["source_fma3"] == lumen_fma or item["sink_fma3"] == lumen_fma:
-        addImportedComponent(item["model_entity3"], lumen)
+    if item["source_fma"] == lumen_fma:
+        addImportedComponent(item["model_entity"], item["source_fma"], item["solute_chebi"], lumen)
+        print(item["variable_text"])
+    if item["sink_fma"] == lumen_fma:
+        addImportedComponent(item["model_entity"], item["sink_fma"], item["solute_chebi"], lumen)
+        print(item["variable_text"])
+    if item["source_fma2"] != "" and item["source_fma2"] == lumen_fma:
+        addImportedComponent(item["model_entity2"], item["source_fma2"], item["solute_chebi2"], lumen)
+        print(item["variable_text2"])
+    if item["source_fma2"] != "" and item["sink_fma2"] == lumen_fma:
+        addImportedComponent(item["model_entity2"], item["sink_fma2"], item["solute_chebi2"], lumen)
+        print(item["variable_text2"])
+    if item["source_fma3"] != "" and item["source_fma3"] == lumen_fma:
+        addImportedComponent(item["model_entity3"], item["source_fma3"], item["solute_chebi3"], lumen)
+        print(item["variable_text3"])
+    if item["source_fma3"] != "" and item["sink_fma3"] == lumen_fma:
+        addImportedComponent(item["model_entity3"], item["sink_fma3"], item["solute_chebi3"], lumen)
+        print(item["variable_text3"])
+
+# create cytosol components inside epithelial component
+for item in modelRecipe:
+    if item["source_fma"] == cytosol_fma:
+        addImportedComponent(item["model_entity"], item["source_fma"], item["solute_chebi"], cytosol)
+        print(item["variable_text"])
+    if item["sink_fma"] == cytosol_fma:
+        addImportedComponent(item["model_entity"], item["sink_fma"], item["solute_chebi"], cytosol)
+        print(item["variable_text"])
+    if item["source_fma2"] != '' and item['source_fma2'] == cytosol_fma:
+        addImportedComponent(item["model_entity2"], item["source_fma2"], item["solute_chebi2"], cytosol)
+        print(item["variable_text2"])
+    if item["source_fma2"] != '' and item['sink_fma2'] == cytosol_fma:
+        addImportedComponent(item["model_entity2"], item["sink_fma2"], item["solute_chebi2"], cytosol)
+        print(item["variable_text2"])
+    if item["source_fma3"] != '' and item["source_fma3"] == cytosol_fma:
+        addImportedComponent(item["model_entity3"], item["source_fma3"], item["solute_chebi3"], cytosol)
+        print(item["variable_text3"])
+    if item["source_fma3"] != '' and item["sink_fma3"] == cytosol_fma:
+        addImportedComponent(item["model_entity3"], item["sink_fma3"], item["solute_chebi3"], cytosol)
+        print(item["variable_text3"])
+
+# create interstitial fluid components inside epithelial component
+for item in modelRecipe:
+    if item["source_fma"] == interstitialfluid_fma:
+        addImportedComponent(item["model_entity"], item["source_fma"], item["solute_chebi"], interstitialfluid)
+        print(item["variable_text"])
+    if item["sink_fma"] == interstitialfluid_fma:
+        addImportedComponent(item["model_entity"], item["sink_fma"], item["solute_chebi"], interstitialfluid)
+        print(item["variable_text"])
+    if item["source_fma2"] != "" and item["source_fma2"] == interstitialfluid_fma:
+        addImportedComponent(item["model_entity2"], item["source_fma2"], item["solute_chebi2"], interstitialfluid)
+        print(item["variable_text2"])
+    if item["source_fma2"] != "" and item["sink_fma2"] == interstitialfluid_fma:
+        addImportedComponent(item["model_entity2"], item["sink_fma2"], item["solute_chebi2"], interstitialfluid)
+        print(item["variable_text2"])
+    if item["source_fma3"] != "" and item["source_fma3"] == interstitialfluid_fma:
+        addImportedComponent(item["model_entity3"], item["source_fma3"], item["solute_chebi3"], interstitialfluid)
+        print(item["variable_text3"])
+    if item["source_fma3"] != "" and item["sink_fma3"] == interstitialfluid_fma:
+        addImportedComponent(item["model_entity3"], item["sink_fma3"], item["solute_chebi3"], interstitialfluid)
+        print(item["variable_text3"])
+
+# include time variable to lumen, cytosol, interstitial fluid, and epithelial component
+v_lumen = Variable()
+v_lumen.setName("time")
+v_lumen.setUnits("second")
+v_lumen.setInterfaceType("public")
+v_lumen.setId(lumen.getName() + "." + v_lumen.getName())
+lumen.addVariable(v_lumen)
+
+v_cytosol = Variable()
+v_cytosol.setName("time")
+v_cytosol.setUnits("second")
+v_cytosol.setInterfaceType("public")
+v_cytosol.setId(cytosol.getName() + "." + v_cytosol.getName())
+cytosol.addVariable(v_cytosol)
+
+v_interstitial = Variable()
+v_interstitial.setName("time")
+v_interstitial.setUnits("second")
+v_interstitial.setInterfaceType("public")
+v_interstitial.setId(interstitialfluid.getName() + "." + v_interstitial.getName())
+interstitialfluid.addVariable(v_interstitial)
+
+v_epithelial = Variable()
+v_epithelial.setName("time")
+v_epithelial.setUnits("second")
+v_epithelial.setInterfaceType("public")
+v_epithelial.setId(epithelial.getName() + "." + v_epithelial.getName())
+epithelial.addVariable(v_epithelial)
+
+# add components to model
+# m.addComponent(lumen)
+# m.addComponent(cytosol)
+# m.addComponent(interstitialfluid)
 
 # add lumen component to epithelial component
 epithelial.addComponent(lumen)
 
-# create cytosol components inside epithelial component
-for item in modelRecipe:
-    if item["source_fma"] == cytosol_fma or item["sink_fma"] == cytosol_fma:
-        addImportedComponent(item["model_entity"], cytosol)
-    if item["source_fma2"] != '' and item['source_fma2'] == cytosol_fma or item['sink_fma2'] == cytosol_fma:
-        addImportedComponent(item["model_entity2"], cytosol)
-    if item["source_fma3"] != '' and item["source_fma3"] == cytosol_fma or item["sink_fma3"] == cytosol_fma:
-        addImportedComponent(item["model_entity3"], cytosol)
-
 # add cytosol component to epithelial component
 epithelial.addComponent(cytosol)
-
-# create interstitial fluid components inside epithelial component
-for item in modelRecipe:
-    if item["source_fma"] == interstitialfluid_fma or item["sink_fma"] == interstitialfluid_fma:
-        addImportedComponent(item["model_entity"], interstitialfluid)
-    if item["source_fma2"] != "" and item["source_fma2"] == interstitialfluid_fma or item[
-        "sink_fma2"] == interstitialfluid_fma:
-        addImportedComponent(item["model_entity2"], interstitialfluid)
-    if item["source_fma3"] != "" and item["source_fma3"] == interstitialfluid_fma or item[
-        "sink_fma3"] == interstitialfluid_fma:
-        addImportedComponent(item["model_entity3"], interstitialfluid)
 
 # add interstitial component to epithelial component
 epithelial.addComponent(interstitialfluid)
 
-# add epithelial component to model
 m.addComponent(epithelial)
 
-# A sample sparql query execution
-from SPARQLWrapper import SPARQLWrapper, JSON
+# mapping connection between epithelial and environment component
+i = 0
+while epithelial.getVariable(i) != None:
+    v11 = epithelial.getVariable(i)
+    v11_name = v11.getName()
+    j = 0
+    while environment.getVariable(j) != None:
+        v12 = environment.getVariable(j)
+        v12_name = v12.getName()
 
-sparql = SPARQLWrapper(sparqlendpoint)
-sparql.setQuery(concentrationQuery)
+        if v11_name == v12_name:
+            variable = Variable()
+            variable.addEquivalence(v11, v12)
+        j += 1
+    i += 1
 
-sparql.setReturnFormat(JSON)
-results = sparql.query().convert()
+# mapping connection between epithelial and lumen component
+i = 0
+while epithelial.getVariable(i) != None:
+    v11 = epithelial.getVariable(i)
+    v11_name = v11.getName()
+    j = 0
+    while lumen.getVariable(j) != None:
+        v12 = lumen.getVariable(j)
+        v12_name = v12.getName()
 
-for result in results["results"]["bindings"]:
-    print(result["modelEntity"]["value"])
+        if v11_name == v12_name:
+            variable = Variable()
+            variable.addEquivalence(v11, v12)
+        j += 1
+    i += 1
 
-# # lumen component
-# lumen = Component()
-# lumen.setName("lumen")
-#
-# # variable
-# lumen_v = Variable()
-# lumen_v2 = Variable()
-#
-# # id - component.variable
-# lumen_v.setId("lumen.C_ext_Na")
-# lumen_v2.setId("lumen.C_int_Na")
-#
-# # initial value
-# lumen_v.setInitialValue("140")
-# lumen_v2.setInitialValue("150")
-#
-# # name
-# lumen_v.setName("C_ext_Na")
-# lumen_v2.setName("C_int_Na")
-#
-# # interface - public or private or public_and_private
-# lumen_v.setInterfaceType("public")
-# lumen_v2.setInterfaceType("public")
-#
-# # units
-# lumen_u = Units()
-# lumen_u.setName("mM")
-# lumen_v.setUnits(lumen_u)
-#
-# lumen_u2 = Units()
-# lumen_u2.setName("mM")
-# lumen_v2.setUnits(lumen_u2)
-#
-# # add variable to lumen component
-# lumen.addVariable(lumen_v)
-# lumen.addVariable(lumen_v2)
-#
-# # math
-# lumen_math = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\">" \
-#              "<apply>" \
-#              "<eq/>" \
-#              "<ci>C</ci>" \
-#              "<apply>" \
-#              "<plus/>" \
-#              "<ci>A</ci>" \
-#              "<ci>B</ci>" \
-#              "</apply>" \
-#              "</apply>" \
-#              "</math>"
-#
-# lumen.appendMath(lumen_math)
-#
-# # add lumen component to the model
-# m.addComponent(lumen)
+# mapping connection between epithelial and cytosol component
+i = 0
+while epithelial.getVariable(i) != None:
+    v11 = epithelial.getVariable(i)
+    v11_name = v11.getName()
+    j = 0
+    while cytosol.getVariable(j) != None:
+        v12 = cytosol.getVariable(j)
+        v12_name = v12.getName()
 
-# # cytosol component
-# cytosol = Component()
-# cytosol.setName("cytosol")
-#
-# # variable
-# cytosol_v = Variable()
-# cytosol_v2 = Variable()
-#
-# # id - component.variable
-# cytosol_v.setId("cytosol.C_ext_Na")
-# cytosol_v2.setId("cytosol.C_c_Na")
-#
-# # initial value
-# cytosol_v.setInitialValue("140")
-# cytosol_v2.setInitialValue("150")
-#
-# # name
-# cytosol_v.setName("C_ext_Na")
-# cytosol_v2.setName("C_c_Na")
-#
-# # interface - public or private or public_and_private
-# cytosol_v.setInterfaceType("public")
-# cytosol_v2.setInterfaceType("public")
-#
-# # units
-# cytosol_u = Units()
-# cytosol_u.setName("mM")
-# cytosol_v.setUnits(cytosol_u)
-#
-# cytosol_u2 = Units()
-# cytosol_u2.setName("mM")
-# cytosol_v2.setUnits(cytosol_u2)
-#
-# # add variable to lumen component
-# cytosol.addVariable(cytosol_v)
-# cytosol.addVariable(cytosol_v2)
-#
-# # math
-# cytosol_math = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\">" \
-#                "<apply>" \
-#                "<eq/>" \
-#                "<ci>C</ci>" \
-#                "<apply>" \
-#                "<plus/>" \
-#                "<ci>A</ci>" \
-#                "<ci>B</ci>" \
-#                "</apply>" \
-#                "</apply>" \
-#                "</math>"
-#
-# cytosol.appendMath(cytosol_math)
-#
-# # add cytosol component to the model
-# m.addComponent(cytosol)
+        if v11_name == v12_name:
+            variable = Variable()
+            variable.addEquivalence(v11, v12)
+        j += 1
+    i += 1
 
-# # interstitial fluid component
-# interstitial = Component()
-# interstitial.setName("interstitialFluid")
-# m.addComponent(interstitial)
+# mapping connection between epithelial and interstitial fluid component
+i = 0
+while epithelial.getVariable(i) != None:
+    v11 = epithelial.getVariable(i)
+    v11_name = v11.getName()
+    j = 0
+    while interstitialfluid.getVariable(j) != None:
+        v12 = interstitialfluid.getVariable(j)
+        v12_name = v12.getName()
 
-# # add equivalence - mapping connections
-# v = Variable()
-# v.addEquivalence(lumen_v, cytosol_v)
-# v.addEquivalence(lumen_v2, cytosol_v2)
+        if v11_name == v12_name:
+            variable = Variable()
+            variable.addEquivalence(v11, v12)
+        j += 1
+    i += 1
 
 # serialize and print a model
 printer = Printer()
