@@ -304,15 +304,6 @@
     <connection component_1="environment" component_2="epithelial">
         <map_variables variable_1="time" variable_2="time"/>
     </connection>
-    <connection component_1="environment" component_2="lumen">
-        <map_variables variable_1="time" variable_2="time"/>
-    </connection>
-    <connection component_1="environment" component_2="cytosol">
-        <map_variables variable_1="time" variable_2="time"/>
-    </connection>
-    <connection component_1="environment" component_2="interstitialfluid">
-        <map_variables variable_1="time" variable_2="time"/>
-    </connection>
     <connection component_1="lumen" component_2="total_transepithelial_sodium_flux">
         <map_variables variable_1="J_mc_Na" variable_2="J_mc_Na"/>
         <map_variables variable_1="time" variable_2="time"/>
@@ -437,28 +428,6 @@
         <map_variables variable_1="time" variable_2="time"/>
     </connection>
     <connection component_1="epithelial" component_2="interstitialfluid">
-        <map_variables variable_1="J_sc_Na" variable_2="J_sc_Na"/>
-        <map_variables variable_1="J_sc_K" variable_2="J_sc_K"/>
-        <map_variables variable_1="G_sc_Cl" variable_2="G_sc_Cl"/>
-        <map_variables variable_1="G_sc_K" variable_2="G_sc_K"/>
-        <map_variables variable_1="time" variable_2="time"/>
-    </connection>
-    <connection component_1="lumen" component_2="cytosol">
-        <map_variables variable_1="J_mc_Na" variable_2="J_mc_Na"/>
-        <map_variables variable_1="J_mc_Cl" variable_2="J_mc_Cl"/>
-        <map_variables variable_1="J_mc_K" variable_2="J_mc_K"/>
-        <map_variables variable_1="G_mc_Na" variable_2="G_mc_Na"/>
-        <map_variables variable_1="G_mc_Cl" variable_2="G_mc_Cl"/>
-        <map_variables variable_1="G_mc_K" variable_2="G_mc_K"/>
-        <map_variables variable_1="time" variable_2="time"/>
-    </connection>
-    <connection component_1="lumen" component_2="interstitialfluid">
-        <map_variables variable_1="G_ms_Na" variable_2="G_ms_Na"/>
-        <map_variables variable_1="G_ms_Cl" variable_2="G_ms_Cl"/>
-        <map_variables variable_1="G_ms_K" variable_2="G_ms_K"/>
-        <map_variables variable_1="time" variable_2="time"/>
-    </connection>
-    <connection component_1="cytosol" component_2="interstitialfluid">
         <map_variables variable_1="J_sc_Na" variable_2="J_sc_Na"/>
         <map_variables variable_1="J_sc_K" variable_2="J_sc_K"/>
         <map_variables variable_1="G_sc_Cl" variable_2="G_sc_Cl"/>

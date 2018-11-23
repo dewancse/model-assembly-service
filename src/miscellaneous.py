@@ -277,7 +277,7 @@ modelRecipe = [
         "variable_text2": "diffusiveflux",
         "variable_text3": "diffusiveflux"
     }
-];
+]
 
 # PMR sparql endpoint
 sparqlendpoint = "https://models.physiomeproject.org/pmr2_virtuoso_search"
@@ -291,12 +291,39 @@ cytosol_fma = "http://purl.obolibrary.org/obo/FMA_66836"
 interstitialfluid_fma = "http://purl.obolibrary.org/obo/FMA_9673"
 
 
+# ODE based equation
+def mathEq(vConcentration, vFlux, sign):
+    return "<math xmlns=\"http://www.w3.org/1998/Math/MathML\">" \
+           "<apply id=" + '"' + vConcentration + "_diff_eq" + '"' + ">" + \
+           "<eq/>" \
+           "<apply>" \
+           "<diff/>" \
+           "<bvar>" \
+           "<ci>time</ci>" \
+           "</bvar> " \
+           "<ci>" + vConcentration + "</ci>" + \
+           "</apply>" \
+           "<apply>" \
+           "<" + sign + "/>" + \
+           "<ci>" + vFlux + "</ci>" + \
+           "</apply>" \
+           "</apply>" \
+           "</math>"
+
+
 # user-defined function to instantiate a time component and its variable attributes
-def createTimeComponent(v, component):
-    v.setName("time")
-    v.setUnits("second")
-    v.setInterfaceType("public")
-    v.setId(component.getName() + "." + v.getName())
+def createComponent(v, name, unit, interface, initialvalue, component, v2):
+    v.setName(name)
+    v.setUnits(unit)
+    v.setInterfaceType(interface)
+
+    if initialvalue != None:
+        v.setInitialValue(initialvalue)
+
+    if v2 == None:
+        v.setId(component.getName() + "." + v.getName())
+    else:
+        v.setId(component.getName() + "." + v2.getName())
 
     component.addVariable(v)
 

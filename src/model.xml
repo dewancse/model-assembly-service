@@ -10,6 +10,40 @@
     </import>
     <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
             xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="solute_concentrations" name="solute_concentrations"/>
+        <component component_ref="solute_concentrations" name="solute_concentrations"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="total_transepithelial_sodium_flux" name="total_transepithelial_sodium_flux"/>
+        <component component_ref="total_transepithelial_sodium_flux" name="total_transepithelial_sodium_flux"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="solute_concentrations" name="solute_concentrations"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="sc_potassium_flux" name="sc_potassium_flux"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="mc_potassium_flux" name="mc_potassium_flux"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="ms_chloride_flux" name="ms_chloride_flux"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="solute_concentrations" name="solute_concentrations"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="ms_potassium_flux" name="ms_potassium_flux"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
         <component component_ref="mc_chloride_flux" name="mc_chloride_flux"/>
     </import>
     <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
@@ -22,41 +56,7 @@
     </import>
     <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
             xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="ms_chloride_flux" name="ms_chloride_flux"/>
-    </import>
-    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="sc_potassium_flux" name="sc_potassium_flux"/>
-    </import>
-    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="mc_potassium_flux" name="mc_potassium_flux"/>
-    </import>
-    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="ms_potassium_flux" name="ms_potassium_flux"/>
-    </import>
-    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
         <component component_ref="sc_chloride_flux" name="sc_chloride_flux"/>
-    </import>
-    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="solute_concentrations" name="solute_concentrations"/>
-    </import>
-    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="solute_concentrations" name="solute_concentrations"/>
-    </import>
-    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="solute_concentrations" name="solute_concentrations"/>
-        <component component_ref="solute_concentrations" name="solute_concentrations"/>
-    </import>
-    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="total_transepithelial_sodium_flux" name="total_transepithelial_sodium_flux"/>
-        <component component_ref="total_transepithelial_sodium_flux" name="total_transepithelial_sodium_flux"/>
     </import>
     <component name="environment">
         <variable name="time" units="second" interface="public" id="environment.time"/>
@@ -78,6 +78,70 @@
         <variable name="G_ms_Cl" units="flux" id="lumen.G_ms_Cl"/>
         <variable name="G_ms_K" units="flux" id="lumen.G_ms_K"/>
         <variable name="time" units="second" interface="public" id="lumen.time"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply id="C_m_Na_diff_eq">
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>time</ci>
+                    </bvar>
+                    <ci>C_m_Na</ci>
+                </apply>
+                <apply>
+                    <minus/>
+                    <ci>J_mc_Na</ci>
+                </apply>
+            </apply>
+        </math>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply id="C_m_Cl_diff_eq">
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>time</ci>
+                    </bvar>
+                    <ci>C_m_Cl</ci>
+                </apply>
+                <apply>
+                    <minus/>
+                    <ci>J_mc_Cl</ci>
+                </apply>
+            </apply>
+        </math>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply id="C_m_Cl_diff_eq">
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>time</ci>
+                    </bvar>
+                    <ci>C_m_Cl</ci>
+                </apply>
+                <apply>
+                    <minus/>
+                    <ci>J_mc_Cl</ci>
+                </apply>
+            </apply>
+        </math>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply id="C_m_K_diff_eq">
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>time</ci>
+                    </bvar>
+                    <ci>C_m_K</ci>
+                </apply>
+                <apply>
+                    <minus/>
+                    <ci>J_mc_K</ci>
+                </apply>
+            </apply>
+        </math>
     </component>
     <component name="cytosol">
         <variable name="C_c_Na" units="mmol_per_cm3" id="cytosol.C_c_Na"/>
@@ -94,6 +158,102 @@
         <variable name="G_sc_Cl" units="flux" id="cytosol.G_sc_Cl"/>
         <variable name="G_sc_K" units="flux" id="cytosol.G_sc_K"/>
         <variable name="time" units="second" interface="public" id="cytosol.time"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply id="C_c_Na_diff_eq">
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>time</ci>
+                    </bvar>
+                    <ci>C_c_Na</ci>
+                </apply>
+                <apply>
+                    <plus/>
+                    <ci>J_mc_Na</ci>
+                </apply>
+            </apply>
+        </math>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply id="C_c_Cl_diff_eq">
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>time</ci>
+                    </bvar>
+                    <ci>C_c_Cl</ci>
+                </apply>
+                <apply>
+                    <plus/>
+                    <ci>J_mc_Cl</ci>
+                </apply>
+            </apply>
+        </math>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply id="C_c_Cl_diff_eq">
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>time</ci>
+                    </bvar>
+                    <ci>C_c_Cl</ci>
+                </apply>
+                <apply>
+                    <plus/>
+                    <ci>J_mc_Cl</ci>
+                </apply>
+            </apply>
+        </math>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply id="C_c_K_diff_eq">
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>time</ci>
+                    </bvar>
+                    <ci>C_c_K</ci>
+                </apply>
+                <apply>
+                    <plus/>
+                    <ci>J_mc_K</ci>
+                </apply>
+            </apply>
+        </math>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply id="C_c_Na_diff_eq">
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>time</ci>
+                    </bvar>
+                    <ci>C_c_Na</ci>
+                </apply>
+                <apply>
+                    <minus/>
+                    <ci>J_sc_Na</ci>
+                </apply>
+            </apply>
+        </math>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply id="C_c_K_diff_eq">
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>time</ci>
+                    </bvar>
+                    <ci>C_c_K</ci>
+                </apply>
+                <apply>
+                    <plus/>
+                    <ci>J_sc_K</ci>
+                </apply>
+            </apply>
+        </math>
     </component>
     <component name="interstitialfluid">
         <variable name="C_s_Na" units="mmol_per_cm3" initial_value="1.438E-1" id="interstitialfluid.C_s_Na"/>
@@ -107,6 +267,38 @@
         <variable name="G_ms_Cl" units="flux" id="interstitialfluid.G_ms_Cl"/>
         <variable name="G_ms_K" units="flux" id="interstitialfluid.G_ms_K"/>
         <variable name="time" units="second" interface="public" id="interstitialfluid.time"/>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply id="C_s_Na_diff_eq">
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>time</ci>
+                    </bvar>
+                    <ci>C_s_Na</ci>
+                </apply>
+                <apply>
+                    <plus/>
+                    <ci>J_sc_Na</ci>
+                </apply>
+            </apply>
+        </math>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply id="C_s_K_diff_eq">
+                <eq/>
+                <apply>
+                    <diff/>
+                    <bvar>
+                        <ci>time</ci>
+                    </bvar>
+                    <ci>C_s_K</ci>
+                </apply>
+                <apply>
+                    <minus/>
+                    <ci>J_sc_K</ci>
+                </apply>
+            </apply>
+        </math>
     </component>
     <connection component_1="environment" component_2="epithelial">
         <map_variables variable_1="time" variable_2="time"/>
