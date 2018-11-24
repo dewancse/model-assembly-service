@@ -385,6 +385,19 @@ def concentrationSparql(fma, chebi):
            "}"
 
 
+def addUnitsModel(unit_name, importedModel, m):
+    i = 0
+    while importedModel.getUnits(i) != None:
+        u = importedModel.getUnits(i)
+        # u.getUnitAttributes(reference, prefix, exponent, multiplier, id))
+        if u.getName() == unit_name:
+            # if this unit not exists, then add in the model
+            if m.getUnits(unit_name) == None:
+                m.addUnits(u)
+                break
+        i += 1
+
+
 # instantiate source url and create an imported component in the new model
 def instantiateImportedComponent(sourceurl, component, m):
     imp = ImportSource()

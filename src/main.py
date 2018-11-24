@@ -36,90 +36,94 @@ def addImportedComponent(modelentity, fma, chebi, compartment, source_fma2, sour
     # if compartment.getName() != "epithelial":
     compartment.addComponent(m.getComponent(name_of_component_flux))
 
+    print("\n")
+    print("MDOELENTITY FLUX:", modelentity)
 
-print("\n")
-print("MDOELENTITY FLUX:", modelentity)
+    # sparql
+    query = concentrationSparql(fma, chebi)
 
-# sparql
-query = concentrationSparql(fma, chebi)
+    sparql = SPARQLWrapper(sparqlendpoint)
+    sparql.setQuery(query)
 
-sparql = SPARQLWrapper(sparqlendpoint)
-sparql.setQuery(query)
+    sparql.setReturnFormat(JSON)
+    results = sparql.query().convert()
 
-sparql.setReturnFormat(JSON)
-results = sparql.query().convert()
+    # load this cellml model
+    model_name_flux = modelentity[0:modelentity.find('#')]
+    r = requests.get(workspaceURL + model_name_flux)
 
-# load this cellml model
-model_name_flux = modelentity[0:modelentity.find('#')]
-r = requests.get(workspaceURL + model_name_flux)
+    # parse the string representation of the model to access by libcellml
+    p = Parser()
+    importedModel = p.parseModel(r.text)
 
-# parse the string representation of the model to access by libcellml
-p = Parser()
-importedModel = p.parseModel(r.text)
+    for result in results["results"]["bindings"]:
+        model_entity_cons = result["modelEntity"]["value"]
+        model_name_cons = model_entity_cons[0:model_entity_cons.find('#')]
 
-for result in results["results"]["bindings"]:
-    model_entity_cons = result["modelEntity"]["value"]
-    model_name_cons = model_entity_cons[0:model_entity_cons.find('#')]
+        print("MDOELENTITY CONCENTRATION:", modelentity)
 
-    print("MDOELENTITY CONCENTRATION:", modelentity)
+        flag_flux = False
+        flag_concentration = False
+        if model_name_cons == model_name_flux:
+            # component and variable for concentrations
+            component_variable_cons = model_entity_cons[model_entity_cons.find('#') + 1:len(model_entity_cons)]
+            name_of_component_cons = component_variable_cons[:component_variable_cons.find('.')]
+            name_of_variable_cons = component_variable_cons[component_variable_cons.find('.') + 1:]
 
-    flag_flux = False
-    flag_concentration = False
-    if model_name_cons == model_name_flux:
-        # component and variable for concentrations
-        component_variable_cons = model_entity_cons[model_entity_cons.find('#') + 1:len(model_entity_cons)]
-        name_of_component_cons = component_variable_cons[:component_variable_cons.find('.')]
-        name_of_variable_cons = component_variable_cons[component_variable_cons.find('.') + 1:]
-
-        # iteratively checking a flux and its associated concentration variable in a component
-        c = importedModel.getComponent(name_of_component_cons)
-
-        i = 0
-        while c.getVariable(i) != None:
-            v_flux = c.getVariable(i)
-            # if flux variable exists then find its associated concentration variable
-            if v_flux.getName() == name_of_variable_flux:
-                flag_flux = True
-                break
-            # increment i to iterate next item in the while loop
-            i += 1
-
-        # find a concentration variable of the associated flux variable in the same component
-        if flag_flux == True:
+            # iteratively checking a flux and its associated concentration variable in a component
             c = importedModel.getComponent(name_of_component_cons)
-            i = 1
+
+            i = 0
             while c.getVariable(i) != None:
-                v_cons = c.getVariable(i)
-                if v_cons.getName() == name_of_variable_cons:
-                    # concentration variable
-                    if compartment.getVariable(v_cons.getName()) == None:
-                        v_cons_compartment = Variable()
-                        createComponent(v_cons_compartment, v_cons.getName(), v_cons.getUnits(),
-                                        v_cons.getInterfaceType(), v_cons.getInitialValue(), compartment, v_cons)
-
-                    # flux variable
-                    if compartment.getVariable(v_flux.getName()) == None:
-                        v_flux_compartment = Variable()
-                        createComponent(v_flux_compartment, v_flux.getName(), v_flux.getUnits(),
-                                        v_flux.getInterfaceType(), v_flux.getInitialValue(), compartment, v_flux)
-
-                    # assign plus or minus sign in the ODE based equations
-                    sign = odeSignNotation(compartment, source_fma, sink_fma)
-
-                    # exclude ODE based equations for channels and diffusive fluxes
-                    # TODO: retrieve channels and diffusive fluxes equations!
-                    if source_fma2 != "channel" and source_fma2 != "diffusiveflux":
-                        compartment.appendMath(mathEq(v_cons.getName(), v_flux.getName(), sign))
-
-                    flag_concentration = True
+                v_flux = c.getVariable(i)
+                # if flux variable exists then find its associated concentration variable
+                if v_flux.getName() == name_of_variable_flux:
+                    flag_flux = True
                     break
                 # increment i to iterate next item in the while loop
                 i += 1
 
-        # if flux and concentration variables are in the same component
-        # then exit from the for loop to iterate next item from the model recipe
-        if flag_concentration == True:
-            break
+            # find a concentration variable of the associated flux variable in the same component
+            if flag_flux == True:
+                c = importedModel.getComponent(name_of_component_cons)
+                i = 1
+                while c.getVariable(i) != None:
+                    v_cons = c.getVariable(i)
+                    if v_cons.getName() == name_of_variable_cons:
+                        # add units of concentration and flux variables
+                        addUnitsModel(v_cons.getUnits(), importedModel, m)
+                        addUnitsModel(v_flux.getUnits(), importedModel, m)
+
+                        # concentration variable
+                        if compartment.getVariable(v_cons.getName()) == None:
+                            v_cons_compartment = Variable()
+                            createComponent(v_cons_compartment, v_cons.getName(), v_cons.getUnits(),
+                                            v_cons.getInterfaceType(), v_cons.getInitialValue(), compartment, v_cons)
+
+                        # flux variable
+                        if compartment.getVariable(v_flux.getName()) == None:
+                            v_flux_compartment = Variable()
+                            createComponent(v_flux_compartment, v_flux.getName(), v_flux.getUnits(),
+                                            v_flux.getInterfaceType(), v_flux.getInitialValue(), compartment, v_flux)
+
+                        # assign plus or minus sign in the ODE based equations
+                        sign = odeSignNotation(compartment, source_fma, sink_fma)
+
+                        # exclude ODE based equations for channels and diffusive fluxes
+                        # TODO: retrieve channels and diffusive fluxes equations!
+                        if source_fma2 != "channel" and source_fma2 != "diffusiveflux":
+                            compartment.appendMath(mathEq(v_cons.getName(), v_flux.getName(), sign))
+
+                        flag_concentration = True
+                        break
+                    # increment i to iterate next item in the while loop
+                    i += 1
+
+            # if flux and concentration variables are in the same component
+            # then exit from the for loop to iterate next item from the model recipe
+            if flag_concentration == True:
+                break
+
 
 # environment component
 environment = Component()

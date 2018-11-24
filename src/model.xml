@@ -2,18 +2,6 @@
 <model xmlns="http://www.cellml.org/cellml/2.0#" name="epithelialModel" id="epithelialModelID">
     <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
             xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="sc_potassium_flux" name="sc_potassium_flux"/>
-    </import>
-    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="sc_chloride_flux" name="sc_chloride_flux"/>
-    </import>
-    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="mc_chloride_flux" name="mc_chloride_flux"/>
-    </import>
-    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
         <component component_ref="ms_chloride_flux" name="ms_chloride_flux"/>
     </import>
     <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
@@ -26,7 +14,7 @@
     </import>
     <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
             xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="mc_potassium_flux" name="mc_potassium_flux"/>
+        <component component_ref="ms_potassium_flux" name="ms_potassium_flux"/>
     </import>
     <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
             xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -34,7 +22,19 @@
     </import>
     <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
             xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="ms_potassium_flux" name="ms_potassium_flux"/>
+        <component component_ref="mc_chloride_flux" name="mc_chloride_flux"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="mc_potassium_flux" name="mc_potassium_flux"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="sc_chloride_flux" name="sc_chloride_flux"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="sc_potassium_flux" name="sc_potassium_flux"/>
     </import>
     <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
             xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -46,8 +46,8 @@
     </import>
     <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
             xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="solute_concentrations" name="solute_concentrations"/>
-        <component component_ref="solute_concentrations" name="solute_concentrations"/>
+        <component component_ref="total_transepithelial_sodium_flux" name="total_transepithelial_sodium_flux"/>
+        <component component_ref="total_transepithelial_sodium_flux" name="total_transepithelial_sodium_flux"/>
     </import>
     <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
             xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -55,9 +55,17 @@
     </import>
     <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
             xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="total_transepithelial_sodium_flux" name="total_transepithelial_sodium_flux"/>
-        <component component_ref="total_transepithelial_sodium_flux" name="total_transepithelial_sodium_flux"/>
+        <component component_ref="solute_concentrations" name="solute_concentrations"/>
     </import>
+    <units name="mmol_per_cm3">
+        <unit exponent="-3" prefix="centi" units="metre"/>
+        <unit prefix="milli" units="mole"/>
+    </units>
+    <units name="flux">
+        <unit exponent="-3" prefix="centi" units="metre"/>
+        <unit prefix="milli" units="mole"/>
+        <unit exponent="-1" units="second"/>
+    </units>
     <component name="environment">
         <variable name="time" units="second" interface="public" id="environment.time"/>
     </component>
@@ -554,6 +562,28 @@
     </connection>
     <encapsulation>
         <component_ref component="epithelial">
+            <component_ref component="total_transepithelial_sodium_flux"/>
+            <component_ref component="total_transepithelial_sodium_flux"/>
+            <component_ref component="solute_concentrations"/>
+            <component_ref component="solute_concentrations"/>
+            <component_ref component="solute_concentrations"/>
+            <component_ref component="solute_concentrations"/>
+            <component_ref component="total_transepithelial_potassium_flux"/>
+            <component_ref component="total_transepithelial_potassium_flux"/>
+            <component_ref component="mc_sodium_flux"/>
+            <component_ref component="mc_sodium_flux"/>
+            <component_ref component="mc_chloride_flux"/>
+            <component_ref component="mc_chloride_flux"/>
+            <component_ref component="mc_potassium_flux"/>
+            <component_ref component="mc_potassium_flux"/>
+            <component_ref component="solute_concentrations"/>
+            <component_ref component="solute_concentrations"/>
+            <component_ref component="sc_potassium_flux"/>
+            <component_ref component="sc_potassium_flux"/>
+            <component_ref component="sc_chloride_flux"/>
+            <component_ref component="sc_chloride_flux"/>
+            <component_ref component="sc_potassium_flux"/>
+            <component_ref component="sc_potassium_flux"/>
             <component_ref component="lumen">
                 <component_ref component="total_transepithelial_sodium_flux"/>
                 <component_ref component="solute_concentrations"/>
