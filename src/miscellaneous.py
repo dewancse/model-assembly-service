@@ -1,7 +1,7 @@
 from libcellml import *
 
 # pre-generated JSON model recipe
-modelRecipe = [
+model_recipe = [
     {
         "med_fma": "http://purl.obolibrary.org/obo/FMA_84666",
         "med_pr": "http://purl.obolibrary.org/obo/PR_P55018",
@@ -309,6 +309,47 @@ def mathEq(vConcentration, vFlux, sign):
            "</apply>" \
            "</apply>" \
            "</math>"
+
+
+# assign plus or minus sign in the ODE based equations
+def odeSignNotation(compartment, source_fma, sink_fma):
+    # lumen
+    if compartment.getName() == "lumen":
+        if source_fma == lumen_fma and sink_fma == cytosol_fma:
+            sign = "minus"
+        else:
+            sign = "plus"
+
+    # cytosol
+    if compartment.getName() == "cytosol":
+        if source_fma == cytosol_fma and sink_fma == lumen_fma:
+            sign = "minus"
+        elif source_fma == cytosol_fma and sink_fma == interstitialfluid_fma:
+            sign = "minus"
+        elif source_fma == lumen_fma and sink_fma == cytosol_fma:
+            sign = "plus"
+        elif source_fma == interstitialfluid_fma and sink_fma == cytosol_fma:
+            sign = "plus"
+
+    # interstitial fluid
+    if compartment.getName() == "interstitialfluid":
+        if source_fma == interstitialfluid_fma and sink_fma == cytosol_fma:
+            sign = "minus"
+        else:
+            sign = "plus"
+
+    # epithelial
+    if compartment.getName() == "epithelial":
+        if source_fma == lumen_fma and sink_fma == cytosol_fma:
+            sign = "plus"
+        elif source_fma == cytosol_fma and sink_fma == lumen_fma:
+            sign = "minus"
+        elif source_fma == cytosol_fma and sink_fma == interstitialfluid_fma:
+            sign = "minus"
+        elif source_fma == interstitialfluid_fma and sink_fma == cytosol_fma:
+            sign = "plus"
+
+    return sign
 
 
 # user-defined function to instantiate a time component and its variable attributes

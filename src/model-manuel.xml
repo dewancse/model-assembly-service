@@ -260,9 +260,9 @@
         <variable name="J_sc_K" units="flux" initial_value="1" interface="public" id="epithelial.J_sc_K"/>
         <variable name="G_sc_Cl" units="flux" initial_value="1" interface="public" id="epithelial.G_sc_Cl"/>
         <variable name="G_sc_K" units="flux" initial_value="1" interface="public" id="epithelial.G_sc_K"/>
-        <variable name="J_Na" units="flux" initial_value="1" interface="public" id="epithelial.G_ms_Na"/>
-        <variable name="J_Cl" units="flux" initial_value="1" interface="public" id="epithelial.G_ms_Cl"/>
-        <variable name="J_K" units="flux" initial_value="1" interface="public" id="epithelial.G_ms_K"/>
+        <variable name="J_Na" units="flux" initial_value="1" interface="public" id="epithelial.J_Na"/>
+        <variable name="J_Cl" units="flux" initial_value="1" interface="public" id="epithelial.J_Cl"/>
+        <variable name="J_K" units="flux" initial_value="1" interface="public" id="epithelial.J_K"/>
         <variable name="time" units="second" interface="public" id="epithelial.time"/>
         <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="J_Na_calculation">
