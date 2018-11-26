@@ -292,7 +292,7 @@ interstitialfluid_fma = "http://purl.obolibrary.org/obo/FMA_9673"
 
 
 # get channel and diffusive fluxes equation from source model
-def getChannelsEquation(str_channel, v, compartment):
+def getChannelsEquation(str_channel, v, compartment, importedModel, m):
     str_index = []
     list_of_variables = []
     for i in range(len(str_channel)):
@@ -313,40 +313,74 @@ def getChannelsEquation(str_channel, v, compartment):
                     channel_str = ""
                     for s in my_str:
                         channel_str += s
-                    channel_str = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\">" + channel_str + "</apply></math>"
+                    channel_str = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\">\n" + channel_str + "</apply>\n</math>\n"
                     compartment.appendMath(channel_str)
                     # extract variables from this math string
                     for i in range(len(my_str)):
                         if "<ci>" in my_str[i]:
                             start_index = my_str[i].find("<ci>")
                             end_index = my_str[i].find("</ci>")
-                            list_of_variables.append(my_str[i][start_index + 4:end_index])
+                            if my_str[i][start_index + 4:end_index] != v:
+                                list_of_variables.append(my_str[i][start_index + 4:end_index])
                     flag = True
                     break
         if flag == True:
             break
 
-    print("List of variables:", list_of_variables)
+    # remove variables if already exists in the model
+    i = 0
+    while compartment.getVariable(i) != None:
+        var = compartment.getVariable(i)
+        # TODO: remove C_c_Na from the list below and include from parent component
+        # TODO: ['C_c_Na', 'RT', 'psi_c', 'P_mc_Na', 'F', 'psi_m']
+        if var.getName() in list_of_variables:
+            list_of_variables.remove(var.getName())
+        i += 1
+
+    # unique elements in the list
+    list_of_variables = list(set(list_of_variables))
+
+    for item in list_of_variables:
+        # iterate over components
+        i = 0
+        while importedModel.getComponent(i) != None:
+            c = importedModel.getComponent(i)
+            # variables within a component
+            j = 0
+            while c.getVariable(j) != None:
+                v = c.getVariable(j)
+                if v.getName() == item and v.getInitialValue() != "":
+                    # add units
+                    addUnitsModel(v.getUnits(), importedModel, m)
+
+                    if compartment.getVariable(v.getName()) == None:
+                        v_new = Variable()
+                        createComponent(v_new, v.getName(), v.getUnits(), v.getInterfaceType(), v.getInitialValue(),
+                                        compartment, v)
+                j += 1
+            i += 1
+
+    # print("List of variables:", list_of_variables)
 
 
 # ODE based equation
 def mathEq(vConcentration, vFlux, sign):
-    return "<math xmlns=\"http://www.w3.org/1998/Math/MathML\">" \
-           "<apply id=" + '"' + vConcentration + "_diff_eq" + '"' + ">" + \
-           "<eq/>" \
-           "<apply>" \
-           "<diff/>" \
-           "<bvar>" \
-           "<ci>time</ci>" \
-           "</bvar> " \
-           "<ci>" + vConcentration + "</ci>" + \
-           "</apply>" \
-           "<apply>" \
-           "<" + sign + "/>" + \
-           "<ci>" + vFlux + "</ci>" + \
-           "</apply>" \
-           "</apply>" \
-           "</math>"
+    return "<math xmlns=\"http://www.w3.org/1998/Math/MathML\">\n" \
+           "    <apply id=" + '"' + vConcentration + "_diff_eq" + '"' + ">\n" + \
+           "        <eq/>\n" \
+           "        <apply>\n" \
+           "            <diff/>\n" \
+           "            <bvar>\n" \
+           "                <ci>time</ci>\n" \
+           "            </bvar>\n" \
+           "            <ci>" + vConcentration + "</ci>\n" + \
+           "        </apply>\n" \
+           "        <apply>\n" \
+           "            <" + sign + "/>\n" + \
+           "            <ci>" + vFlux + "</ci>\n" + \
+           "        </apply>\n" \
+           "    </apply>\n" \
+           "</math>\n"
 
 
 # assign plus or minus sign in the ODE based equations

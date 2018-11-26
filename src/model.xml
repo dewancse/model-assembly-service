@@ -2,42 +2,6 @@
 <model xmlns="http://www.cellml.org/cellml/2.0#" name="epithelialModel" id="epithelialModelID">
     <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
             xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="sc_potassium_flux" name="sc_potassium_flux"/>
-    </import>
-    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="mc_chloride_flux" name="mc_chloride_flux"/>
-    </import>
-    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="sc_chloride_flux" name="sc_chloride_flux"/>
-    </import>
-    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="sc_potassium_flux" name="sc_potassium_flux"/>
-    </import>
-    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="ms_sodium_flux" name="ms_sodium_flux"/>
-    </import>
-    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="ms_chloride_flux" name="ms_chloride_flux"/>
-    </import>
-    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="ms_potassium_flux" name="ms_potassium_flux"/>
-    </import>
-    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="mc_potassium_flux" name="mc_potassium_flux"/>
-    </import>
-    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="solute_concentrations" name="solute_concentrations"/>
-    </import>
-    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
         <component component_ref="total_transepithelial_potassium_flux" name="total_transepithelial_potassium_flux"/>
     </import>
     <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
@@ -52,11 +16,47 @@
     <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
             xmlns:xlink="http://www.w3.org/1999/xlink">
         <component component_ref="solute_concentrations" name="solute_concentrations"/>
+        <component component_ref="solute_concentrations" name="solute_concentrations"/>
     </import>
     <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
             xmlns:xlink="http://www.w3.org/1999/xlink">
         <component component_ref="solute_concentrations" name="solute_concentrations"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="sc_potassium_flux" name="sc_potassium_flux"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="mc_potassium_flux" name="mc_potassium_flux"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="ms_potassium_flux" name="ms_potassium_flux"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
         <component component_ref="solute_concentrations" name="solute_concentrations"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="sc_chloride_flux" name="sc_chloride_flux"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="ms_sodium_flux" name="ms_sodium_flux"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="mc_chloride_flux" name="mc_chloride_flux"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="ms_chloride_flux" name="ms_chloride_flux"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="sc_potassium_flux" name="sc_potassium_flux"/>
     </import>
     <units name="mmol_per_cm3">
         <unit exponent="-3" prefix="centi" units="metre"/>
@@ -67,11 +67,27 @@
         <unit prefix="milli" units="mole"/>
         <unit exponent="-1" units="second"/>
     </units>
+    <units name="C_per_mmol">
+        <unit exponent="-1" prefix="milli" units="mole"/>
+        <unit units="coulomb"/>
+    </units>
+    <units name="J_per_mmol">
+        <unit exponent="-1" units="kelvin"/>
+        <unit units="joule"/>
+        <unit exponent="-1" prefix="milli" units="mole"/>
+    </units>
+    <units name="millivolt">
+        <unit prefix="milli" units="volt"/>
+    </units>
+    <units name="cm_per_s">
+        <unit exponent="-1" units="second"/>
+        <unit prefix="centi" units="metre"/>
+    </units>
     <component name="environment">
         <variable name="time" units="second" interface="public" id="environment.time"/>
     </component>
     <component name="epithelial">
-        <variable name="C_m_Na" units="mmol_per_cm3" id="epithelial.C_m_Na"/>
+        <variable name="C_m_Na" units="mmol_per_cm3" initial_value="0.05" id="epithelial.C_m_Na"/>
         <variable name="J_mc_Na" units="flux" id="epithelial.J_mc_Na"/>
         <variable name="C_c_Na" units="mmol_per_cm3" id="epithelial.C_c_Na"/>
         <variable name="C_m_Cl" units="mmol_per_cm3" initial_value="0.03" id="epithelial.C_m_Cl"/>
@@ -81,15 +97,25 @@
         <variable name="J_mc_K" units="flux" id="epithelial.J_mc_K"/>
         <variable name="C_c_K" units="mmol_per_cm3" initial_value="0.1637" id="epithelial.C_c_K"/>
         <variable name="G_mc_Na" units="flux" id="epithelial.G_mc_Na"/>
+        <variable name="F" units="C_per_mmol" initial_value="96.48" id="epithelial.F"/>
+        <variable name="RT" units="J_per_mmol" initial_value="2.579" id="epithelial.RT"/>
+        <variable name="psi_m" units="millivolt" initial_value="-28.0" id="epithelial.psi_m"/>
+        <variable name="psi_c" units="millivolt" initial_value="-86.4" id="epithelial.psi_c"/>
+        <variable name="P_mc_Na" units="cm_per_s" initial_value="3.27E-6" id="epithelial.P_mc_Na"/>
         <variable name="G_mc_Cl" units="flux" id="epithelial.G_mc_Cl"/>
+        <variable name="P_mc_Cl" units="cm_per_s" initial_value="1.43E-6" id="epithelial.P_mc_Cl"/>
         <variable name="G_mc_K" units="flux" id="epithelial.G_mc_K"/>
+        <variable name="P_mc_K" units="cm_per_s" initial_value="4.90E-7" id="epithelial.P_mc_K"/>
         <variable name="J_sc_Na" units="flux" id="epithelial.J_sc_Na"/>
         <variable name="C_s_Na" units="mmol_per_cm3" initial_value="1.438E-1" id="epithelial.C_s_Na"/>
         <variable name="C_s_K" units="mmol_per_cm3" id="epithelial.C_s_K"/>
         <variable name="J_sc_K" units="flux" id="epithelial.J_sc_K"/>
         <variable name="C_s_Cl" units="mmol_per_cm3" id="epithelial.C_s_Cl"/>
         <variable name="G_sc_Cl" units="flux" id="epithelial.G_sc_Cl"/>
+        <variable name="psi_s" units="millivolt" initial_value="0.0" id="epithelial.psi_s"/>
+        <variable name="P_sc_Cl" units="cm_per_s" initial_value="9.16E-5" id="epithelial.P_sc_Cl"/>
         <variable name="G_sc_K" units="flux" id="epithelial.G_sc_K"/>
+        <variable name="P_sc_K" units="cm_per_s" initial_value="4.74E-4" id="epithelial.P_sc_K"/>
         <variable name="time" units="second" interface="public" id="epithelial.time"/>
         <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="C_m_Na_diff_eq">
@@ -106,8 +132,6 @@
                     <ci>J_mc_Na</ci>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="C_c_Na_diff_eq">
                 <eq/>
                 <apply>
@@ -122,8 +146,6 @@
                     <ci>J_mc_Na</ci>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="C_m_Cl_diff_eq">
                 <eq/>
                 <apply>
@@ -138,8 +160,6 @@
                     <ci>J_mc_Cl</ci>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="C_c_Cl_diff_eq">
                 <eq/>
                 <apply>
@@ -154,8 +174,6 @@
                     <ci>J_mc_Cl</ci>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="C_m_Cl_diff_eq">
                 <eq/>
                 <apply>
@@ -170,8 +188,6 @@
                     <ci>J_mc_Cl</ci>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="C_c_Cl_diff_eq">
                 <eq/>
                 <apply>
@@ -186,8 +202,6 @@
                     <ci>J_mc_Cl</ci>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="C_m_K_diff_eq">
                 <eq/>
                 <apply>
@@ -202,8 +216,6 @@
                     <ci>J_mc_K</ci>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="C_c_K_diff_eq">
                 <eq/>
                 <apply>
@@ -218,8 +230,6 @@
                     <ci>J_mc_K</ci>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="G_mc_Na_calculation">
                 <eq/>
                 <ci>G_mc_Na</ci>
@@ -294,8 +304,6 @@
                     </apply>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="G_mc_Na_calculation">
                 <eq/>
                 <ci>G_mc_Na</ci>
@@ -370,8 +378,6 @@
                     </apply>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="G_mc_Cl_calculation">
                 <eq/>
                 <ci>G_mc_Cl</ci>
@@ -459,8 +465,6 @@
                     </apply>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="G_mc_Cl_calculation">
                 <eq/>
                 <ci>G_mc_Cl</ci>
@@ -548,8 +552,6 @@
                     </apply>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="G_mc_K_calculation">
                 <eq/>
                 <ci>G_mc_K</ci>
@@ -624,8 +626,6 @@
                     </apply>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="G_mc_K_calculation">
                 <eq/>
                 <ci>G_mc_K</ci>
@@ -700,8 +700,6 @@
                     </apply>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="C_c_Na_diff_eq">
                 <eq/>
                 <apply>
@@ -716,8 +714,6 @@
                     <ci>J_sc_Na</ci>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="C_s_Na_diff_eq">
                 <eq/>
                 <apply>
@@ -732,8 +728,6 @@
                     <ci>J_sc_Na</ci>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="C_s_K_diff_eq">
                 <eq/>
                 <apply>
@@ -748,8 +742,6 @@
                     <ci>J_sc_K</ci>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="C_c_K_diff_eq">
                 <eq/>
                 <apply>
@@ -764,8 +756,6 @@
                     <ci>J_sc_K</ci>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="G_sc_Cl_calculation">
                 <eq/>
                 <ci>G_sc_Cl</ci>
@@ -853,8 +843,6 @@
                     </apply>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="G_sc_Cl_calculation">
                 <eq/>
                 <ci>G_sc_Cl</ci>
@@ -942,8 +930,6 @@
                     </apply>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="G_sc_K_calculation">
                 <eq/>
                 <ci>G_sc_K</ci>
@@ -1018,8 +1004,6 @@
                     </apply>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="G_sc_K_calculation">
                 <eq/>
                 <ci>G_sc_K</ci>
@@ -1097,18 +1081,35 @@
         </math>
     </component>
     <component name="lumen">
-        <variable name="C_m_Na" units="mmol_per_cm3" id="lumen.C_m_Na"/>
+        <variable name="C_m_Na" units="mmol_per_cm3" initial_value="0.05" id="lumen.C_m_Na"/>
         <variable name="J_mc_Na" units="flux" id="lumen.J_mc_Na"/>
         <variable name="C_m_Cl" units="mmol_per_cm3" initial_value="0.03" id="lumen.C_m_Cl"/>
         <variable name="J_mc_Cl" units="flux" id="lumen.J_mc_Cl"/>
         <variable name="C_m_K" units="mmol_per_cm3" initial_value="0.002" id="lumen.C_m_K"/>
         <variable name="J_mc_K" units="flux" id="lumen.J_mc_K"/>
         <variable name="G_mc_Na" units="flux" id="lumen.G_mc_Na"/>
+        <variable name="F" units="C_per_mmol" initial_value="96.48" id="lumen.F"/>
+        <variable name="RT" units="J_per_mmol" initial_value="2.579" id="lumen.RT"/>
+        <variable name="C_c_Na" units="mmol_per_cm3" initial_value="0.0164" id="lumen.C_c_Na"/>
+        <variable name="psi_m" units="millivolt" initial_value="-28.0" id="lumen.psi_m"/>
+        <variable name="psi_c" units="millivolt" initial_value="-86.4" id="lumen.psi_c"/>
+        <variable name="P_mc_Na" units="cm_per_s" initial_value="3.27E-6" id="lumen.P_mc_Na"/>
         <variable name="G_mc_Cl" units="flux" id="lumen.G_mc_Cl"/>
+        <variable name="C_c_Cl" units="mmol_per_cm3" initial_value="0.0203" id="lumen.C_c_Cl"/>
+        <variable name="P_mc_Cl" units="cm_per_s" initial_value="1.43E-6" id="lumen.P_mc_Cl"/>
         <variable name="G_mc_K" units="flux" id="lumen.G_mc_K"/>
+        <variable name="P_mc_K" units="cm_per_s" initial_value="4.90E-7" id="lumen.P_mc_K"/>
+        <variable name="C_c_K" units="mmol_per_cm3" initial_value="0.1637" id="lumen.C_c_K"/>
         <variable name="G_ms_Na" units="flux" id="lumen.G_ms_Na"/>
+        <variable name="P_ms_Na" units="cm_per_s" initial_value="4.80E-6" id="lumen.P_ms_Na"/>
+        <variable name="psi_s" units="millivolt" initial_value="0.0" id="lumen.psi_s"/>
+        <variable name="C_s_Na" units="mmol_per_cm3" initial_value="1.438E-1" id="lumen.C_s_Na"/>
         <variable name="G_ms_Cl" units="flux" id="lumen.G_ms_Cl"/>
+        <variable name="P_ms_Cl" units="cm_per_s" initial_value="2.40E-6" id="lumen.P_ms_Cl"/>
+        <variable name="C_s_Cl" units="mmol_per_cm3" initial_value="1.12E-1" id="lumen.C_s_Cl"/>
         <variable name="G_ms_K" units="flux" id="lumen.G_ms_K"/>
+        <variable name="C_s_K" units="mmol_per_cm3" initial_value="4.25E-3" id="lumen.C_s_K"/>
+        <variable name="P_ms_K" units="cm_per_s" initial_value="4.80E-6" id="lumen.P_ms_K"/>
         <variable name="time" units="second" interface="public" id="lumen.time"/>
         <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="C_m_Na_diff_eq">
@@ -1125,8 +1126,6 @@
                     <ci>J_mc_Na</ci>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="C_m_Cl_diff_eq">
                 <eq/>
                 <apply>
@@ -1141,8 +1140,6 @@
                     <ci>J_mc_Cl</ci>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="C_m_Cl_diff_eq">
                 <eq/>
                 <apply>
@@ -1157,8 +1154,6 @@
                     <ci>J_mc_Cl</ci>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="C_m_K_diff_eq">
                 <eq/>
                 <apply>
@@ -1173,8 +1168,6 @@
                     <ci>J_mc_K</ci>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="G_mc_Na_calculation">
                 <eq/>
                 <ci>G_mc_Na</ci>
@@ -1249,8 +1242,6 @@
                     </apply>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="G_mc_Cl_calculation">
                 <eq/>
                 <ci>G_mc_Cl</ci>
@@ -1338,8 +1329,6 @@
                     </apply>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="G_mc_K_calculation">
                 <eq/>
                 <ci>G_mc_K</ci>
@@ -1414,8 +1403,6 @@
                     </apply>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="G_ms_Na_calculation">
                 <eq/>
                 <ci>G_ms_Na</ci>
@@ -1490,8 +1477,6 @@
                     </apply>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="G_ms_Cl_calculation">
                 <eq/>
                 <ci>G_ms_Cl</ci>
@@ -1579,8 +1564,6 @@
                     </apply>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="G_ms_K_calculation">
                 <eq/>
                 <ci>G_ms_K</ci>
@@ -1665,12 +1648,27 @@
         <variable name="C_c_K" units="mmol_per_cm3" initial_value="0.1637" id="cytosol.C_c_K"/>
         <variable name="J_mc_K" units="flux" id="cytosol.J_mc_K"/>
         <variable name="G_mc_Na" units="flux" id="cytosol.G_mc_Na"/>
+        <variable name="F" units="C_per_mmol" initial_value="96.48" id="cytosol.F"/>
+        <variable name="RT" units="J_per_mmol" initial_value="2.579" id="cytosol.RT"/>
+        <variable name="C_m_Na" units="mmol_per_cm3" initial_value="0.05" id="cytosol.C_m_Na"/>
+        <variable name="psi_m" units="millivolt" initial_value="-28.0" id="cytosol.psi_m"/>
+        <variable name="psi_c" units="millivolt" initial_value="-86.4" id="cytosol.psi_c"/>
+        <variable name="P_mc_Na" units="cm_per_s" initial_value="3.27E-6" id="cytosol.P_mc_Na"/>
         <variable name="G_mc_Cl" units="flux" id="cytosol.G_mc_Cl"/>
+        <variable name="C_m_Cl" units="mmol_per_cm3" initial_value="0.03" id="cytosol.C_m_Cl"/>
+        <variable name="P_mc_Cl" units="cm_per_s" initial_value="1.43E-6" id="cytosol.P_mc_Cl"/>
         <variable name="G_mc_K" units="flux" id="cytosol.G_mc_K"/>
+        <variable name="P_mc_K" units="cm_per_s" initial_value="4.90E-7" id="cytosol.P_mc_K"/>
+        <variable name="C_m_K" units="mmol_per_cm3" initial_value="0.002" id="cytosol.C_m_K"/>
         <variable name="J_sc_Na" units="flux" id="cytosol.J_sc_Na"/>
         <variable name="J_sc_K" units="flux" id="cytosol.J_sc_K"/>
         <variable name="G_sc_Cl" units="flux" id="cytosol.G_sc_Cl"/>
+        <variable name="psi_s" units="millivolt" initial_value="0.0" id="cytosol.psi_s"/>
+        <variable name="C_s_Cl" units="mmol_per_cm3" initial_value="1.12E-1" id="cytosol.C_s_Cl"/>
+        <variable name="P_sc_Cl" units="cm_per_s" initial_value="9.16E-5" id="cytosol.P_sc_Cl"/>
         <variable name="G_sc_K" units="flux" id="cytosol.G_sc_K"/>
+        <variable name="P_sc_K" units="cm_per_s" initial_value="4.74E-4" id="cytosol.P_sc_K"/>
+        <variable name="C_s_K" units="mmol_per_cm3" initial_value="4.25E-3" id="cytosol.C_s_K"/>
         <variable name="time" units="second" interface="public" id="cytosol.time"/>
         <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="C_c_Na_diff_eq">
@@ -1687,8 +1685,6 @@
                     <ci>J_mc_Na</ci>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="C_c_Cl_diff_eq">
                 <eq/>
                 <apply>
@@ -1703,8 +1699,6 @@
                     <ci>J_mc_Cl</ci>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="C_c_Cl_diff_eq">
                 <eq/>
                 <apply>
@@ -1719,8 +1713,6 @@
                     <ci>J_mc_Cl</ci>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="C_c_K_diff_eq">
                 <eq/>
                 <apply>
@@ -1735,8 +1727,6 @@
                     <ci>J_mc_K</ci>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="G_mc_Na_calculation">
                 <eq/>
                 <ci>G_mc_Na</ci>
@@ -1811,8 +1801,6 @@
                     </apply>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="G_mc_Cl_calculation">
                 <eq/>
                 <ci>G_mc_Cl</ci>
@@ -1900,8 +1888,6 @@
                     </apply>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="G_mc_K_calculation">
                 <eq/>
                 <ci>G_mc_K</ci>
@@ -1976,8 +1962,6 @@
                     </apply>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="C_c_Na_diff_eq">
                 <eq/>
                 <apply>
@@ -1992,8 +1976,6 @@
                     <ci>J_sc_Na</ci>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="C_c_K_diff_eq">
                 <eq/>
                 <apply>
@@ -2008,8 +1990,6 @@
                     <ci>J_sc_K</ci>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="G_sc_Cl_calculation">
                 <eq/>
                 <ci>G_sc_Cl</ci>
@@ -2097,8 +2077,6 @@
                     </apply>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="G_sc_K_calculation">
                 <eq/>
                 <ci>G_sc_K</ci>
@@ -2182,10 +2160,25 @@
         <variable name="J_sc_K" units="flux" id="interstitialfluid.J_sc_K"/>
         <variable name="C_s_Cl" units="mmol_per_cm3" id="interstitialfluid.C_s_Cl"/>
         <variable name="G_sc_Cl" units="flux" id="interstitialfluid.G_sc_Cl"/>
+        <variable name="F" units="C_per_mmol" initial_value="96.48" id="interstitialfluid.F"/>
+        <variable name="psi_s" units="millivolt" initial_value="0.0" id="interstitialfluid.psi_s"/>
+        <variable name="C_c_Cl" units="mmol_per_cm3" initial_value="0.0203" id="interstitialfluid.C_c_Cl"/>
+        <variable name="P_sc_Cl" units="cm_per_s" initial_value="9.16E-5" id="interstitialfluid.P_sc_Cl"/>
+        <variable name="RT" units="J_per_mmol" initial_value="2.579" id="interstitialfluid.RT"/>
+        <variable name="psi_c" units="millivolt" initial_value="-86.4" id="interstitialfluid.psi_c"/>
         <variable name="G_sc_K" units="flux" id="interstitialfluid.G_sc_K"/>
+        <variable name="P_sc_K" units="cm_per_s" initial_value="4.74E-4" id="interstitialfluid.P_sc_K"/>
+        <variable name="C_c_K" units="mmol_per_cm3" initial_value="0.1637" id="interstitialfluid.C_c_K"/>
         <variable name="G_ms_Na" units="flux" id="interstitialfluid.G_ms_Na"/>
+        <variable name="P_ms_Na" units="cm_per_s" initial_value="4.80E-6" id="interstitialfluid.P_ms_Na"/>
+        <variable name="C_m_Na" units="mmol_per_cm3" initial_value="0.05" id="interstitialfluid.C_m_Na"/>
+        <variable name="psi_m" units="millivolt" initial_value="-28.0" id="interstitialfluid.psi_m"/>
         <variable name="G_ms_Cl" units="flux" id="interstitialfluid.G_ms_Cl"/>
+        <variable name="P_ms_Cl" units="cm_per_s" initial_value="2.40E-6" id="interstitialfluid.P_ms_Cl"/>
+        <variable name="C_m_Cl" units="mmol_per_cm3" initial_value="0.03" id="interstitialfluid.C_m_Cl"/>
         <variable name="G_ms_K" units="flux" id="interstitialfluid.G_ms_K"/>
+        <variable name="C_m_K" units="mmol_per_cm3" initial_value="0.002" id="interstitialfluid.C_m_K"/>
+        <variable name="P_ms_K" units="cm_per_s" initial_value="4.80E-6" id="interstitialfluid.P_ms_K"/>
         <variable name="time" units="second" interface="public" id="interstitialfluid.time"/>
         <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="C_s_Na_diff_eq">
@@ -2202,8 +2195,6 @@
                     <ci>J_sc_Na</ci>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="C_s_K_diff_eq">
                 <eq/>
                 <apply>
@@ -2218,8 +2209,6 @@
                     <ci>J_sc_K</ci>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="G_sc_Cl_calculation">
                 <eq/>
                 <ci>G_sc_Cl</ci>
@@ -2307,8 +2296,6 @@
                     </apply>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="G_sc_K_calculation">
                 <eq/>
                 <ci>G_sc_K</ci>
@@ -2383,8 +2370,6 @@
                     </apply>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="G_ms_Na_calculation">
                 <eq/>
                 <ci>G_ms_Na</ci>
@@ -2459,8 +2444,6 @@
                     </apply>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="G_ms_Cl_calculation">
                 <eq/>
                 <ci>G_ms_Cl</ci>
@@ -2548,8 +2531,6 @@
                     </apply>
                 </apply>
             </apply>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="G_ms_K_calculation">
                 <eq/>
                 <ci>G_ms_K</ci>
@@ -2632,39 +2613,80 @@
     <connection component_1="epithelial" component_2="lumen">
         <map_variables variable_1="C_m_Na" variable_2="C_m_Na"/>
         <map_variables variable_1="J_mc_Na" variable_2="J_mc_Na"/>
+        <map_variables variable_1="C_c_Na" variable_2="C_c_Na"/>
         <map_variables variable_1="C_m_Cl" variable_2="C_m_Cl"/>
         <map_variables variable_1="J_mc_Cl" variable_2="J_mc_Cl"/>
-        <map_variables variable_1="C_m_K" variable_2="C_m_K"/>
-        <map_variables variable_1="J_mc_K" variable_2="J_mc_K"/>
-        <map_variables variable_1="G_mc_Na" variable_2="G_mc_Na"/>
-        <map_variables variable_1="G_mc_Cl" variable_2="G_mc_Cl"/>
-        <map_variables variable_1="G_mc_K" variable_2="G_mc_K"/>
-        <map_variables variable_1="time" variable_2="time"/>
-    </connection>
-    <connection component_1="epithelial" component_2="cytosol">
-        <map_variables variable_1="J_mc_Na" variable_2="J_mc_Na"/>
-        <map_variables variable_1="C_c_Na" variable_2="C_c_Na"/>
-        <map_variables variable_1="J_mc_Cl" variable_2="J_mc_Cl"/>
         <map_variables variable_1="C_c_Cl" variable_2="C_c_Cl"/>
+        <map_variables variable_1="C_m_K" variable_2="C_m_K"/>
         <map_variables variable_1="J_mc_K" variable_2="J_mc_K"/>
         <map_variables variable_1="C_c_K" variable_2="C_c_K"/>
         <map_variables variable_1="G_mc_Na" variable_2="G_mc_Na"/>
+        <map_variables variable_1="F" variable_2="F"/>
+        <map_variables variable_1="RT" variable_2="RT"/>
+        <map_variables variable_1="psi_m" variable_2="psi_m"/>
+        <map_variables variable_1="psi_c" variable_2="psi_c"/>
+        <map_variables variable_1="P_mc_Na" variable_2="P_mc_Na"/>
         <map_variables variable_1="G_mc_Cl" variable_2="G_mc_Cl"/>
+        <map_variables variable_1="P_mc_Cl" variable_2="P_mc_Cl"/>
         <map_variables variable_1="G_mc_K" variable_2="G_mc_K"/>
+        <map_variables variable_1="P_mc_K" variable_2="P_mc_K"/>
+        <map_variables variable_1="C_s_Na" variable_2="C_s_Na"/>
+        <map_variables variable_1="C_s_K" variable_2="C_s_K"/>
+        <map_variables variable_1="C_s_Cl" variable_2="C_s_Cl"/>
+        <map_variables variable_1="psi_s" variable_2="psi_s"/>
+        <map_variables variable_1="time" variable_2="time"/>
+    </connection>
+    <connection component_1="epithelial" component_2="cytosol">
+        <map_variables variable_1="C_m_Na" variable_2="C_m_Na"/>
+        <map_variables variable_1="J_mc_Na" variable_2="J_mc_Na"/>
+        <map_variables variable_1="C_c_Na" variable_2="C_c_Na"/>
+        <map_variables variable_1="C_m_Cl" variable_2="C_m_Cl"/>
+        <map_variables variable_1="J_mc_Cl" variable_2="J_mc_Cl"/>
+        <map_variables variable_1="C_c_Cl" variable_2="C_c_Cl"/>
+        <map_variables variable_1="C_m_K" variable_2="C_m_K"/>
+        <map_variables variable_1="J_mc_K" variable_2="J_mc_K"/>
+        <map_variables variable_1="C_c_K" variable_2="C_c_K"/>
+        <map_variables variable_1="G_mc_Na" variable_2="G_mc_Na"/>
+        <map_variables variable_1="F" variable_2="F"/>
+        <map_variables variable_1="RT" variable_2="RT"/>
+        <map_variables variable_1="psi_m" variable_2="psi_m"/>
+        <map_variables variable_1="psi_c" variable_2="psi_c"/>
+        <map_variables variable_1="P_mc_Na" variable_2="P_mc_Na"/>
+        <map_variables variable_1="G_mc_Cl" variable_2="G_mc_Cl"/>
+        <map_variables variable_1="P_mc_Cl" variable_2="P_mc_Cl"/>
+        <map_variables variable_1="G_mc_K" variable_2="G_mc_K"/>
+        <map_variables variable_1="P_mc_K" variable_2="P_mc_K"/>
         <map_variables variable_1="J_sc_Na" variable_2="J_sc_Na"/>
+        <map_variables variable_1="C_s_K" variable_2="C_s_K"/>
         <map_variables variable_1="J_sc_K" variable_2="J_sc_K"/>
+        <map_variables variable_1="C_s_Cl" variable_2="C_s_Cl"/>
         <map_variables variable_1="G_sc_Cl" variable_2="G_sc_Cl"/>
+        <map_variables variable_1="psi_s" variable_2="psi_s"/>
+        <map_variables variable_1="P_sc_Cl" variable_2="P_sc_Cl"/>
         <map_variables variable_1="G_sc_K" variable_2="G_sc_K"/>
+        <map_variables variable_1="P_sc_K" variable_2="P_sc_K"/>
         <map_variables variable_1="time" variable_2="time"/>
     </connection>
     <connection component_1="epithelial" component_2="interstitialfluid">
+        <map_variables variable_1="C_m_Na" variable_2="C_m_Na"/>
+        <map_variables variable_1="C_m_Cl" variable_2="C_m_Cl"/>
+        <map_variables variable_1="C_c_Cl" variable_2="C_c_Cl"/>
+        <map_variables variable_1="C_m_K" variable_2="C_m_K"/>
+        <map_variables variable_1="C_c_K" variable_2="C_c_K"/>
+        <map_variables variable_1="F" variable_2="F"/>
+        <map_variables variable_1="RT" variable_2="RT"/>
+        <map_variables variable_1="psi_m" variable_2="psi_m"/>
+        <map_variables variable_1="psi_c" variable_2="psi_c"/>
         <map_variables variable_1="J_sc_Na" variable_2="J_sc_Na"/>
         <map_variables variable_1="C_s_Na" variable_2="C_s_Na"/>
         <map_variables variable_1="C_s_K" variable_2="C_s_K"/>
         <map_variables variable_1="J_sc_K" variable_2="J_sc_K"/>
         <map_variables variable_1="C_s_Cl" variable_2="C_s_Cl"/>
         <map_variables variable_1="G_sc_Cl" variable_2="G_sc_Cl"/>
+        <map_variables variable_1="psi_s" variable_2="psi_s"/>
+        <map_variables variable_1="P_sc_Cl" variable_2="P_sc_Cl"/>
         <map_variables variable_1="G_sc_K" variable_2="G_sc_K"/>
+        <map_variables variable_1="P_sc_K" variable_2="P_sc_K"/>
         <map_variables variable_1="time" variable_2="time"/>
     </connection>
     <encapsulation>

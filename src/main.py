@@ -86,7 +86,7 @@ def addImportedComponent(modelentity, fma, chebi, compartment, source_fma2, sour
             # find a concentration variable of the associated flux variable in the same component
             if flag_flux == True:
                 c = importedModel.getComponent(name_of_component_cons)
-                i = 1
+                i = 0
                 while c.getVariable(i) != None:
                     v_cons = c.getVariable(i)
                     if v_cons.getName() == name_of_variable_cons:
@@ -116,8 +116,8 @@ def addImportedComponent(modelentity, fma, chebi, compartment, source_fma2, sour
                         # ODE equations for channels and diffusive fluxes
                         if source_fma2 == "channel" or source_fma2 == "diffusiveflux":
                             c = importedModel.getComponent(name_of_component_flux)
-                            getChannelsEquation(c.getMath().splitlines(), name_of_variable_flux, compartment)
-                            # print("MATH:", c.getMath().splitlines())
+                            getChannelsEquation(c.getMath().splitlines(), name_of_variable_flux, compartment,
+                                                importedModel, m)
 
                         flag_concentration = True
                         break
@@ -307,6 +307,38 @@ epithelial.addComponent(cytosol)
 epithelial.addComponent(interstitialfluid)
 
 m.addComponent(epithelial)
+
+# remove multiple instances of MathML in lumen, cytosol and interstitial fluid component
+i = 0
+while epithelial.getComponent(i) != None:
+    c = epithelial.getComponent(i)
+    str_math = c.getMath().splitlines()
+    str_math_2 = ""
+    print("compartments:", str_math)
+    for j in range(len(str_math)):
+        if "<math xmlns=\"http://www.w3.org/1998/Math/MathML\">" in str_math[j] or "</math>" in str_math[j]:
+            if j != 0 and j != len(str_math) - 1:
+                continue
+        str_math_2 += str_math[j]
+    c.setMath(str_math_2)
+    i += 1
+
+# remove multiple instances of MathML in epithelial component
+i = 0
+while m.getComponent(i) != None:
+    c = m.getComponent(i)
+    if c.getName() == "epithelial":
+        str_math = c.getMath().splitlines()
+        str_math_2 = ""
+        print("epithelial:", str_math)
+        for j in range(len(str_math)):
+            if "<math xmlns=\"http://www.w3.org/1998/Math/MathML\">" in str_math[j] or "</math>" in str_math[j]:
+                if j != 0 and j != len(str_math) - 1:
+                    continue
+            str_math_2 += str_math[j]
+        c.setMath(str_math_2)
+        break
+    i += 1
 
 # mapping connection between epithelial and environment component
 i = 0
