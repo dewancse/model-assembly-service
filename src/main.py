@@ -33,8 +33,8 @@ def addImportedComponent(modelentity, fma, chebi, compartment, source_fma2, sour
     name_of_variable_flux = component_variable_flux[component_variable_flux.find('.') + 1:]
 
     # uncomment if want to include imported components inside epithelial's encapsulation
-    # if compartment.getName() != "epithelial":
-    compartment.addComponent(m.getComponent(name_of_component_flux))
+    if compartment.getName() != "epithelial":
+        compartment.addComponent(m.getComponent(name_of_component_flux))
 
     print("\n")
     print("MDOELENTITY FLUX:", modelentity)
@@ -110,9 +110,14 @@ def addImportedComponent(modelentity, fma, chebi, compartment, source_fma2, sour
                         sign = odeSignNotation(compartment, source_fma, sink_fma)
 
                         # exclude ODE based equations for channels and diffusive fluxes
-                        # TODO: retrieve channels and diffusive fluxes equations!
                         if source_fma2 != "channel" and source_fma2 != "diffusiveflux":
                             compartment.appendMath(mathEq(v_cons.getName(), v_flux.getName(), sign))
+
+                        # ODE equations for channels and diffusive fluxes
+                        if source_fma2 == "channel" or source_fma2 == "diffusiveflux":
+                            c = importedModel.getComponent(name_of_component_flux)
+                            getChannelsEquation(c.getMath().splitlines(), name_of_variable_flux, compartment)
+                            # print("MATH:", c.getMath().splitlines())
 
                         flag_concentration = True
                         break

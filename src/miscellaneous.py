@@ -291,6 +291,44 @@ cytosol_fma = "http://purl.obolibrary.org/obo/FMA_66836"
 interstitialfluid_fma = "http://purl.obolibrary.org/obo/FMA_9673"
 
 
+# get channel and diffusive fluxes equation from source model
+def getChannelsEquation(str_channel, v, compartment):
+    str_index = []
+    list_of_variables = []
+    for i in range(len(str_channel)):
+        if "id=" in str_channel[i]:
+            str_index.append(i)  # insert variables equation
+        elif "</math>" in str_channel[i]:
+            str_index.append(i)  # insert math index to note end of math
+
+    # print(str_index)
+    for i in range(len(str_index)):
+        flag = False
+        if i + 1 == len(str_index):
+            break
+        else:
+            my_str = str_channel[str_index[i]:str_index[i + 1] - 1]
+            for i in range(len(my_str)):
+                if "<eq/>" in my_str[i] and "<ci>" + v + "</ci>" in my_str[i + 1]:
+                    channel_str = ""
+                    for s in my_str:
+                        channel_str += s
+                    channel_str = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\">" + channel_str + "</apply></math>"
+                    compartment.appendMath(channel_str)
+                    # extract variables from this math string
+                    for i in range(len(my_str)):
+                        if "<ci>" in my_str[i]:
+                            start_index = my_str[i].find("<ci>")
+                            end_index = my_str[i].find("</ci>")
+                            list_of_variables.append(my_str[i][start_index + 4:end_index])
+                    flag = True
+                    break
+        if flag == True:
+            break
+
+    print("List of variables:", list_of_variables)
+
+
 # ODE based equation
 def mathEq(vConcentration, vFlux, sign):
     return "<math xmlns=\"http://www.w3.org/1998/Math/MathML\">" \
