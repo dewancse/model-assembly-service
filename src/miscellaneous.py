@@ -314,7 +314,11 @@ def getChannelsEquation(str_channel, v, compartment, importedModel, m):
                     for s in my_str:
                         channel_str += s
                     channel_str = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\">\n" + channel_str + "</apply>\n</math>\n"
-                    compartment.appendMath(channel_str)
+                    # check that whether this channel already exists in this component
+                    # we are doing this because G_mc_Na, etc comes twice in the epithelial component!
+                    mth = compartment.getMath()
+                    if channel_str not in mth:
+                        compartment.appendMath(channel_str)
                     # extract variables from this math string
                     for i in range(len(my_str)):
                         if "<ci>" in my_str[i]:
