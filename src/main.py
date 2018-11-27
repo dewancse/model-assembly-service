@@ -27,7 +27,7 @@ for item in model_recipe:
 
 
 # create imported components from source model into the new model
-def addImportedComponent(modelentity, fma, chebi, compartment, source_fma2, source_fma, sink_fma):
+def addImportedComponent(modelentity, fma, chebi, compartment, source_fma2, source_fma, sink_fma, epithelial):
     # component and variable for fluxes
     component_variable_flux = modelentity[modelentity.find('#') + 1:len(modelentity)]
     name_of_component_flux = component_variable_flux[:component_variable_flux.find('.')]
@@ -98,14 +98,14 @@ def addImportedComponent(modelentity, fma, chebi, compartment, source_fma2, sour
                         # concentration variable
                         if compartment.getVariable(v_cons.getName()) == None:
                             v_cons_compartment = Variable()
-                            createComponent(v_cons_compartment, v_cons.getName(), v_cons.getUnits(),
-                                            v_cons.getInterfaceType(), v_cons.getInitialValue(), compartment, v_cons)
+                            createComponent(v_cons_compartment, v_cons.getName(), v_cons.getUnits(), "public",
+                                            v_cons.getInitialValue(), compartment, v_cons)
 
                         # flux variable
                         if compartment.getVariable(v_flux.getName()) == None:
                             v_flux_compartment = Variable()
-                            createComponent(v_flux_compartment, v_flux.getName(), v_flux.getUnits(),
-                                            v_flux.getInterfaceType(), v_flux.getInitialValue(), compartment, v_flux)
+                            createComponent(v_flux_compartment, v_flux.getName(), v_flux.getUnits(), "public",
+                                            v_flux.getInitialValue(), compartment, v_flux)
 
                         # assign plus or minus sign in the ODE based equations
                         sign = odeSignNotation(compartment, source_fma, sink_fma)
@@ -118,7 +118,7 @@ def addImportedComponent(modelentity, fma, chebi, compartment, source_fma2, sour
                         if source_fma2 == "channel" or source_fma2 == "diffusiveflux":
                             c = importedModel.getComponent(name_of_component_flux)
                             getChannelsEquation(c.getMath().splitlines(), name_of_variable_flux, compartment,
-                                                importedModel, m)
+                                                importedModel, m, epithelial)
 
                         flag_concentration = True
                         break
@@ -159,131 +159,64 @@ interstitialfluid.setName("interstitialfluid")
 for item in model_recipe:
     if item["source_fma"] == lumen_fma:
         addImportedComponent(item["model_entity"], item["source_fma"], item["solute_chebi"], lumen, item["source_fma2"],
-                             item["source_fma"], item["sink_fma"])
+                             item["source_fma"], item["sink_fma"], epithelial)
     if item["sink_fma"] == lumen_fma:
         addImportedComponent(item["model_entity"], item["sink_fma"], item["solute_chebi"], lumen, item["source_fma2"],
-                             item["source_fma"], item["sink_fma"])
+                             item["source_fma"], item["sink_fma"], epithelial)
     if item["source_fma2"] != "" and item["source_fma2"] == lumen_fma:
         addImportedComponent(item["model_entity2"], item["source_fma2"], item["solute_chebi2"], lumen,
-                             item["source_fma2"], item["source_fma2"], item["sink_fma2"])
+                             item["source_fma2"], item["source_fma2"], item["sink_fma2"], epithelial)
     if item["source_fma2"] != "" and item["sink_fma2"] == lumen_fma:
         addImportedComponent(item["model_entity2"], item["sink_fma2"], item["solute_chebi2"], lumen,
-                             item["source_fma2"], item["source_fma2"], item["sink_fma2"])
+                             item["source_fma2"], item["source_fma2"], item["sink_fma2"], epithelial)
     if item["source_fma3"] != "" and item["source_fma3"] == lumen_fma:
         addImportedComponent(item["model_entity3"], item["source_fma3"], item["solute_chebi3"], lumen,
-                             item["source_fma2"], item["source_fma3"], item["sink_fma3"])
+                             item["source_fma2"], item["source_fma3"], item["sink_fma3"], epithelial)
     if item["source_fma3"] != "" and item["sink_fma3"] == lumen_fma:
         addImportedComponent(item["model_entity3"], item["sink_fma3"], item["solute_chebi3"], lumen,
-                             item["source_fma2"], item["source_fma3"], item["sink_fma3"])
+                             item["source_fma2"], item["source_fma3"], item["sink_fma3"], epithelial)
 
 # create cytosol components inside epithelial component
 for item in model_recipe:
     if item["source_fma"] == cytosol_fma:
         addImportedComponent(item["model_entity"], item["source_fma"], item["solute_chebi"], cytosol,
-                             item["source_fma2"], item["source_fma"], item["sink_fma"])
+                             item["source_fma2"], item["source_fma"], item["sink_fma"], epithelial)
     if item["sink_fma"] == cytosol_fma:
         addImportedComponent(item["model_entity"], item["sink_fma"], item["solute_chebi"], cytosol, item["source_fma2"],
-                             item["source_fma"], item["sink_fma"])
+                             item["source_fma"], item["sink_fma"], epithelial)
     if item["source_fma2"] != "" and item['source_fma2'] == cytosol_fma:
         addImportedComponent(item["model_entity2"], item["source_fma2"], item["solute_chebi2"], cytosol,
-                             item["source_fma2"], item["source_fma2"], item["sink_fma2"])
+                             item["source_fma2"], item["source_fma2"], item["sink_fma2"], epithelial)
     if item["source_fma2"] != "" and item['sink_fma2'] == cytosol_fma:
         addImportedComponent(item["model_entity2"], item["sink_fma2"], item["solute_chebi2"], cytosol,
-                             item["source_fma2"], item["source_fma2"], item["sink_fma2"])
+                             item["source_fma2"], item["source_fma2"], item["sink_fma2"], epithelial)
     if item["source_fma3"] != "" and item["source_fma3"] == cytosol_fma:
         addImportedComponent(item["model_entity3"], item["source_fma3"], item["solute_chebi3"], cytosol,
-                             item["source_fma2"], item["source_fma3"], item["sink_fma3"])
+                             item["source_fma2"], item["source_fma3"], item["sink_fma3"], epithelial)
     if item["source_fma3"] != "" and item["sink_fma3"] == cytosol_fma:
         addImportedComponent(item["model_entity3"], item["sink_fma3"], item["solute_chebi3"], cytosol,
-                             item["source_fma2"], item["source_fma3"], item["sink_fma3"])
+                             item["source_fma2"], item["source_fma3"], item["sink_fma3"], epithelial)
 
 # create interstitial fluid components inside epithelial component
 for item in model_recipe:
     if item["source_fma"] == interstitialfluid_fma:
         addImportedComponent(item["model_entity"], item["source_fma"], item["solute_chebi"], interstitialfluid,
-                             item["source_fma2"], item["source_fma"], item["sink_fma"])
+                             item["source_fma2"], item["source_fma"], item["sink_fma"], epithelial)
     if item["sink_fma"] == interstitialfluid_fma:
         addImportedComponent(item["model_entity"], item["sink_fma"], item["solute_chebi"], interstitialfluid,
-                             item["source_fma2"], item["source_fma"], item["sink_fma"])
+                             item["source_fma2"], item["source_fma"], item["sink_fma"], epithelial)
     if item["source_fma2"] != "" and item["source_fma2"] == interstitialfluid_fma:
         addImportedComponent(item["model_entity2"], item["source_fma2"], item["solute_chebi2"], interstitialfluid,
-                             item["source_fma2"], item["source_fma2"], item["sink_fma2"])
+                             item["source_fma2"], item["source_fma2"], item["sink_fma2"], epithelial)
     if item["source_fma2"] != "" and item["sink_fma2"] == interstitialfluid_fma:
         addImportedComponent(item["model_entity2"], item["sink_fma2"], item["solute_chebi2"], interstitialfluid,
-                             item["source_fma2"], item["source_fma2"], item["sink_fma2"])
+                             item["source_fma2"], item["source_fma2"], item["sink_fma2"], epithelial)
     if item["source_fma3"] != "" and item["source_fma3"] == interstitialfluid_fma:
         addImportedComponent(item["model_entity3"], item["source_fma3"], item["solute_chebi3"], interstitialfluid,
-                             item["source_fma2"], item["source_fma3"], item["sink_fma3"])
+                             item["source_fma2"], item["source_fma3"], item["sink_fma3"], epithelial)
     if item["source_fma3"] != "" and item["sink_fma3"] == interstitialfluid_fma:
         addImportedComponent(item["model_entity3"], item["sink_fma3"], item["solute_chebi3"], interstitialfluid,
-                             item["source_fma2"], item["source_fma3"], item["sink_fma3"])
-
-# create epithelial components
-for item in model_recipe:
-    if item["source_fma"] == lumen_fma and item["sink_fma"] == cytosol_fma:
-        addImportedComponent(item["model_entity"], item["source_fma"], item["solute_chebi"], epithelial,
-                             item["source_fma2"], item["source_fma"], item["sink_fma"])
-        addImportedComponent(item["model_entity"], item["sink_fma"], item["solute_chebi"], epithelial,
-                             item["source_fma2"], item["source_fma"], item["sink_fma"])
-    if item["source_fma"] == cytosol_fma and item["sink_fma"] == lumen_fma:
-        addImportedComponent(item["model_entity"], item["source_fma"], item["solute_chebi"], epithelial,
-                             item["source_fma2"], item["source_fma"], item["sink_fma"])
-        addImportedComponent(item["model_entity"], item["sink_fma"], item["solute_chebi"], epithelial,
-                             item["source_fma2"], item["source_fma"], item["sink_fma"])
-    if item["source_fma"] == cytosol_fma and item["sink_fma"] == interstitialfluid_fma:
-        addImportedComponent(item["model_entity"], item["source_fma"], item["solute_chebi"], epithelial,
-                             item["source_fma2"], item["source_fma"], item["sink_fma"])
-        addImportedComponent(item["model_entity"], item["sink_fma"], item["solute_chebi"], epithelial,
-                             item["source_fma2"], item["source_fma"], item["sink_fma"])
-    if item["source_fma"] == interstitialfluid_fma and item["sink_fma"] == cytosol_fma:
-        addImportedComponent(item["model_entity"], item["source_fma"], item["solute_chebi"], epithelial,
-                             item["source_fma2"], item["source_fma"], item["sink_fma"])
-        addImportedComponent(item["model_entity"], item["sink_fma"], item["solute_chebi"], epithelial,
-                             item["source_fma2"], item["source_fma"], item["sink_fma"])
-    if item["source_fma2"] != "" and (item["source_fma2"] == lumen_fma and item["sink_fma2"] == cytosol_fma):
-        addImportedComponent(item["model_entity2"], item["source_fma2"], item["solute_chebi2"], epithelial,
-                             item["source_fma2"], item["source_fma2"], item["sink_fma2"])
-        addImportedComponent(item["model_entity2"], item["sink_fma2"], item["solute_chebi2"], epithelial,
-                             item["source_fma2"], item["source_fma2"], item["sink_fma2"])
-    if item["source_fma2"] != "" and item["source_fma2"] == cytosol_fma and item["sink_fma2"] == lumen_fma:
-        addImportedComponent(item["model_entity2"], item["source_fma2"], item["solute_chebi2"], epithelial,
-                             item["source_fma2"], item["source_fma2"], item["sink_fma2"])
-        addImportedComponent(item["model_entity2"], item["sink_fma2"], item["solute_chebi2"], epithelial,
-                             item["source_fma2"], item["source_fma2"], item["sink_fma2"])
-    if item["source_fma2"] != "" and (
-            item['source_fma2'] == cytosol_fma and item['sink_fma2'] == interstitialfluid_fma):
-        addImportedComponent(item["model_entity2"], item["source_fma2"], item["solute_chebi2"], epithelial,
-                             item["source_fma2"], item["source_fma2"], item["sink_fma2"])
-        addImportedComponent(item["model_entity2"], item["sink_fma2"], item["solute_chebi2"], epithelial,
-                             item["source_fma2"], item["source_fma2"], item["sink_fma2"])
-    if item["source_fma2"] != "" and (
-            item['source_fma2'] == interstitialfluid_fma and item['sink_fma2'] == cytosol_fma):
-        addImportedComponent(item["model_entity2"], item["source_fma2"], item["solute_chebi2"], epithelial,
-                             item["source_fma2"], item["source_fma2"], item["sink_fma2"])
-        addImportedComponent(item["model_entity2"], item["sink_fma2"], item["solute_chebi2"], epithelial,
-                             item["source_fma2"], item["source_fma2"], item["sink_fma2"])
-    if item["source_fma3"] != "" and (item["source_fma3"] == lumen_fma and item["sink_fma3"] == cytosol_fma):
-        addImportedComponent(item["model_entity3"], item["source_fma3"], item["solute_chebi3"], epithelial,
-                             item["source_fma2"], item["source_fma3"], item["sink_fma3"])
-        addImportedComponent(item["model_entity3"], item["sink_fma3"], item["solute_chebi3"], epithelial,
-                             item["source_fma2"], item["source_fma3"], item["sink_fma3"])
-    if item["source_fma3"] != "" and (item["source_fma3"] == cytosol_fma and item["sink_fma3"] == lumen_fma):
-        addImportedComponent(item["model_entity3"], item["source_fma3"], item["solute_chebi3"], epithelial,
-                             item["source_fma2"], item["source_fma3"], item["sink_fma3"])
-        addImportedComponent(item["model_entity3"], item["sink_fma3"], item["solute_chebi3"], epithelial,
-                             item["source_fma2"], item["source_fma3"], item["sink_fma3"])
-    if item["source_fma3"] != "" and (
-            item["source_fma3"] == cytosol_fma and item["sink_fma3"] == interstitialfluid_fma):
-        addImportedComponent(item["model_entity3"], item["source_fma3"], item["solute_chebi3"], epithelial,
-                             item["source_fma2"], item["source_fma3"], item["sink_fma3"])
-        addImportedComponent(item["model_entity3"], item["sink_fma3"], item["solute_chebi3"], epithelial,
-                             item["source_fma2"], item["source_fma3"], item["sink_fma3"])
-    if item["source_fma3"] != "" and (
-            item["source_fma3"] == interstitialfluid_fma and item["sink_fma3"] == cytosol_fma):
-        addImportedComponent(item["model_entity3"], item["source_fma3"], item["solute_chebi3"], epithelial,
-                             item["source_fma2"], item["source_fma3"], item["sink_fma3"])
-        addImportedComponent(item["model_entity3"], item["sink_fma3"], item["solute_chebi3"], epithelial,
-                             item["source_fma2"], item["source_fma3"], item["sink_fma3"])
+                             item["source_fma2"], item["source_fma3"], item["sink_fma3"], epithelial)
 
 # include time variable to lumen, cytosol, interstitial fluid and epithelial component
 v_lumen = Variable()
@@ -294,9 +227,6 @@ createComponent(v_cytosol, "time", "second", "public", None, cytosol, None)
 
 v_interstitial = Variable()
 createComponent(v_interstitial, "time", "second", "public", None, interstitialfluid, None)
-
-v_epithelial = Variable()
-createComponent(v_epithelial, "time", "second", "public", None, epithelial, None)
 
 # add lumen component to epithelial component
 epithelial.addComponent(lumen)

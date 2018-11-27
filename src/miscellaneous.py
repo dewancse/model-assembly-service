@@ -292,7 +292,7 @@ interstitialfluid_fma = "http://purl.obolibrary.org/obo/FMA_9673"
 
 
 # get channel and diffusive fluxes equation from source model
-def getChannelsEquation(str_channel, v, compartment, importedModel, m):
+def getChannelsEquation(str_channel, v, compartment, importedModel, m, epithelial):
     str_index = []
     list_of_variables = []
     for i in range(len(str_channel)):
@@ -356,14 +356,17 @@ def getChannelsEquation(str_channel, v, compartment, importedModel, m):
                 if v.getName() == item and v.getInitialValue() != "":
                     # add units
                     addUnitsModel(v.getUnits(), importedModel, m)
-
+                    if epithelial.getVariable(v.getName()) == None:
+                        v_epithelial = Variable()
+                        # insert this variable in the epithelial component
+                        createComponent(v_epithelial, v.getName(), v.getUnits(), "public_and_private",
+                                        v.getInitialValue(), epithelial, v)
                     if compartment.getVariable(v.getName()) == None:
-                        v_new = Variable()
-                        createComponent(v_new, v.getName(), v.getUnits(), v.getInterfaceType(), v.getInitialValue(),
-                                        compartment, v)
+                        v_compartment = Variable()
+                        # insert this variable in the lumen/cytosol/interstitial fluid component
+                        createComponent(v_compartment, v.getName(), v.getUnits(), "public", None, compartment, v)
                 j += 1
             i += 1
-
     # print("List of variables:", list_of_variables)
 
 
@@ -429,6 +432,8 @@ def odeSignNotation(compartment, source_fma, sink_fma):
 
 
 # user-defined function to instantiate a time component and its variable attributes
+# if v2 == None then this component's variable name, e.g. environment.time
+# else variable comes from other component, e.g. lumen.P_mc_Na where P_mc_Na comes from a source model
 def createComponent(v, name, unit, interface, initialvalue, component, v2):
     v.setName(name)
     v.setUnits(unit)
