@@ -1,4 +1,5 @@
 import requests
+from libcellml import *
 from miscellaneous import *
 from SPARQLWrapper import SPARQLWrapper, JSON
 
