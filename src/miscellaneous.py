@@ -293,8 +293,13 @@ interstitialfluid_fma = "http://purl.obolibrary.org/obo/FMA_9673"
 
 # get channel and diffusive fluxes equation from source model
 def getChannelsEquation(str_channel, v, compartment, importedModel, m, epithelial):
+    # string index of "id=" and "</math>" inside MathML
     str_index = []
+    # save here required variables to make channels and diffusive fluxes equations
+    # e.g. ['C_c_Na', 'RT', 'psi_c', 'P_mc_Na', 'F', 'psi_m']
     list_of_variables = []
+    # remove C_c_Na from here ['C_c_Na', 'RT', 'psi_c', 'P_mc_Na', 'F', 'psi_m'] and save in this variable
+    list_of_variables_2 = []
     for i in range(len(str_channel)):
         if "id=" in str_channel[i]:
             str_index.append(i)  # insert variables equation
@@ -331,12 +336,12 @@ def getChannelsEquation(str_channel, v, compartment, importedModel, m, epithelia
         if flag == True:
             break
 
-    # remove variables if already exists in the model
+    # remove variables if already exists in the component
     i = 0
     while compartment.getVariable(i) != None:
         var = compartment.getVariable(i)
-        # TODO: remove C_c_Na from the list below and include from parent component
-        # TODO: ['C_c_Na', 'RT', 'psi_c', 'P_mc_Na', 'F', 'psi_m']
+        # we will remove C_c_Na from the list below after constructing lumen, cytosol and interstitial fluid component
+        # e.g. ['C_c_Na', 'RT', 'psi_c', 'P_mc_Na', 'F', 'psi_m']
         if var.getName() in list_of_variables:
             list_of_variables.remove(var.getName())
         i += 1
@@ -356,11 +361,13 @@ def getChannelsEquation(str_channel, v, compartment, importedModel, m, epithelia
                 if v.getName() == item and v.getInitialValue() != "":
                     # add units
                     addUnitsModel(v.getUnits(), importedModel, m)
+
                     if epithelial.getVariable(v.getName()) == None:
                         v_epithelial = Variable()
                         # insert this variable in the epithelial component
                         createComponent(v_epithelial, v.getName(), v.getUnits(), "public_and_private",
                                         v.getInitialValue(), epithelial, v)
+
                     if compartment.getVariable(v.getName()) == None:
                         v_compartment = Variable()
                         # insert this variable in the lumen/cytosol/interstitial fluid component

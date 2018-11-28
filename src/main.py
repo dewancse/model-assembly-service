@@ -38,7 +38,7 @@ def addImportedComponent(modelentity, fma, chebi, compartment, source_fma2, sour
         compartment.addComponent(m.getComponent(name_of_component_flux))
 
     print("\n")
-    print("MDOELENTITY FLUX:", modelentity)
+    print("MODELENTITY FLUX:", modelentity)
 
     # sparql
     query = concentrationSparql(fma, chebi)
@@ -61,7 +61,7 @@ def addImportedComponent(modelentity, fma, chebi, compartment, source_fma2, sour
         model_entity_cons = result["modelEntity"]["value"]
         model_name_cons = model_entity_cons[0:model_entity_cons.find('#')]
 
-        print("MDOELENTITY CONCENTRATION:", modelentity)
+        print("MODELENTITY CONCENTRATION:", modelentity)
 
         flag_flux = False
         flag_concentration = False
@@ -90,7 +90,7 @@ def addImportedComponent(modelentity, fma, chebi, compartment, source_fma2, sour
                 i = 0
                 while c.getVariable(i) != None:
                     v_cons = c.getVariable(i)
-                    if v_cons.getName() == name_of_variable_cons:
+                    if v_cons.getName() == name_of_variable_cons and v_cons.getInitialValue() != "":
                         # add units of concentration and flux variables
                         addUnitsModel(v_cons.getUnits(), importedModel, m)
                         addUnitsModel(v_flux.getUnits(), importedModel, m)
@@ -114,12 +114,6 @@ def addImportedComponent(modelentity, fma, chebi, compartment, source_fma2, sour
                         if source_fma2 != "channel" and source_fma2 != "diffusiveflux":
                             compartment.appendMath(mathEq(v_cons.getName(), v_flux.getName(), sign))
 
-                        # ODE equations for channels and diffusive fluxes
-                        if source_fma2 == "channel" or source_fma2 == "diffusiveflux":
-                            c = importedModel.getComponent(name_of_component_flux)
-                            getChannelsEquation(c.getMath().splitlines(), name_of_variable_flux, compartment,
-                                                importedModel, m, epithelial)
-
                         flag_concentration = True
                         break
                     # increment i to iterate next item in the while loop
@@ -129,6 +123,13 @@ def addImportedComponent(modelentity, fma, chebi, compartment, source_fma2, sour
             # then exit from the for loop to iterate next item from the model recipe
             if flag_concentration == True:
                 break
+
+    # ODE equations for channels and diffusive fluxes
+    # Include all variables that are in the channels and diffusive fluxes equations
+    if source_fma2 == "channel" or source_fma2 == "diffusiveflux":
+        c = importedModel.getComponent(name_of_component_flux)
+        getChannelsEquation(c.getMath().splitlines(), name_of_variable_flux, compartment,
+                            importedModel, m, epithelial)
 
 
 # environment component
@@ -238,6 +239,29 @@ epithelial.addComponent(cytosol)
 epithelial.addComponent(interstitialfluid)
 
 m.addComponent(epithelial)
+
+# remove concentration of solutes variable from the epithelial component which exist
+# in the lumen/cytosol/interstitial fluid component with initial value.
+# Initially, make a list of epithelial component's variables
+i = 0
+epithelial_var_list = []
+while epithelial.getVariable(i) != None:
+    v = epithelial.getVariable(i)
+    epithelial_var_list.append(v.getName())
+    i += 1
+
+# Iterate over lumen, cytosol and interstitial fluid component
+# remove C_c_Na from here ['C_c_Na', 'RT', 'psi_c', 'P_mc_Na', 'F', 'psi_m']
+eIndex = 0
+while epithelial.getComponent(eIndex) != None:
+    compName = epithelial.getComponent(eIndex)
+    vIndex = 0
+    while compName.getVariable(vIndex) != None:
+        varName = compName.getVariable(vIndex)
+        if varName.getName() in epithelial_var_list and varName.getInitialValue() != "":
+            epithelial.removeVariable(varName.getName())
+        vIndex += 1
+    eIndex += 1
 
 # remove multiple instances of MathML in lumen, cytosol and interstitial fluid component
 i = 0
