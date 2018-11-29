@@ -25,7 +25,7 @@ for item in model_recipe:
     if item["model_entity3"] != "":
         processModelEntity(item["model_entity3"], m)
 
-# math dictionary for lumen, cytosol and interstitial fluid component
+# math dictionary to store ODE based equations for lumen, cytosol and interstitial fluid component
 math_dict = [
     {
         "lumen": {},
@@ -44,53 +44,29 @@ def addImportedComponent(modelentity, fma, chebi, compartment, source_fma2, sour
     component_variable_flux = modelentity[modelentity.find('#') + 1:len(modelentity)]
     name_of_component_flux = component_variable_flux[:component_variable_flux.find('.')]
     name_of_variable_flux = component_variable_flux[component_variable_flux.find('.') + 1:]
-
-    # uncomment if want to include imported components inside epithelial's encapsulation
-    if compartment.getName() != "epithelial":
-        compartment.addComponent(m.getComponent(name_of_component_flux))
-
-    print("\n")
-    print("MODELENTITY FLUX:", modelentity)
-
+    # add this flux's component in the lumen/cytosol/interstitial fluid component
+    compartment.addComponent(m.getComponent(name_of_component_flux))
     # sparql
     query = concentrationSparql(fma, chebi)
-
     sparql = SPARQLWrapper(sparqlendpoint)
     sparql.setQuery(query)
-
     sparql.setReturnFormat(JSON)
     results = sparql.query().convert()
-
     # load this cellml model
     model_name_flux = modelentity[0:modelentity.find('#')]
-
     # store imported models' name and href
-    # if name_of_component_flux not in importedModel_dict
-    # then append this in importedModel_dict
-    flag = False
-    for x in importedModel_dict:
-        if x["name"] == name_of_component_flux:
-            flag = True
-            break
-    if flag == False:
-        importedModel_dict.append({
-            "href": workspaceURL + model_name_flux,
-            "name": name_of_component_flux
-        })
-
+    # if name_of_component_flux not in importedModel_dict then append this in importedModel_dict
+    storeImportedModelsNameAndHref(importedModel_dict, model_name_flux, name_of_component_flux, workspaceURL)
     # making http request to the source model
     r = requests.get(workspaceURL + model_name_flux)
-
     # parse the string representation of the model to access by libcellml
     p = Parser()
     importedModel = p.parseModel(r.text)
-
+    # iterate over the sparql's each result in the results
     for result in results["results"]["bindings"]:
         model_entity_cons = result["modelEntity"]["value"]
         model_name_cons = model_entity_cons[0:model_entity_cons.find('#')]
-
-        print("MODELENTITY CONCENTRATION:", modelentity)
-
+        # flags to keep track of flux and concentration in the same component
         flag_flux = False
         flag_concentration = False
         if model_name_cons == model_name_flux:
@@ -98,7 +74,6 @@ def addImportedComponent(modelentity, fma, chebi, compartment, source_fma2, sour
             component_variable_cons = model_entity_cons[model_entity_cons.find('#') + 1:len(model_entity_cons)]
             name_of_component_cons = component_variable_cons[:component_variable_cons.find('.')]
             name_of_variable_cons = component_variable_cons[component_variable_cons.find('.') + 1:]
-
             # iteratively checking a flux and its associated concentration variable in a component
             c = importedModel.getComponent(name_of_component_cons)
             for i in range(c.variableCount()):
@@ -107,7 +82,6 @@ def addImportedComponent(modelentity, fma, chebi, compartment, source_fma2, sour
                 if v_flux.getName() == name_of_variable_flux:
                     flag_flux = True
                     break
-
             # find a concentration variable of the associated flux variable in the same component
             if flag_flux == True:
                 c = importedModel.getComponent(name_of_component_cons)
@@ -117,35 +91,28 @@ def addImportedComponent(modelentity, fma, chebi, compartment, source_fma2, sour
                         # add units of concentration and flux variables
                         addUnitsModel(v_cons.getUnits(), importedModel, m)
                         addUnitsModel(v_flux.getUnits(), importedModel, m)
-
                         # concentration variable
                         if compartment.getVariable(v_cons.getName()) == None:
                             v_cons_compartment = Variable()
                             createComponent(v_cons_compartment, v_cons.getName(), v_cons.getUnits(), "public",
                                             v_cons.getInitialValue(), compartment, v_cons)
-
                         # flux variable
                         if compartment.getVariable(v_flux.getName()) == None:
                             v_flux_compartment = Variable()
                             createComponent(v_flux_compartment, v_flux.getName(), v_flux.getUnits(), "public",
                                             v_flux.getInitialValue(), compartment, v_flux)
-
                         # assign plus or minus sign in the ODE based equations
                         sign = odeSignNotation(compartment, source_fma, sink_fma)
-
                         # exclude ODE based equations for channels and diffusive fluxes
                         if source_fma2 != "channel" and source_fma2 != "diffusiveflux":
                             # insert ODE math equations of lumen, cytosol and interstitial fluid component
                             insertODEMathEquation(math_dict, compartment, v_cons, v_flux, sign)
-
                         flag_concentration = True
                         break
-
             # if flux and concentration variables are in the same component
             # then exit from the for loop to iterate next item from the model recipe
             if flag_concentration == True:
                 break
-
     # ODE equations for channels and diffusive fluxes
     # Include all variables that are in the channels and diffusive fluxes equations
     if source_fma2 == "channel" or source_fma2 == "diffusiveflux":
@@ -408,10 +375,6 @@ for i in range(lumen.componentCount()):
             v2 = lumen.getVariable(k)
             v2_name = v2.getName()
             if v1_name == v2_name:
-                print("lumen.getName:", lumen.getName())
-                print("c.getName:", c.getName())
-                print("Variable:", v1_name, v2_name)
-                print("\n")
                 variable = Variable()
                 variable.addEquivalence(v1, v2)
 

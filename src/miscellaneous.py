@@ -292,6 +292,22 @@ cytosol_fma = "http://purl.obolibrary.org/obo/FMA_66836"
 interstitialfluid_fma = "http://purl.obolibrary.org/obo/FMA_9673"
 
 
+# store imported models' name and href
+# if name_of_component_flux not in importedModel_dict
+# then append this in importedModel_dict
+def storeImportedModelsNameAndHref(importedModel_dict, model_name_flux, name_of_component_flux, workspaceURL):
+    flag = False
+    for x in importedModel_dict:
+        if x["name"] == name_of_component_flux:
+            flag = True
+            break
+    if flag == False:
+        importedModel_dict.append({
+            "href": workspaceURL + model_name_flux,
+            "name": name_of_component_flux
+        })
+
+
 # get channel and diffusive fluxes equation from source model
 def getChannelsEquation(str_channel, v, compartment, importedModel, m, epithelial):
     # string index of "id=" and "</math>" inside MathML
@@ -422,26 +438,6 @@ def insertODEMathEquation(math_dict, compartment, v_cons, v_flux, sign):
         else:
             math_dict[0]["interstitialfluid"][v_cons.getName()] = \
                 math_dict[0]["interstitialfluid"][v_cons.getName()] + "\n" + subMath(sign, v_flux.getName())
-
-
-# ODE based equation
-def mathEq(vConcentration, vFlux, sign):
-    return "<math xmlns=\"http://www.w3.org/1998/Math/MathML\">\n" \
-           "    <apply id=" + '"' + vConcentration + "_diff_eq" + '"' + ">\n" + \
-           "        <eq/>\n" \
-           "        <apply>\n" \
-           "            <diff/>\n" \
-           "            <bvar>\n" \
-           "                <ci>time</ci>\n" \
-           "            </bvar>\n" \
-           "            <ci>" + vConcentration + "</ci>\n" + \
-           "        </apply>\n" \
-           "        <apply>\n" \
-           "            <" + sign + "/>\n" + \
-           "            <ci>" + vFlux + "</ci>\n" + \
-           "        </apply>\n" \
-           "    </apply>\n" \
-           "</math>\n"
 
 
 # assign plus or minus sign in the ODE based equations
