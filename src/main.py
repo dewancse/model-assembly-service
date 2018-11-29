@@ -239,6 +239,36 @@ createComponent(v_cytosol, "time", "second", "public", None, cytosol, None)
 v_interstitial = Variable()
 createComponent(v_interstitial, "time", "second", "public", None, interstitialfluid, None)
 
+# find name of solutes from the model recipe and define corresponding
+# variables in the lumen, cytosol and interstitial fluid component
+list_of_solutes = []
+for item in model_recipe:
+    # remove + or - sign of the solutes, so str[0:len(str) - 1]
+    if item["solute_text"] != "" and item["solute_text"] != "channel" and item["solute_text"] != "diffusiveflux":
+        list_of_solutes.append(item["solute_text"][0:len(item["solute_text"]) - 1])
+    if item["solute_text2"] != "" and item["solute_text2"] != "channel" and item["solute_text2"] != "diffusiveflux":
+        list_of_solutes.append(item["solute_text2"][0:len(item["solute_text2"]) - 1])
+    if item["solute_text3"] != "" and item["solute_text3"] != "channel" and item["solute_text3"] != "diffusiveflux":
+        list_of_solutes.append(item["solute_text3"][0:len(item["solute_text3"]) - 1])
+
+# unique elements in the list
+list_of_solutes = list(set(list_of_solutes))
+
+# insert list of solutes variable in the lumen component
+for item in list_of_solutes:
+    v = Variable()
+    createComponent(v, "J_" + item + "_" + lumen.getName(), "flux", "public", None, lumen, None)
+
+# insert list of solutes variable in the cytosol component
+for item in list_of_solutes:
+    v = Variable()
+    createComponent(v, "J_" + item + "_" + cytosol.getName(), "flux", "public", None, cytosol, None)
+
+# insert list of solutes variable in the interstitial fluid component
+for item in list_of_solutes:
+    v = Variable()
+    createComponent(v, "J_" + item + "_" + interstitialfluid.getName(), "flux", "public", None, interstitialfluid, None)
+
 # add lumen component to epithelial component
 epithelial.addComponent(lumen)
 
@@ -260,11 +290,10 @@ for i in range(epithelial.variableCount()):
 
 # Iterate over lumen, cytosol and interstitial fluid component
 # remove C_c_Na from here ['C_c_Na', 'RT', 'psi_c', 'P_mc_Na', 'F', 'psi_m']
-eIndex = 0
-for eIndex in range(epithelial.componentCount()):
-    compName = epithelial.getComponent(eIndex)
-    for vIndex in range(compName.variableCount()):
-        varName = compName.getVariable(vIndex)
+for i in range(epithelial.componentCount()):
+    compName = epithelial.getComponent(i)
+    for j in range(compName.variableCount()):
+        varName = compName.getVariable(j)
         if varName.getName() in epithelial_var_list and varName.getInitialValue() != "":
             epithelial.removeVariable(varName.getName())
 

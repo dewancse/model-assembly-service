@@ -490,7 +490,6 @@ def instantiateImportedComponent(sourceurl, component, m):
     importedComponent.setSourceComponent(imp, component)
 
     m.addComponent(importedComponent)
-
     # making http request to the source model
     r = requests.get(sourceurl)
     # parse the string representation of the model to access by libcellml
