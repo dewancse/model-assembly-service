@@ -25,6 +25,15 @@ for item in model_recipe:
     if item["model_entity3"] != "":
         processModelEntity(item["model_entity3"], m)
 
+# math dictionary for lumen, cytosol and interstitial fluid component
+math_dict = [
+    {
+        "lumen": {},
+        "cytosol": {},
+        "interstitialfluid": {}
+    }
+]
+
 # store imported models' name and href
 importedModel_dict = []
 
@@ -56,7 +65,8 @@ def addImportedComponent(modelentity, fma, chebi, compartment, source_fma2, sour
     model_name_flux = modelentity[0:modelentity.find('#')]
 
     # store imported models' name and href
-    # if name_of_component_flux not in importedModel_dict:
+    # if name_of_component_flux not in importedModel_dict
+    # then append this in importedModel_dict
     flag = False
     for x in importedModel_dict:
         if x["name"] == name_of_component_flux:
@@ -125,7 +135,8 @@ def addImportedComponent(modelentity, fma, chebi, compartment, source_fma2, sour
 
                         # exclude ODE based equations for channels and diffusive fluxes
                         if source_fma2 != "channel" and source_fma2 != "diffusiveflux":
-                            compartment.appendMath(mathEq(v_cons.getName(), v_flux.getName(), sign))
+                            # insert ODE math equations of lumen, cytosol and interstitial fluid component
+                            insertODEMathEquation(math_dict, compartment, v_cons, v_flux, sign)
 
                         flag_concentration = True
                         break
@@ -228,6 +239,25 @@ for item in model_recipe:
     if item["source_fma3"] != "" and item["sink_fma3"] == interstitialfluid_fma:
         addImportedComponent(item["model_entity3"], item["sink_fma3"], item["solute_chebi3"], interstitialfluid,
                              item["source_fma2"], item["source_fma3"], item["sink_fma3"], epithelial)
+
+# append math in the lumen, cytosol and interstitial fluid component
+# maths in lumen component
+lumen_math = ""
+for key in math_dict[0]["lumen"].keys():
+    lumen_math += fullMath(key, math_dict[0]["lumen"][key])
+lumen.appendMath(lumen_math)
+
+# maths in cytosol component
+cytosol_math = ""
+for key in math_dict[0]["cytosol"].keys():
+    cytosol_math += fullMath(key, math_dict[0]["cytosol"][key])
+cytosol.appendMath(cytosol_math)
+
+# maths in interstitialfluid component
+interstitialfluid_math = ""
+for key in math_dict[0]["interstitialfluid"].keys():
+    interstitialfluid_math += fullMath(key, math_dict[0]["interstitialfluid"][key])
+interstitialfluid.appendMath(interstitialfluid_math)
 
 # include time variable to lumen, cytosol, interstitial fluid and epithelial component
 v_lumen = Variable()

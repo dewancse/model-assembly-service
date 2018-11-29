@@ -371,6 +371,59 @@ def getChannelsEquation(str_channel, v, compartment, importedModel, m, epithelia
                         createComponent(v_compartment, v.getName(), v.getUnits(), "public", None, compartment, v)
 
 
+# user-defined function to append a substring of an ODE math equation
+def subMath(sign, vFlux):
+    return "            <apply>\n" \
+           "                <" + sign + "/>\n" + \
+           "                <ci>" + vFlux + "</ci>\n" + \
+           "            </apply>"
+
+
+# user-defined function to define an ODE math equation
+def fullMath(vConcentration, subMath):
+    return "<math xmlns=\"http://www.w3.org/1998/Math/MathML\">\n" \
+           "    <apply id=" + '"' + vConcentration + "_diff_eq" + '"' + ">\n" + \
+           "        <eq/>\n" \
+           "        <apply>\n" \
+           "            <diff/>\n" \
+           "            <bvar>\n" \
+           "                <ci>time</ci>\n" \
+           "            </bvar>\n" \
+           "            <ci>" + vConcentration + "</ci>\n" + \
+           "        </apply>\n" \
+           "        <apply>\n" \
+           "            <plus/>\n" \
+           "" + subMath + "\n" + \
+           "        </apply>\n" \
+           "    </apply>\n" \
+           "</math>\n"
+
+
+# insert ODE math equations of lumen, cytosol and interstitial fluid component
+def insertODEMathEquation(math_dict, compartment, v_cons, v_flux, sign):
+    # ODE equations for lumen
+    if compartment.getName() == "lumen":
+        if v_cons.getName() not in math_dict[0]["lumen"].keys():
+            math_dict[0]["lumen"][v_cons.getName()] = subMath(sign, v_flux.getName())
+        else:
+            math_dict[0]["lumen"][v_cons.getName()] = \
+                math_dict[0]["lumen"][v_cons.getName()] + "\n" + subMath(sign, v_flux.getName())
+    # ODE equations for cytosol
+    if compartment.getName() == "cytosol":
+        if v_cons.getName() not in math_dict[0]["cytosol"].keys():
+            math_dict[0]["cytosol"][v_cons.getName()] = subMath(sign, v_flux.getName())
+        else:
+            math_dict[0]["cytosol"][v_cons.getName()] = \
+                math_dict[0]["cytosol"][v_cons.getName()] + "\n" + subMath(sign, v_flux.getName())
+    # ODE equations for interstitial fluid
+    if compartment.getName() == "interstitialfluid":
+        if v_cons.getName() not in math_dict[0]["interstitialfluid"].keys():
+            math_dict[0]["interstitialfluid"][v_cons.getName()] = subMath(sign, v_flux.getName())
+        else:
+            math_dict[0]["interstitialfluid"][v_cons.getName()] = \
+                math_dict[0]["interstitialfluid"][v_cons.getName()] + "\n" + subMath(sign, v_flux.getName())
+
+
 # ODE based equation
 def mathEq(vConcentration, vFlux, sign):
     return "<math xmlns=\"http://www.w3.org/1998/Math/MathML\">\n" \
