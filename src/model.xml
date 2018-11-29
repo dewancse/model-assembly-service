@@ -2,35 +2,16 @@
 <model xmlns="http://www.cellml.org/cellml/2.0#" name="epithelialModel" id="epithelialModelID">
     <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
             xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="mc_sodium_flux" name="mc_sodium_flux"/>
-    </import>
-    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="total_transepithelial_potassium_flux" name="total_transepithelial_potassium_flux"/>
-    </import>
-    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="ms_chloride_flux" name="ms_chloride_flux"/>
-    </import>
-    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="ms_potassium_flux" name="ms_potassium_flux"/>
-    </import>
-    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="sc_potassium_flux" name="sc_potassium_flux"/>
-    </import>
-    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="ms_sodium_flux" name="ms_sodium_flux"/>
-    </import>
-    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="mc_chloride_flux" name="mc_chloride_flux"/>
+        <component component_ref="solute_concentrations" name="solute_concentrations"/>
+        <component component_ref="solute_concentrations" name="solute_concentrations"/>
     </import>
     <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
             xmlns:xlink="http://www.w3.org/1999/xlink">
         <component component_ref="solute_concentrations" name="solute_concentrations"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="sc_potassium_flux" name="sc_potassium_flux"/>
     </import>
     <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
             xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -38,7 +19,36 @@
     </import>
     <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
             xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="sc_potassium_flux" name="sc_potassium_flux"/>
+        <component component_ref="ms_potassium_flux" name="ms_potassium_flux"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="ms_chloride_flux" name="ms_chloride_flux"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="total_transepithelial_sodium_flux" name="total_transepithelial_sodium_flux"/>
+        <component component_ref="total_transepithelial_sodium_flux" name="total_transepithelial_sodium_flux"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="solute_concentrations" name="solute_concentrations"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="mc_sodium_flux" name="mc_sodium_flux"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="mc_chloride_flux" name="mc_chloride_flux"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="total_transepithelial_potassium_flux" name="total_transepithelial_potassium_flux"/>
+    </import>
+    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+        <component component_ref="ms_sodium_flux" name="ms_sodium_flux"/>
     </import>
     <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
             xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -46,17 +56,7 @@
     </import>
     <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
             xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="total_transepithelial_sodium_flux" name="total_transepithelial_sodium_flux"/>
-        <component component_ref="total_transepithelial_sodium_flux" name="total_transepithelial_sodium_flux"/>
-    </import>
-    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="solute_concentrations" name="solute_concentrations"/>
-        <component component_ref="solute_concentrations" name="solute_concentrations"/>
-    </import>
-    <import xlink:href="https://models.physiomeproject.org/workspace/267/rawfile/HEAD/chang_fujita_b_1999.cellml"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-        <component component_ref="solute_concentrations" name="solute_concentrations"/>
+        <component component_ref="sc_potassium_flux" name="sc_potassium_flux"/>
     </import>
     <units name="mmol_per_cm3">
         <unit exponent="-3" prefix="centi" units="metre"/>
@@ -67,10 +67,53 @@
         <unit prefix="milli" units="mole"/>
         <unit exponent="-1" units="second"/>
     </units>
+    <units name="cm_per_s">
+        <unit exponent="-1" units="second"/>
+        <unit prefix="centi" units="metre"/>
+    </units>
+    <units name="millivolt">
+        <unit prefix="milli" units="volt"/>
+    </units>
+    <units name="C_per_mmol">
+        <unit exponent="-1" prefix="milli" units="mole"/>
+        <unit units="coulomb"/>
+    </units>
+    <units name="J_per_mmol">
+        <unit exponent="-1" units="kelvin"/>
+        <unit units="joule"/>
+        <unit exponent="-1" prefix="milli" units="mole"/>
+    </units>
     <component name="environment">
         <variable name="time" units="second" interface="public" id="environment.time"/>
     </component>
-    <component name="epithelial"/>
+    <component name="epithelial">
+        <variable name="P_mc_Na" units="cm_per_s" initial_value="3.27E-6" interface="public_and_private"
+                  id="epithelial.P_mc_Na"/>
+        <variable name="psi_m" units="millivolt" initial_value="-28.0" interface="public_and_private"
+                  id="epithelial.psi_m"/>
+        <variable name="F" units="C_per_mmol" initial_value="96.48" interface="public_and_private" id="epithelial.F"/>
+        <variable name="psi_c" units="millivolt" initial_value="-86.4" interface="public_and_private"
+                  id="epithelial.psi_c"/>
+        <variable name="RT" units="J_per_mmol" initial_value="2.579" interface="public_and_private" id="epithelial.RT"/>
+        <variable name="P_mc_Cl" units="cm_per_s" initial_value="1.43E-6" interface="public_and_private"
+                  id="epithelial.P_mc_Cl"/>
+        <variable name="P_mc_K" units="cm_per_s" initial_value="4.90E-7" interface="public_and_private"
+                  id="epithelial.P_mc_K"/>
+        <variable name="psi_s" units="millivolt" initial_value="0.0" interface="public_and_private"
+                  id="epithelial.psi_s"/>
+        <variable name="P_ms_Na" units="cm_per_s" initial_value="4.80E-6" interface="public_and_private"
+                  id="epithelial.P_ms_Na"/>
+        <variable name="P_ms_Cl" units="cm_per_s" initial_value="2.40E-6" interface="public_and_private"
+                  id="epithelial.P_ms_Cl"/>
+        <variable name="C_s_Cl" units="mmol_per_cm3" initial_value="1.12E-1" interface="public_and_private"
+                  id="epithelial.C_s_Cl"/>
+        <variable name="P_ms_K" units="cm_per_s" initial_value="4.80E-6" interface="public_and_private"
+                  id="epithelial.P_ms_K"/>
+        <variable name="P_sc_Cl" units="cm_per_s" initial_value="9.16E-5" interface="public_and_private"
+                  id="epithelial.P_sc_Cl"/>
+        <variable name="P_sc_K" units="cm_per_s" initial_value="4.74E-4" interface="public_and_private"
+                  id="epithelial.P_sc_K"/>
+    </component>
     <component name="lumen">
         <variable name="C_m_Na" units="mmol_per_cm3" initial_value="0.05" interface="public" id="lumen.C_m_Na"/>
         <variable name="J_mc_Na" units="flux" interface="public" id="lumen.J_mc_Na"/>
@@ -78,6 +121,23 @@
         <variable name="J_mc_Cl" units="flux" interface="public" id="lumen.J_mc_Cl"/>
         <variable name="C_m_K" units="mmol_per_cm3" initial_value="0.002" interface="public" id="lumen.C_m_K"/>
         <variable name="J_mc_K" units="flux" interface="public" id="lumen.J_mc_K"/>
+        <variable name="P_mc_Na" units="cm_per_s" interface="public" id="lumen.P_mc_Na"/>
+        <variable name="psi_m" units="millivolt" interface="public" id="lumen.psi_m"/>
+        <variable name="F" units="C_per_mmol" interface="public" id="lumen.F"/>
+        <variable name="C_c_Na" units="mmol_per_cm3" interface="public" id="lumen.C_c_Na"/>
+        <variable name="psi_c" units="millivolt" interface="public" id="lumen.psi_c"/>
+        <variable name="RT" units="J_per_mmol" interface="public" id="lumen.RT"/>
+        <variable name="P_mc_Cl" units="cm_per_s" interface="public" id="lumen.P_mc_Cl"/>
+        <variable name="C_c_Cl" units="mmol_per_cm3" interface="public" id="lumen.C_c_Cl"/>
+        <variable name="C_c_K" units="mmol_per_cm3" interface="public" id="lumen.C_c_K"/>
+        <variable name="P_mc_K" units="cm_per_s" interface="public" id="lumen.P_mc_K"/>
+        <variable name="psi_s" units="millivolt" interface="public" id="lumen.psi_s"/>
+        <variable name="C_s_Na" units="mmol_per_cm3" interface="public" id="lumen.C_s_Na"/>
+        <variable name="P_ms_Na" units="cm_per_s" interface="public" id="lumen.P_ms_Na"/>
+        <variable name="P_ms_Cl" units="cm_per_s" interface="public" id="lumen.P_ms_Cl"/>
+        <variable name="C_s_Cl" units="mmol_per_cm3" interface="public" id="lumen.C_s_Cl"/>
+        <variable name="P_ms_K" units="cm_per_s" interface="public" id="lumen.P_ms_K"/>
+        <variable name="C_s_K" units="mmol_per_cm3" interface="public" id="lumen.C_s_K"/>
         <variable name="time" units="second" interface="public" id="lumen.time"/>
         <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="C_m_Na_diff_eq">
@@ -136,6 +196,476 @@
                     <ci>J_mc_K</ci>
                 </apply>
             </apply>
+            <apply id="G_mc_Na_calculation">
+                <eq/>
+                <ci>G_mc_Na</ci>
+                <apply>
+                    <times/>
+                    <ci>P_mc_Na</ci>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <times/>
+                            <ci>F</ci>
+                            <apply>
+                                <minus/>
+                                <ci>psi_m</ci>
+                                <ci>psi_c</ci>
+                            </apply>
+                        </apply>
+                        <ci>RT</ci>
+                    </apply>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <minus/>
+                            <ci>C_m_Na</ci>
+                            <apply>
+                                <times/>
+                                <ci>C_c_Na</ci>
+                                <apply>
+                                    <exp/>
+                                    <apply>
+                                        <times/>
+                                        <apply>
+                                            <minus/>
+                                            <apply>
+                                                <divide/>
+                                                <ci>F</ci>
+                                                <ci>RT</ci>
+                                            </apply>
+                                        </apply>
+                                        <apply>
+                                            <minus/>
+                                            <ci>psi_m</ci>
+                                            <ci>psi_c</ci>
+                                        </apply>
+                                    </apply>
+                                </apply>
+                            </apply>
+                        </apply>
+                        <apply>
+                            <minus/>
+                            <cn xmlns:cellml="http://www.cellml.org/cellml/1.0#" cellml:units="dimensionless">1.0</cn>
+                            <apply>
+                                <exp/>
+                                <apply>
+                                    <times/>
+                                    <apply>
+                                        <minus/>
+                                        <apply>
+                                            <divide/>
+                                            <ci>F</ci>
+                                            <ci>RT</ci>
+                                        </apply>
+                                    </apply>
+                                    <apply>
+                                        <minus/>
+                                        <ci>psi_m</ci>
+                                        <ci>psi_c</ci>
+                                    </apply>
+                                </apply>
+                            </apply>
+                        </apply>
+                    </apply>
+                </apply>
+            </apply>
+            <apply id="G_mc_Cl_calculation">
+                <eq/>
+                <ci>G_mc_Cl</ci>
+                <apply>
+                    <times/>
+                    <ci>P_mc_Cl</ci>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <times/>
+                            <cn xmlns:cellml="http://www.cellml.org/cellml/1.0#" cellml:units="dimensionless">-1.0</cn>
+                            <ci>F</ci>
+                            <apply>
+                                <minus/>
+                                <ci>psi_m</ci>
+                                <ci>psi_c</ci>
+                            </apply>
+                        </apply>
+                        <ci>RT</ci>
+                    </apply>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <minus/>
+                            <ci>C_m_Cl</ci>
+                            <apply>
+                                <times/>
+                                <ci>C_c_Cl</ci>
+                                <apply>
+                                    <exp/>
+                                    <apply>
+                                        <times/>
+                                        <apply>
+                                            <minus/>
+                                            <apply>
+                                                <divide/>
+                                                <apply>
+                                                    <times/>
+                                                    <cn xmlns:cellml="http://www.cellml.org/cellml/1.0#"
+                                                        cellml:units="dimensionless">-1.0
+                                                    </cn>
+                                                    <ci>F</ci>
+                                                </apply>
+                                                <ci>RT</ci>
+                                            </apply>
+                                        </apply>
+                                        <apply>
+                                            <minus/>
+                                            <ci>psi_m</ci>
+                                            <ci>psi_c</ci>
+                                        </apply>
+                                    </apply>
+                                </apply>
+                            </apply>
+                        </apply>
+                        <apply>
+                            <minus/>
+                            <cn xmlns:cellml="http://www.cellml.org/cellml/1.0#" cellml:units="dimensionless">1.0</cn>
+                            <apply>
+                                <exp/>
+                                <apply>
+                                    <times/>
+                                    <apply>
+                                        <minus/>
+                                        <apply>
+                                            <divide/>
+                                            <apply>
+                                                <times/>
+                                                <cn xmlns:cellml="http://www.cellml.org/cellml/1.0#"
+                                                    cellml:units="dimensionless">-1.0
+                                                </cn>
+                                                <ci>F</ci>
+                                            </apply>
+                                            <ci>RT</ci>
+                                        </apply>
+                                    </apply>
+                                    <apply>
+                                        <minus/>
+                                        <ci>psi_m</ci>
+                                        <ci>psi_c</ci>
+                                    </apply>
+                                </apply>
+                            </apply>
+                        </apply>
+                    </apply>
+                </apply>
+            </apply>
+            <apply id="G_mc_K_calculation">
+                <eq/>
+                <ci>G_mc_K</ci>
+                <apply>
+                    <times/>
+                    <ci>P_mc_K</ci>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <times/>
+                            <ci>F</ci>
+                            <apply>
+                                <minus/>
+                                <ci>psi_m</ci>
+                                <ci>psi_c</ci>
+                            </apply>
+                        </apply>
+                        <ci>RT</ci>
+                    </apply>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <minus/>
+                            <ci>C_m_K</ci>
+                            <apply>
+                                <times/>
+                                <ci>C_c_K</ci>
+                                <apply>
+                                    <exp/>
+                                    <apply>
+                                        <times/>
+                                        <apply>
+                                            <minus/>
+                                            <apply>
+                                                <divide/>
+                                                <ci>F</ci>
+                                                <ci>RT</ci>
+                                            </apply>
+                                        </apply>
+                                        <apply>
+                                            <minus/>
+                                            <ci>psi_m</ci>
+                                            <ci>psi_c</ci>
+                                        </apply>
+                                    </apply>
+                                </apply>
+                            </apply>
+                        </apply>
+                        <apply>
+                            <minus/>
+                            <cn xmlns:cellml="http://www.cellml.org/cellml/1.0#" cellml:units="dimensionless">1.0</cn>
+                            <apply>
+                                <exp/>
+                                <apply>
+                                    <times/>
+                                    <apply>
+                                        <minus/>
+                                        <apply>
+                                            <divide/>
+                                            <ci>F</ci>
+                                            <ci>RT</ci>
+                                        </apply>
+                                    </apply>
+                                    <apply>
+                                        <minus/>
+                                        <ci>psi_m</ci>
+                                        <ci>psi_c</ci>
+                                    </apply>
+                                </apply>
+                            </apply>
+                        </apply>
+                    </apply>
+                </apply>
+            </apply>
+            <apply id="G_ms_Na_calculation">
+                <eq/>
+                <ci>G_ms_Na</ci>
+                <apply>
+                    <times/>
+                    <ci>P_ms_Na</ci>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <times/>
+                            <ci>F</ci>
+                            <apply>
+                                <minus/>
+                                <ci>psi_m</ci>
+                                <ci>psi_s</ci>
+                            </apply>
+                        </apply>
+                        <ci>RT</ci>
+                    </apply>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <minus/>
+                            <ci>C_m_Na</ci>
+                            <apply>
+                                <times/>
+                                <ci>C_s_Na</ci>
+                                <apply>
+                                    <exp/>
+                                    <apply>
+                                        <times/>
+                                        <apply>
+                                            <minus/>
+                                            <apply>
+                                                <divide/>
+                                                <ci>F</ci>
+                                                <ci>RT</ci>
+                                            </apply>
+                                        </apply>
+                                        <apply>
+                                            <minus/>
+                                            <ci>psi_m</ci>
+                                            <ci>psi_s</ci>
+                                        </apply>
+                                    </apply>
+                                </apply>
+                            </apply>
+                        </apply>
+                        <apply>
+                            <minus/>
+                            <cn xmlns:cellml="http://www.cellml.org/cellml/1.0#" cellml:units="dimensionless">1.0</cn>
+                            <apply>
+                                <exp/>
+                                <apply>
+                                    <times/>
+                                    <apply>
+                                        <minus/>
+                                        <apply>
+                                            <divide/>
+                                            <ci>F</ci>
+                                            <ci>RT</ci>
+                                        </apply>
+                                    </apply>
+                                    <apply>
+                                        <minus/>
+                                        <ci>psi_m</ci>
+                                        <ci>psi_s</ci>
+                                    </apply>
+                                </apply>
+                            </apply>
+                        </apply>
+                    </apply>
+                </apply>
+            </apply>
+            <apply id="G_ms_Cl_calculation">
+                <eq/>
+                <ci>G_ms_Cl</ci>
+                <apply>
+                    <times/>
+                    <ci>P_ms_Cl</ci>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <times/>
+                            <cn xmlns:cellml="http://www.cellml.org/cellml/1.0#" cellml:units="dimensionless">-1.0</cn>
+                            <ci>F</ci>
+                            <apply>
+                                <minus/>
+                                <ci>psi_m</ci>
+                                <ci>psi_s</ci>
+                            </apply>
+                        </apply>
+                        <ci>RT</ci>
+                    </apply>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <minus/>
+                            <ci>C_m_Cl</ci>
+                            <apply>
+                                <times/>
+                                <ci>C_s_Cl</ci>
+                                <apply>
+                                    <exp/>
+                                    <apply>
+                                        <times/>
+                                        <apply>
+                                            <minus/>
+                                            <apply>
+                                                <divide/>
+                                                <apply>
+                                                    <times/>
+                                                    <cn xmlns:cellml="http://www.cellml.org/cellml/1.0#"
+                                                        cellml:units="dimensionless">-1.0
+                                                    </cn>
+                                                    <ci>F</ci>
+                                                </apply>
+                                                <ci>RT</ci>
+                                            </apply>
+                                        </apply>
+                                        <apply>
+                                            <minus/>
+                                            <ci>psi_m</ci>
+                                            <ci>psi_s</ci>
+                                        </apply>
+                                    </apply>
+                                </apply>
+                            </apply>
+                        </apply>
+                        <apply>
+                            <minus/>
+                            <cn xmlns:cellml="http://www.cellml.org/cellml/1.0#" cellml:units="dimensionless">1.0</cn>
+                            <apply>
+                                <exp/>
+                                <apply>
+                                    <times/>
+                                    <apply>
+                                        <minus/>
+                                        <apply>
+                                            <divide/>
+                                            <apply>
+                                                <times/>
+                                                <cn xmlns:cellml="http://www.cellml.org/cellml/1.0#"
+                                                    cellml:units="dimensionless">-1.0
+                                                </cn>
+                                                <ci>F</ci>
+                                            </apply>
+                                            <ci>RT</ci>
+                                        </apply>
+                                    </apply>
+                                    <apply>
+                                        <minus/>
+                                        <ci>psi_m</ci>
+                                        <ci>psi_s</ci>
+                                    </apply>
+                                </apply>
+                            </apply>
+                        </apply>
+                    </apply>
+                </apply>
+            </apply>
+            <apply id="G_ms_K_calculation">
+                <eq/>
+                <ci>G_ms_K</ci>
+                <apply>
+                    <times/>
+                    <ci>P_ms_K</ci>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <times/>
+                            <ci>F</ci>
+                            <apply>
+                                <minus/>
+                                <ci>psi_m</ci>
+                                <ci>psi_s</ci>
+                            </apply>
+                        </apply>
+                        <ci>RT</ci>
+                    </apply>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <minus/>
+                            <ci>C_m_K</ci>
+                            <apply>
+                                <times/>
+                                <ci>C_s_K</ci>
+                                <apply>
+                                    <exp/>
+                                    <apply>
+                                        <times/>
+                                        <apply>
+                                            <minus/>
+                                            <apply>
+                                                <divide/>
+                                                <ci>F</ci>
+                                                <ci>RT</ci>
+                                            </apply>
+                                        </apply>
+                                        <apply>
+                                            <minus/>
+                                            <ci>psi_m</ci>
+                                            <ci>psi_s</ci>
+                                        </apply>
+                                    </apply>
+                                </apply>
+                            </apply>
+                        </apply>
+                        <apply>
+                            <minus/>
+                            <cn xmlns:cellml="http://www.cellml.org/cellml/1.0#" cellml:units="dimensionless">1.0</cn>
+                            <apply>
+                                <exp/>
+                                <apply>
+                                    <times/>
+                                    <apply>
+                                        <minus/>
+                                        <apply>
+                                            <divide/>
+                                            <ci>F</ci>
+                                            <ci>RT</ci>
+                                        </apply>
+                                    </apply>
+                                    <apply>
+                                        <minus/>
+                                        <ci>psi_m</ci>
+                                        <ci>psi_s</ci>
+                                    </apply>
+                                </apply>
+                            </apply>
+                        </apply>
+                    </apply>
+                </apply>
+            </apply>
         </math>
     </component>
     <component name="cytosol">
@@ -145,8 +675,23 @@
         <variable name="J_mc_Cl" units="flux" interface="public" id="cytosol.J_mc_Cl"/>
         <variable name="C_c_K" units="mmol_per_cm3" initial_value="0.1637" interface="public" id="cytosol.C_c_K"/>
         <variable name="J_mc_K" units="flux" interface="public" id="cytosol.J_mc_K"/>
+        <variable name="P_mc_Na" units="cm_per_s" interface="public" id="cytosol.P_mc_Na"/>
+        <variable name="C_m_Na" units="mmol_per_cm3" interface="public" id="cytosol.C_m_Na"/>
+        <variable name="psi_m" units="millivolt" interface="public" id="cytosol.psi_m"/>
+        <variable name="F" units="C_per_mmol" interface="public" id="cytosol.F"/>
+        <variable name="psi_c" units="millivolt" interface="public" id="cytosol.psi_c"/>
+        <variable name="RT" units="J_per_mmol" interface="public" id="cytosol.RT"/>
+        <variable name="P_mc_Cl" units="cm_per_s" interface="public" id="cytosol.P_mc_Cl"/>
+        <variable name="C_m_Cl" units="mmol_per_cm3" interface="public" id="cytosol.C_m_Cl"/>
+        <variable name="C_m_K" units="mmol_per_cm3" interface="public" id="cytosol.C_m_K"/>
+        <variable name="P_mc_K" units="cm_per_s" interface="public" id="cytosol.P_mc_K"/>
         <variable name="J_sc_Na" units="flux" interface="public" id="cytosol.J_sc_Na"/>
         <variable name="J_sc_K" units="flux" interface="public" id="cytosol.J_sc_K"/>
+        <variable name="psi_s" units="millivolt" interface="public" id="cytosol.psi_s"/>
+        <variable name="C_s_Cl" units="mmol_per_cm3" interface="public" id="cytosol.C_s_Cl"/>
+        <variable name="P_sc_Cl" units="cm_per_s" interface="public" id="cytosol.P_sc_Cl"/>
+        <variable name="P_sc_K" units="cm_per_s" interface="public" id="cytosol.P_sc_K"/>
+        <variable name="C_s_K" units="mmol_per_cm3" interface="public" id="cytosol.C_s_K"/>
         <variable name="time" units="second" interface="public" id="cytosol.time"/>
         <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="C_c_Na_diff_eq">
@@ -205,6 +750,241 @@
                     <ci>J_mc_K</ci>
                 </apply>
             </apply>
+            <apply id="G_mc_Na_calculation">
+                <eq/>
+                <ci>G_mc_Na</ci>
+                <apply>
+                    <times/>
+                    <ci>P_mc_Na</ci>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <times/>
+                            <ci>F</ci>
+                            <apply>
+                                <minus/>
+                                <ci>psi_m</ci>
+                                <ci>psi_c</ci>
+                            </apply>
+                        </apply>
+                        <ci>RT</ci>
+                    </apply>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <minus/>
+                            <ci>C_m_Na</ci>
+                            <apply>
+                                <times/>
+                                <ci>C_c_Na</ci>
+                                <apply>
+                                    <exp/>
+                                    <apply>
+                                        <times/>
+                                        <apply>
+                                            <minus/>
+                                            <apply>
+                                                <divide/>
+                                                <ci>F</ci>
+                                                <ci>RT</ci>
+                                            </apply>
+                                        </apply>
+                                        <apply>
+                                            <minus/>
+                                            <ci>psi_m</ci>
+                                            <ci>psi_c</ci>
+                                        </apply>
+                                    </apply>
+                                </apply>
+                            </apply>
+                        </apply>
+                        <apply>
+                            <minus/>
+                            <cn xmlns:cellml="http://www.cellml.org/cellml/1.0#" cellml:units="dimensionless">1.0</cn>
+                            <apply>
+                                <exp/>
+                                <apply>
+                                    <times/>
+                                    <apply>
+                                        <minus/>
+                                        <apply>
+                                            <divide/>
+                                            <ci>F</ci>
+                                            <ci>RT</ci>
+                                        </apply>
+                                    </apply>
+                                    <apply>
+                                        <minus/>
+                                        <ci>psi_m</ci>
+                                        <ci>psi_c</ci>
+                                    </apply>
+                                </apply>
+                            </apply>
+                        </apply>
+                    </apply>
+                </apply>
+            </apply>
+            <apply id="G_mc_Cl_calculation">
+                <eq/>
+                <ci>G_mc_Cl</ci>
+                <apply>
+                    <times/>
+                    <ci>P_mc_Cl</ci>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <times/>
+                            <cn xmlns:cellml="http://www.cellml.org/cellml/1.0#" cellml:units="dimensionless">-1.0</cn>
+                            <ci>F</ci>
+                            <apply>
+                                <minus/>
+                                <ci>psi_m</ci>
+                                <ci>psi_c</ci>
+                            </apply>
+                        </apply>
+                        <ci>RT</ci>
+                    </apply>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <minus/>
+                            <ci>C_m_Cl</ci>
+                            <apply>
+                                <times/>
+                                <ci>C_c_Cl</ci>
+                                <apply>
+                                    <exp/>
+                                    <apply>
+                                        <times/>
+                                        <apply>
+                                            <minus/>
+                                            <apply>
+                                                <divide/>
+                                                <apply>
+                                                    <times/>
+                                                    <cn xmlns:cellml="http://www.cellml.org/cellml/1.0#"
+                                                        cellml:units="dimensionless">-1.0
+                                                    </cn>
+                                                    <ci>F</ci>
+                                                </apply>
+                                                <ci>RT</ci>
+                                            </apply>
+                                        </apply>
+                                        <apply>
+                                            <minus/>
+                                            <ci>psi_m</ci>
+                                            <ci>psi_c</ci>
+                                        </apply>
+                                    </apply>
+                                </apply>
+                            </apply>
+                        </apply>
+                        <apply>
+                            <minus/>
+                            <cn xmlns:cellml="http://www.cellml.org/cellml/1.0#" cellml:units="dimensionless">1.0</cn>
+                            <apply>
+                                <exp/>
+                                <apply>
+                                    <times/>
+                                    <apply>
+                                        <minus/>
+                                        <apply>
+                                            <divide/>
+                                            <apply>
+                                                <times/>
+                                                <cn xmlns:cellml="http://www.cellml.org/cellml/1.0#"
+                                                    cellml:units="dimensionless">-1.0
+                                                </cn>
+                                                <ci>F</ci>
+                                            </apply>
+                                            <ci>RT</ci>
+                                        </apply>
+                                    </apply>
+                                    <apply>
+                                        <minus/>
+                                        <ci>psi_m</ci>
+                                        <ci>psi_c</ci>
+                                    </apply>
+                                </apply>
+                            </apply>
+                        </apply>
+                    </apply>
+                </apply>
+            </apply>
+            <apply id="G_mc_K_calculation">
+                <eq/>
+                <ci>G_mc_K</ci>
+                <apply>
+                    <times/>
+                    <ci>P_mc_K</ci>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <times/>
+                            <ci>F</ci>
+                            <apply>
+                                <minus/>
+                                <ci>psi_m</ci>
+                                <ci>psi_c</ci>
+                            </apply>
+                        </apply>
+                        <ci>RT</ci>
+                    </apply>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <minus/>
+                            <ci>C_m_K</ci>
+                            <apply>
+                                <times/>
+                                <ci>C_c_K</ci>
+                                <apply>
+                                    <exp/>
+                                    <apply>
+                                        <times/>
+                                        <apply>
+                                            <minus/>
+                                            <apply>
+                                                <divide/>
+                                                <ci>F</ci>
+                                                <ci>RT</ci>
+                                            </apply>
+                                        </apply>
+                                        <apply>
+                                            <minus/>
+                                            <ci>psi_m</ci>
+                                            <ci>psi_c</ci>
+                                        </apply>
+                                    </apply>
+                                </apply>
+                            </apply>
+                        </apply>
+                        <apply>
+                            <minus/>
+                            <cn xmlns:cellml="http://www.cellml.org/cellml/1.0#" cellml:units="dimensionless">1.0</cn>
+                            <apply>
+                                <exp/>
+                                <apply>
+                                    <times/>
+                                    <apply>
+                                        <minus/>
+                                        <apply>
+                                            <divide/>
+                                            <ci>F</ci>
+                                            <ci>RT</ci>
+                                        </apply>
+                                    </apply>
+                                    <apply>
+                                        <minus/>
+                                        <ci>psi_m</ci>
+                                        <ci>psi_c</ci>
+                                    </apply>
+                                </apply>
+                            </apply>
+                        </apply>
+                    </apply>
+                </apply>
+            </apply>
             <apply id="C_c_Na_diff_eq">
                 <eq/>
                 <apply>
@@ -233,6 +1013,167 @@
                     <ci>J_sc_K</ci>
                 </apply>
             </apply>
+            <apply id="G_sc_Cl_calculation">
+                <eq/>
+                <ci>G_sc_Cl</ci>
+                <apply>
+                    <times/>
+                    <ci>P_sc_Cl</ci>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <times/>
+                            <cn xmlns:cellml="http://www.cellml.org/cellml/1.0#" cellml:units="dimensionless">-1.0</cn>
+                            <ci>F</ci>
+                            <apply>
+                                <minus/>
+                                <ci>psi_s</ci>
+                                <ci>psi_c</ci>
+                            </apply>
+                        </apply>
+                        <ci>RT</ci>
+                    </apply>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <minus/>
+                            <ci>C_s_Cl</ci>
+                            <apply>
+                                <times/>
+                                <ci>C_c_Cl</ci>
+                                <apply>
+                                    <exp/>
+                                    <apply>
+                                        <times/>
+                                        <apply>
+                                            <minus/>
+                                            <apply>
+                                                <divide/>
+                                                <apply>
+                                                    <times/>
+                                                    <cn xmlns:cellml="http://www.cellml.org/cellml/1.0#"
+                                                        cellml:units="dimensionless">-1.0
+                                                    </cn>
+                                                    <ci>F</ci>
+                                                </apply>
+                                                <ci>RT</ci>
+                                            </apply>
+                                        </apply>
+                                        <apply>
+                                            <minus/>
+                                            <ci>psi_s</ci>
+                                            <ci>psi_c</ci>
+                                        </apply>
+                                    </apply>
+                                </apply>
+                            </apply>
+                        </apply>
+                        <apply>
+                            <minus/>
+                            <cn xmlns:cellml="http://www.cellml.org/cellml/1.0#" cellml:units="dimensionless">1.0</cn>
+                            <apply>
+                                <exp/>
+                                <apply>
+                                    <times/>
+                                    <apply>
+                                        <minus/>
+                                        <apply>
+                                            <divide/>
+                                            <apply>
+                                                <times/>
+                                                <cn xmlns:cellml="http://www.cellml.org/cellml/1.0#"
+                                                    cellml:units="dimensionless">-1.0
+                                                </cn>
+                                                <ci>F</ci>
+                                            </apply>
+                                            <ci>RT</ci>
+                                        </apply>
+                                    </apply>
+                                    <apply>
+                                        <minus/>
+                                        <ci>psi_s</ci>
+                                        <ci>psi_c</ci>
+                                    </apply>
+                                </apply>
+                            </apply>
+                        </apply>
+                    </apply>
+                </apply>
+            </apply>
+            <apply id="G_sc_K_calculation">
+                <eq/>
+                <ci>G_sc_K</ci>
+                <apply>
+                    <times/>
+                    <ci>P_sc_K</ci>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <times/>
+                            <ci>F</ci>
+                            <apply>
+                                <minus/>
+                                <ci>psi_s</ci>
+                                <ci>psi_c</ci>
+                            </apply>
+                        </apply>
+                        <ci>RT</ci>
+                    </apply>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <minus/>
+                            <ci>C_s_K</ci>
+                            <apply>
+                                <times/>
+                                <ci>C_c_K</ci>
+                                <apply>
+                                    <exp/>
+                                    <apply>
+                                        <times/>
+                                        <apply>
+                                            <minus/>
+                                            <apply>
+                                                <divide/>
+                                                <ci>F</ci>
+                                                <ci>RT</ci>
+                                            </apply>
+                                        </apply>
+                                        <apply>
+                                            <minus/>
+                                            <ci>psi_s</ci>
+                                            <ci>psi_c</ci>
+                                        </apply>
+                                    </apply>
+                                </apply>
+                            </apply>
+                        </apply>
+                        <apply>
+                            <minus/>
+                            <cn xmlns:cellml="http://www.cellml.org/cellml/1.0#" cellml:units="dimensionless">1.0</cn>
+                            <apply>
+                                <exp/>
+                                <apply>
+                                    <times/>
+                                    <apply>
+                                        <minus/>
+                                        <apply>
+                                            <divide/>
+                                            <ci>F</ci>
+                                            <ci>RT</ci>
+                                        </apply>
+                                    </apply>
+                                    <apply>
+                                        <minus/>
+                                        <ci>psi_s</ci>
+                                        <ci>psi_c</ci>
+                                    </apply>
+                                </apply>
+                            </apply>
+                        </apply>
+                    </apply>
+                </apply>
+            </apply>
         </math>
     </component>
     <component name="interstitialfluid">
@@ -242,6 +1183,22 @@
         <variable name="C_s_K" units="mmol_per_cm3" initial_value="4.25E-3" interface="public"
                   id="interstitialfluid.C_s_K"/>
         <variable name="J_sc_K" units="flux" interface="public" id="interstitialfluid.J_sc_K"/>
+        <variable name="psi_s" units="millivolt" interface="public" id="interstitialfluid.psi_s"/>
+        <variable name="F" units="C_per_mmol" interface="public" id="interstitialfluid.F"/>
+        <variable name="C_s_Cl" units="mmol_per_cm3" interface="public" id="interstitialfluid.C_s_Cl"/>
+        <variable name="psi_c" units="millivolt" interface="public" id="interstitialfluid.psi_c"/>
+        <variable name="RT" units="J_per_mmol" interface="public" id="interstitialfluid.RT"/>
+        <variable name="P_sc_Cl" units="cm_per_s" interface="public" id="interstitialfluid.P_sc_Cl"/>
+        <variable name="C_c_Cl" units="mmol_per_cm3" interface="public" id="interstitialfluid.C_c_Cl"/>
+        <variable name="C_c_K" units="mmol_per_cm3" interface="public" id="interstitialfluid.C_c_K"/>
+        <variable name="P_sc_K" units="cm_per_s" interface="public" id="interstitialfluid.P_sc_K"/>
+        <variable name="C_m_Na" units="mmol_per_cm3" interface="public" id="interstitialfluid.C_m_Na"/>
+        <variable name="psi_m" units="millivolt" interface="public" id="interstitialfluid.psi_m"/>
+        <variable name="P_ms_Na" units="cm_per_s" interface="public" id="interstitialfluid.P_ms_Na"/>
+        <variable name="P_ms_Cl" units="cm_per_s" interface="public" id="interstitialfluid.P_ms_Cl"/>
+        <variable name="C_m_Cl" units="mmol_per_cm3" interface="public" id="interstitialfluid.C_m_Cl"/>
+        <variable name="P_ms_K" units="cm_per_s" interface="public" id="interstitialfluid.P_ms_K"/>
+        <variable name="C_m_K" units="mmol_per_cm3" interface="public" id="interstitialfluid.C_m_K"/>
         <variable name="time" units="second" interface="public" id="interstitialfluid.time"/>
         <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="C_s_Na_diff_eq">
@@ -272,8 +1229,640 @@
                     <ci>J_sc_K</ci>
                 </apply>
             </apply>
+            <apply id="G_sc_Cl_calculation">
+                <eq/>
+                <ci>G_sc_Cl</ci>
+                <apply>
+                    <times/>
+                    <ci>P_sc_Cl</ci>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <times/>
+                            <cn xmlns:cellml="http://www.cellml.org/cellml/1.0#" cellml:units="dimensionless">-1.0</cn>
+                            <ci>F</ci>
+                            <apply>
+                                <minus/>
+                                <ci>psi_s</ci>
+                                <ci>psi_c</ci>
+                            </apply>
+                        </apply>
+                        <ci>RT</ci>
+                    </apply>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <minus/>
+                            <ci>C_s_Cl</ci>
+                            <apply>
+                                <times/>
+                                <ci>C_c_Cl</ci>
+                                <apply>
+                                    <exp/>
+                                    <apply>
+                                        <times/>
+                                        <apply>
+                                            <minus/>
+                                            <apply>
+                                                <divide/>
+                                                <apply>
+                                                    <times/>
+                                                    <cn xmlns:cellml="http://www.cellml.org/cellml/1.0#"
+                                                        cellml:units="dimensionless">-1.0
+                                                    </cn>
+                                                    <ci>F</ci>
+                                                </apply>
+                                                <ci>RT</ci>
+                                            </apply>
+                                        </apply>
+                                        <apply>
+                                            <minus/>
+                                            <ci>psi_s</ci>
+                                            <ci>psi_c</ci>
+                                        </apply>
+                                    </apply>
+                                </apply>
+                            </apply>
+                        </apply>
+                        <apply>
+                            <minus/>
+                            <cn xmlns:cellml="http://www.cellml.org/cellml/1.0#" cellml:units="dimensionless">1.0</cn>
+                            <apply>
+                                <exp/>
+                                <apply>
+                                    <times/>
+                                    <apply>
+                                        <minus/>
+                                        <apply>
+                                            <divide/>
+                                            <apply>
+                                                <times/>
+                                                <cn xmlns:cellml="http://www.cellml.org/cellml/1.0#"
+                                                    cellml:units="dimensionless">-1.0
+                                                </cn>
+                                                <ci>F</ci>
+                                            </apply>
+                                            <ci>RT</ci>
+                                        </apply>
+                                    </apply>
+                                    <apply>
+                                        <minus/>
+                                        <ci>psi_s</ci>
+                                        <ci>psi_c</ci>
+                                    </apply>
+                                </apply>
+                            </apply>
+                        </apply>
+                    </apply>
+                </apply>
+            </apply>
+            <apply id="G_sc_K_calculation">
+                <eq/>
+                <ci>G_sc_K</ci>
+                <apply>
+                    <times/>
+                    <ci>P_sc_K</ci>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <times/>
+                            <ci>F</ci>
+                            <apply>
+                                <minus/>
+                                <ci>psi_s</ci>
+                                <ci>psi_c</ci>
+                            </apply>
+                        </apply>
+                        <ci>RT</ci>
+                    </apply>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <minus/>
+                            <ci>C_s_K</ci>
+                            <apply>
+                                <times/>
+                                <ci>C_c_K</ci>
+                                <apply>
+                                    <exp/>
+                                    <apply>
+                                        <times/>
+                                        <apply>
+                                            <minus/>
+                                            <apply>
+                                                <divide/>
+                                                <ci>F</ci>
+                                                <ci>RT</ci>
+                                            </apply>
+                                        </apply>
+                                        <apply>
+                                            <minus/>
+                                            <ci>psi_s</ci>
+                                            <ci>psi_c</ci>
+                                        </apply>
+                                    </apply>
+                                </apply>
+                            </apply>
+                        </apply>
+                        <apply>
+                            <minus/>
+                            <cn xmlns:cellml="http://www.cellml.org/cellml/1.0#" cellml:units="dimensionless">1.0</cn>
+                            <apply>
+                                <exp/>
+                                <apply>
+                                    <times/>
+                                    <apply>
+                                        <minus/>
+                                        <apply>
+                                            <divide/>
+                                            <ci>F</ci>
+                                            <ci>RT</ci>
+                                        </apply>
+                                    </apply>
+                                    <apply>
+                                        <minus/>
+                                        <ci>psi_s</ci>
+                                        <ci>psi_c</ci>
+                                    </apply>
+                                </apply>
+                            </apply>
+                        </apply>
+                    </apply>
+                </apply>
+            </apply>
+            <apply id="G_ms_Na_calculation">
+                <eq/>
+                <ci>G_ms_Na</ci>
+                <apply>
+                    <times/>
+                    <ci>P_ms_Na</ci>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <times/>
+                            <ci>F</ci>
+                            <apply>
+                                <minus/>
+                                <ci>psi_m</ci>
+                                <ci>psi_s</ci>
+                            </apply>
+                        </apply>
+                        <ci>RT</ci>
+                    </apply>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <minus/>
+                            <ci>C_m_Na</ci>
+                            <apply>
+                                <times/>
+                                <ci>C_s_Na</ci>
+                                <apply>
+                                    <exp/>
+                                    <apply>
+                                        <times/>
+                                        <apply>
+                                            <minus/>
+                                            <apply>
+                                                <divide/>
+                                                <ci>F</ci>
+                                                <ci>RT</ci>
+                                            </apply>
+                                        </apply>
+                                        <apply>
+                                            <minus/>
+                                            <ci>psi_m</ci>
+                                            <ci>psi_s</ci>
+                                        </apply>
+                                    </apply>
+                                </apply>
+                            </apply>
+                        </apply>
+                        <apply>
+                            <minus/>
+                            <cn xmlns:cellml="http://www.cellml.org/cellml/1.0#" cellml:units="dimensionless">1.0</cn>
+                            <apply>
+                                <exp/>
+                                <apply>
+                                    <times/>
+                                    <apply>
+                                        <minus/>
+                                        <apply>
+                                            <divide/>
+                                            <ci>F</ci>
+                                            <ci>RT</ci>
+                                        </apply>
+                                    </apply>
+                                    <apply>
+                                        <minus/>
+                                        <ci>psi_m</ci>
+                                        <ci>psi_s</ci>
+                                    </apply>
+                                </apply>
+                            </apply>
+                        </apply>
+                    </apply>
+                </apply>
+            </apply>
+            <apply id="G_ms_Cl_calculation">
+                <eq/>
+                <ci>G_ms_Cl</ci>
+                <apply>
+                    <times/>
+                    <ci>P_ms_Cl</ci>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <times/>
+                            <cn xmlns:cellml="http://www.cellml.org/cellml/1.0#" cellml:units="dimensionless">-1.0</cn>
+                            <ci>F</ci>
+                            <apply>
+                                <minus/>
+                                <ci>psi_m</ci>
+                                <ci>psi_s</ci>
+                            </apply>
+                        </apply>
+                        <ci>RT</ci>
+                    </apply>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <minus/>
+                            <ci>C_m_Cl</ci>
+                            <apply>
+                                <times/>
+                                <ci>C_s_Cl</ci>
+                                <apply>
+                                    <exp/>
+                                    <apply>
+                                        <times/>
+                                        <apply>
+                                            <minus/>
+                                            <apply>
+                                                <divide/>
+                                                <apply>
+                                                    <times/>
+                                                    <cn xmlns:cellml="http://www.cellml.org/cellml/1.0#"
+                                                        cellml:units="dimensionless">-1.0
+                                                    </cn>
+                                                    <ci>F</ci>
+                                                </apply>
+                                                <ci>RT</ci>
+                                            </apply>
+                                        </apply>
+                                        <apply>
+                                            <minus/>
+                                            <ci>psi_m</ci>
+                                            <ci>psi_s</ci>
+                                        </apply>
+                                    </apply>
+                                </apply>
+                            </apply>
+                        </apply>
+                        <apply>
+                            <minus/>
+                            <cn xmlns:cellml="http://www.cellml.org/cellml/1.0#" cellml:units="dimensionless">1.0</cn>
+                            <apply>
+                                <exp/>
+                                <apply>
+                                    <times/>
+                                    <apply>
+                                        <minus/>
+                                        <apply>
+                                            <divide/>
+                                            <apply>
+                                                <times/>
+                                                <cn xmlns:cellml="http://www.cellml.org/cellml/1.0#"
+                                                    cellml:units="dimensionless">-1.0
+                                                </cn>
+                                                <ci>F</ci>
+                                            </apply>
+                                            <ci>RT</ci>
+                                        </apply>
+                                    </apply>
+                                    <apply>
+                                        <minus/>
+                                        <ci>psi_m</ci>
+                                        <ci>psi_s</ci>
+                                    </apply>
+                                </apply>
+                            </apply>
+                        </apply>
+                    </apply>
+                </apply>
+            </apply>
+            <apply id="G_ms_K_calculation">
+                <eq/>
+                <ci>G_ms_K</ci>
+                <apply>
+                    <times/>
+                    <ci>P_ms_K</ci>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <times/>
+                            <ci>F</ci>
+                            <apply>
+                                <minus/>
+                                <ci>psi_m</ci>
+                                <ci>psi_s</ci>
+                            </apply>
+                        </apply>
+                        <ci>RT</ci>
+                    </apply>
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <minus/>
+                            <ci>C_m_K</ci>
+                            <apply>
+                                <times/>
+                                <ci>C_s_K</ci>
+                                <apply>
+                                    <exp/>
+                                    <apply>
+                                        <times/>
+                                        <apply>
+                                            <minus/>
+                                            <apply>
+                                                <divide/>
+                                                <ci>F</ci>
+                                                <ci>RT</ci>
+                                            </apply>
+                                        </apply>
+                                        <apply>
+                                            <minus/>
+                                            <ci>psi_m</ci>
+                                            <ci>psi_s</ci>
+                                        </apply>
+                                    </apply>
+                                </apply>
+                            </apply>
+                        </apply>
+                        <apply>
+                            <minus/>
+                            <cn xmlns:cellml="http://www.cellml.org/cellml/1.0#" cellml:units="dimensionless">1.0</cn>
+                            <apply>
+                                <exp/>
+                                <apply>
+                                    <times/>
+                                    <apply>
+                                        <minus/>
+                                        <apply>
+                                            <divide/>
+                                            <ci>F</ci>
+                                            <ci>RT</ci>
+                                        </apply>
+                                    </apply>
+                                    <apply>
+                                        <minus/>
+                                        <ci>psi_m</ci>
+                                        <ci>psi_s</ci>
+                                    </apply>
+                                </apply>
+                            </apply>
+                        </apply>
+                    </apply>
+                </apply>
+            </apply>
         </math>
     </component>
+    <connection component_2="lumen">
+        <map_variables variable_1="J_mc_Na" variable_2="J_mc_Na"/>
+        <map_variables variable_1="time" variable_2="time"/>
+        <map_variables variable_1="C_m_Na" variable_2="C_m_Na"/>
+        <map_variables variable_1="C_m_K" variable_2="C_m_K"/>
+        <map_variables variable_1="C_m_Cl" variable_2="C_m_Cl"/>
+        <map_variables variable_1="C_c_Na" variable_2="C_c_Na"/>
+        <map_variables variable_1="C_c_K" variable_2="C_c_K"/>
+        <map_variables variable_1="C_c_Cl" variable_2="C_c_Cl"/>
+        <map_variables variable_1="C_s_Na" variable_2="C_s_Na"/>
+        <map_variables variable_1="C_s_K" variable_2="C_s_K"/>
+        <map_variables variable_1="C_s_Cl" variable_2="C_s_Cl"/>
+        <map_variables variable_1="J_mc_Na" variable_2="J_mc_Na"/>
+        <map_variables variable_1="J_mc_K" variable_2="J_mc_K"/>
+        <map_variables variable_1="J_mc_Cl" variable_2="J_mc_Cl"/>
+        <map_variables variable_1="time" variable_2="time"/>
+        <map_variables variable_1="J_mc_K" variable_2="J_mc_K"/>
+        <map_variables variable_1="time" variable_2="time"/>
+        <map_variables variable_1="J_mc_Na" variable_2="J_mc_Na"/>
+        <map_variables variable_1="P_mc_Na" variable_2="P_mc_Na"/>
+        <map_variables variable_1="time" variable_2="time"/>
+        <map_variables variable_1="RT" variable_2="RT"/>
+        <map_variables variable_1="F" variable_2="F"/>
+        <map_variables variable_1="C_m_Na" variable_2="C_m_Na"/>
+        <map_variables variable_1="C_c_Na" variable_2="C_c_Na"/>
+        <map_variables variable_1="C_m_Cl" variable_2="C_m_Cl"/>
+        <map_variables variable_1="C_c_Cl" variable_2="C_c_Cl"/>
+        <map_variables variable_1="psi_m" variable_2="psi_m"/>
+        <map_variables variable_1="psi_c" variable_2="psi_c"/>
+        <map_variables variable_1="J_mc_Cl" variable_2="J_mc_Cl"/>
+        <map_variables variable_1="P_mc_Cl" variable_2="P_mc_Cl"/>
+        <map_variables variable_1="time" variable_2="time"/>
+        <map_variables variable_1="RT" variable_2="RT"/>
+        <map_variables variable_1="F" variable_2="F"/>
+        <map_variables variable_1="C_m_Cl" variable_2="C_m_Cl"/>
+        <map_variables variable_1="C_c_Cl" variable_2="C_c_Cl"/>
+        <map_variables variable_1="psi_m" variable_2="psi_m"/>
+        <map_variables variable_1="psi_c" variable_2="psi_c"/>
+        <map_variables variable_1="J_mc_K" variable_2="J_mc_K"/>
+        <map_variables variable_1="P_mc_K" variable_2="P_mc_K"/>
+        <map_variables variable_1="time" variable_2="time"/>
+        <map_variables variable_1="RT" variable_2="RT"/>
+        <map_variables variable_1="F" variable_2="F"/>
+        <map_variables variable_1="C_m_K" variable_2="C_m_K"/>
+        <map_variables variable_1="C_c_K" variable_2="C_c_K"/>
+        <map_variables variable_1="C_m_Cl" variable_2="C_m_Cl"/>
+        <map_variables variable_1="C_c_Cl" variable_2="C_c_Cl"/>
+        <map_variables variable_1="psi_m" variable_2="psi_m"/>
+        <map_variables variable_1="psi_c" variable_2="psi_c"/>
+        <map_variables variable_1="P_ms_Na" variable_2="P_ms_Na"/>
+        <map_variables variable_1="time" variable_2="time"/>
+        <map_variables variable_1="RT" variable_2="RT"/>
+        <map_variables variable_1="F" variable_2="F"/>
+        <map_variables variable_1="C_m_Na" variable_2="C_m_Na"/>
+        <map_variables variable_1="C_s_Na" variable_2="C_s_Na"/>
+        <map_variables variable_1="psi_m" variable_2="psi_m"/>
+        <map_variables variable_1="psi_s" variable_2="psi_s"/>
+        <map_variables variable_1="P_ms_Cl" variable_2="P_ms_Cl"/>
+        <map_variables variable_1="time" variable_2="time"/>
+        <map_variables variable_1="RT" variable_2="RT"/>
+        <map_variables variable_1="F" variable_2="F"/>
+        <map_variables variable_1="C_m_Cl" variable_2="C_m_Cl"/>
+        <map_variables variable_1="C_s_Cl" variable_2="C_s_Cl"/>
+        <map_variables variable_1="psi_m" variable_2="psi_m"/>
+        <map_variables variable_1="psi_s" variable_2="psi_s"/>
+        <map_variables variable_1="P_ms_K" variable_2="P_ms_K"/>
+        <map_variables variable_1="time" variable_2="time"/>
+        <map_variables variable_1="RT" variable_2="RT"/>
+        <map_variables variable_1="F" variable_2="F"/>
+        <map_variables variable_1="C_m_K" variable_2="C_m_K"/>
+        <map_variables variable_1="C_s_K" variable_2="C_s_K"/>
+        <map_variables variable_1="psi_m" variable_2="psi_m"/>
+        <map_variables variable_1="psi_s" variable_2="psi_s"/>
+    </connection>
+    <connection component_2="cytosol">
+        <map_variables variable_1="J_mc_Na" variable_2="J_mc_Na"/>
+        <map_variables variable_1="time" variable_2="time"/>
+        <map_variables variable_1="C_m_Na" variable_2="C_m_Na"/>
+        <map_variables variable_1="C_m_K" variable_2="C_m_K"/>
+        <map_variables variable_1="C_m_Cl" variable_2="C_m_Cl"/>
+        <map_variables variable_1="C_c_Na" variable_2="C_c_Na"/>
+        <map_variables variable_1="C_c_K" variable_2="C_c_K"/>
+        <map_variables variable_1="C_c_Cl" variable_2="C_c_Cl"/>
+        <map_variables variable_1="C_s_K" variable_2="C_s_K"/>
+        <map_variables variable_1="C_s_Cl" variable_2="C_s_Cl"/>
+        <map_variables variable_1="J_mc_Na" variable_2="J_mc_Na"/>
+        <map_variables variable_1="J_sc_Na" variable_2="J_sc_Na"/>
+        <map_variables variable_1="J_mc_K" variable_2="J_mc_K"/>
+        <map_variables variable_1="J_sc_K" variable_2="J_sc_K"/>
+        <map_variables variable_1="J_mc_Cl" variable_2="J_mc_Cl"/>
+        <map_variables variable_1="time" variable_2="time"/>
+        <map_variables variable_1="J_mc_K" variable_2="J_mc_K"/>
+        <map_variables variable_1="time" variable_2="time"/>
+        <map_variables variable_1="J_mc_Na" variable_2="J_mc_Na"/>
+        <map_variables variable_1="P_mc_Na" variable_2="P_mc_Na"/>
+        <map_variables variable_1="time" variable_2="time"/>
+        <map_variables variable_1="RT" variable_2="RT"/>
+        <map_variables variable_1="F" variable_2="F"/>
+        <map_variables variable_1="C_m_Na" variable_2="C_m_Na"/>
+        <map_variables variable_1="C_c_Na" variable_2="C_c_Na"/>
+        <map_variables variable_1="C_m_Cl" variable_2="C_m_Cl"/>
+        <map_variables variable_1="C_c_Cl" variable_2="C_c_Cl"/>
+        <map_variables variable_1="psi_m" variable_2="psi_m"/>
+        <map_variables variable_1="psi_c" variable_2="psi_c"/>
+        <map_variables variable_1="J_mc_Cl" variable_2="J_mc_Cl"/>
+        <map_variables variable_1="P_mc_Cl" variable_2="P_mc_Cl"/>
+        <map_variables variable_1="time" variable_2="time"/>
+        <map_variables variable_1="RT" variable_2="RT"/>
+        <map_variables variable_1="F" variable_2="F"/>
+        <map_variables variable_1="C_m_Cl" variable_2="C_m_Cl"/>
+        <map_variables variable_1="C_c_Cl" variable_2="C_c_Cl"/>
+        <map_variables variable_1="psi_m" variable_2="psi_m"/>
+        <map_variables variable_1="psi_c" variable_2="psi_c"/>
+        <map_variables variable_1="J_mc_K" variable_2="J_mc_K"/>
+        <map_variables variable_1="P_mc_K" variable_2="P_mc_K"/>
+        <map_variables variable_1="time" variable_2="time"/>
+        <map_variables variable_1="RT" variable_2="RT"/>
+        <map_variables variable_1="F" variable_2="F"/>
+        <map_variables variable_1="C_m_K" variable_2="C_m_K"/>
+        <map_variables variable_1="C_c_K" variable_2="C_c_K"/>
+        <map_variables variable_1="C_m_Cl" variable_2="C_m_Cl"/>
+        <map_variables variable_1="C_c_Cl" variable_2="C_c_Cl"/>
+        <map_variables variable_1="psi_m" variable_2="psi_m"/>
+        <map_variables variable_1="psi_c" variable_2="psi_c"/>
+        <map_variables variable_1="J_sc_K" variable_2="J_sc_K"/>
+        <map_variables variable_1="P_sc_K" variable_2="P_sc_K"/>
+        <map_variables variable_1="time" variable_2="time"/>
+        <map_variables variable_1="RT" variable_2="RT"/>
+        <map_variables variable_1="F" variable_2="F"/>
+        <map_variables variable_1="C_s_K" variable_2="C_s_K"/>
+        <map_variables variable_1="C_c_K" variable_2="C_c_K"/>
+        <map_variables variable_1="psi_s" variable_2="psi_s"/>
+        <map_variables variable_1="psi_c" variable_2="psi_c"/>
+        <map_variables variable_1="P_sc_Cl" variable_2="P_sc_Cl"/>
+        <map_variables variable_1="time" variable_2="time"/>
+        <map_variables variable_1="RT" variable_2="RT"/>
+        <map_variables variable_1="F" variable_2="F"/>
+        <map_variables variable_1="C_s_Cl" variable_2="C_s_Cl"/>
+        <map_variables variable_1="C_c_Cl" variable_2="C_c_Cl"/>
+        <map_variables variable_1="psi_s" variable_2="psi_s"/>
+        <map_variables variable_1="psi_c" variable_2="psi_c"/>
+    </connection>
+    <connection component_2="interstitialfluid">
+        <map_variables variable_1="C_m_Na" variable_2="C_m_Na"/>
+        <map_variables variable_1="C_m_K" variable_2="C_m_K"/>
+        <map_variables variable_1="C_m_Cl" variable_2="C_m_Cl"/>
+        <map_variables variable_1="C_c_K" variable_2="C_c_K"/>
+        <map_variables variable_1="C_c_Cl" variable_2="C_c_Cl"/>
+        <map_variables variable_1="C_s_Na" variable_2="C_s_Na"/>
+        <map_variables variable_1="C_s_K" variable_2="C_s_K"/>
+        <map_variables variable_1="C_s_Cl" variable_2="C_s_Cl"/>
+        <map_variables variable_1="J_sc_Na" variable_2="J_sc_Na"/>
+        <map_variables variable_1="J_sc_K" variable_2="J_sc_K"/>
+        <map_variables variable_1="time" variable_2="time"/>
+        <map_variables variable_1="J_sc_K" variable_2="J_sc_K"/>
+        <map_variables variable_1="P_sc_K" variable_2="P_sc_K"/>
+        <map_variables variable_1="time" variable_2="time"/>
+        <map_variables variable_1="RT" variable_2="RT"/>
+        <map_variables variable_1="F" variable_2="F"/>
+        <map_variables variable_1="C_s_K" variable_2="C_s_K"/>
+        <map_variables variable_1="C_c_K" variable_2="C_c_K"/>
+        <map_variables variable_1="psi_s" variable_2="psi_s"/>
+        <map_variables variable_1="psi_c" variable_2="psi_c"/>
+        <map_variables variable_1="P_sc_Cl" variable_2="P_sc_Cl"/>
+        <map_variables variable_1="time" variable_2="time"/>
+        <map_variables variable_1="RT" variable_2="RT"/>
+        <map_variables variable_1="F" variable_2="F"/>
+        <map_variables variable_1="C_s_Cl" variable_2="C_s_Cl"/>
+        <map_variables variable_1="C_c_Cl" variable_2="C_c_Cl"/>
+        <map_variables variable_1="psi_s" variable_2="psi_s"/>
+        <map_variables variable_1="psi_c" variable_2="psi_c"/>
+        <map_variables variable_1="P_ms_Na" variable_2="P_ms_Na"/>
+        <map_variables variable_1="time" variable_2="time"/>
+        <map_variables variable_1="RT" variable_2="RT"/>
+        <map_variables variable_1="F" variable_2="F"/>
+        <map_variables variable_1="C_m_Na" variable_2="C_m_Na"/>
+        <map_variables variable_1="C_s_Na" variable_2="C_s_Na"/>
+        <map_variables variable_1="psi_m" variable_2="psi_m"/>
+        <map_variables variable_1="psi_s" variable_2="psi_s"/>
+        <map_variables variable_1="P_ms_Cl" variable_2="P_ms_Cl"/>
+        <map_variables variable_1="time" variable_2="time"/>
+        <map_variables variable_1="RT" variable_2="RT"/>
+        <map_variables variable_1="F" variable_2="F"/>
+        <map_variables variable_1="C_m_Cl" variable_2="C_m_Cl"/>
+        <map_variables variable_1="C_s_Cl" variable_2="C_s_Cl"/>
+        <map_variables variable_1="psi_m" variable_2="psi_m"/>
+        <map_variables variable_1="psi_s" variable_2="psi_s"/>
+        <map_variables variable_1="P_ms_K" variable_2="P_ms_K"/>
+        <map_variables variable_1="time" variable_2="time"/>
+        <map_variables variable_1="RT" variable_2="RT"/>
+        <map_variables variable_1="F" variable_2="F"/>
+        <map_variables variable_1="C_m_K" variable_2="C_m_K"/>
+        <map_variables variable_1="C_s_K" variable_2="C_s_K"/>
+        <map_variables variable_1="psi_m" variable_2="psi_m"/>
+        <map_variables variable_1="psi_s" variable_2="psi_s"/>
+    </connection>
+    <connection component_1="epithelial" component_2="lumen">
+        <map_variables variable_1="P_mc_Na" variable_2="P_mc_Na"/>
+        <map_variables variable_1="psi_m" variable_2="psi_m"/>
+        <map_variables variable_1="F" variable_2="F"/>
+        <map_variables variable_1="psi_c" variable_2="psi_c"/>
+        <map_variables variable_1="RT" variable_2="RT"/>
+        <map_variables variable_1="P_mc_Cl" variable_2="P_mc_Cl"/>
+        <map_variables variable_1="P_mc_K" variable_2="P_mc_K"/>
+        <map_variables variable_1="psi_s" variable_2="psi_s"/>
+        <map_variables variable_1="P_ms_Na" variable_2="P_ms_Na"/>
+        <map_variables variable_1="P_ms_Cl" variable_2="P_ms_Cl"/>
+        <map_variables variable_1="C_s_Cl" variable_2="C_s_Cl"/>
+        <map_variables variable_1="P_ms_K" variable_2="P_ms_K"/>
+    </connection>
+    <connection component_1="epithelial" component_2="cytosol">
+        <map_variables variable_1="P_mc_Na" variable_2="P_mc_Na"/>
+        <map_variables variable_1="psi_m" variable_2="psi_m"/>
+        <map_variables variable_1="F" variable_2="F"/>
+        <map_variables variable_1="psi_c" variable_2="psi_c"/>
+        <map_variables variable_1="RT" variable_2="RT"/>
+        <map_variables variable_1="P_mc_Cl" variable_2="P_mc_Cl"/>
+        <map_variables variable_1="P_mc_K" variable_2="P_mc_K"/>
+        <map_variables variable_1="psi_s" variable_2="psi_s"/>
+        <map_variables variable_1="C_s_Cl" variable_2="C_s_Cl"/>
+        <map_variables variable_1="P_sc_Cl" variable_2="P_sc_Cl"/>
+        <map_variables variable_1="P_sc_K" variable_2="P_sc_K"/>
+    </connection>
+    <connection component_1="epithelial" component_2="interstitialfluid">
+        <map_variables variable_1="psi_m" variable_2="psi_m"/>
+        <map_variables variable_1="F" variable_2="F"/>
+        <map_variables variable_1="psi_c" variable_2="psi_c"/>
+        <map_variables variable_1="RT" variable_2="RT"/>
+        <map_variables variable_1="psi_s" variable_2="psi_s"/>
+        <map_variables variable_1="P_ms_Na" variable_2="P_ms_Na"/>
+        <map_variables variable_1="P_ms_Cl" variable_2="P_ms_Cl"/>
+        <map_variables variable_1="C_s_Cl" variable_2="C_s_Cl"/>
+        <map_variables variable_1="P_ms_K" variable_2="P_ms_K"/>
+        <map_variables variable_1="P_sc_Cl" variable_2="P_sc_Cl"/>
+        <map_variables variable_1="P_sc_K" variable_2="P_sc_K"/>
+    </connection>
     <encapsulation>
         <component_ref component="epithelial">
             <component_ref component="lumen">

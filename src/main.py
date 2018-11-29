@@ -25,6 +25,9 @@ for item in model_recipe:
     if item["model_entity3"] != "":
         processModelEntity(item["model_entity3"], m)
 
+# store imported models' name and href
+importedModel_dict = []
+
 
 # create imported components from source model into the new model
 def addImportedComponent(modelentity, fma, chebi, compartment, source_fma2, source_fma, sink_fma, epithelial):
@@ -51,6 +54,21 @@ def addImportedComponent(modelentity, fma, chebi, compartment, source_fma2, sour
 
     # load this cellml model
     model_name_flux = modelentity[0:modelentity.find('#')]
+
+    # store imported models' name and href
+    # if name_of_component_flux not in importedModel_dict:
+    flag = False
+    for x in importedModel_dict:
+        if x["name"] == name_of_component_flux:
+            flag = True
+            break
+    if flag == False:
+        importedModel_dict.append({
+            "href": workspaceURL + model_name_flux,
+            "name": name_of_component_flux
+        })
+
+    # making http request to the source model
     r = requests.get(workspaceURL + model_name_flux)
 
     # parse the string representation of the model to access by libcellml
@@ -73,22 +91,17 @@ def addImportedComponent(modelentity, fma, chebi, compartment, source_fma2, sour
 
             # iteratively checking a flux and its associated concentration variable in a component
             c = importedModel.getComponent(name_of_component_cons)
-
-            i = 0
-            while c.getVariable(i) != None:
+            for i in range(c.variableCount()):
                 v_flux = c.getVariable(i)
                 # if flux variable exists then find its associated concentration variable
                 if v_flux.getName() == name_of_variable_flux:
                     flag_flux = True
                     break
-                # increment i to iterate next item in the while loop
-                i += 1
 
             # find a concentration variable of the associated flux variable in the same component
             if flag_flux == True:
                 c = importedModel.getComponent(name_of_component_cons)
-                i = 0
-                while c.getVariable(i) != None:
+                for i in range(c.variableCount()):
                     v_cons = c.getVariable(i)
                     if v_cons.getName() == name_of_variable_cons and v_cons.getInitialValue() != "":
                         # add units of concentration and flux variables
@@ -116,8 +129,6 @@ def addImportedComponent(modelentity, fma, chebi, compartment, source_fma2, sour
 
                         flag_concentration = True
                         break
-                    # increment i to iterate next item in the while loop
-                    i += 1
 
             # if flux and concentration variables are in the same component
             # then exit from the for loop to iterate next item from the model recipe
@@ -128,8 +139,7 @@ def addImportedComponent(modelentity, fma, chebi, compartment, source_fma2, sour
     # Include all variables that are in the channels and diffusive fluxes equations
     if source_fma2 == "channel" or source_fma2 == "diffusiveflux":
         c = importedModel.getComponent(name_of_component_flux)
-        getChannelsEquation(c.getMath().splitlines(), name_of_variable_flux, compartment,
-                            importedModel, m, epithelial)
+        getChannelsEquation(c.getMath().splitlines(), name_of_variable_flux, compartment, importedModel, m, epithelial)
 
 
 # environment component
@@ -243,29 +253,23 @@ m.addComponent(epithelial)
 # remove concentration of solutes variable from the epithelial component which exist
 # in the lumen/cytosol/interstitial fluid component with initial value.
 # Initially, make a list of epithelial component's variables
-i = 0
 epithelial_var_list = []
-while epithelial.getVariable(i) != None:
+for i in range(epithelial.variableCount()):
     v = epithelial.getVariable(i)
     epithelial_var_list.append(v.getName())
-    i += 1
 
 # Iterate over lumen, cytosol and interstitial fluid component
 # remove C_c_Na from here ['C_c_Na', 'RT', 'psi_c', 'P_mc_Na', 'F', 'psi_m']
 eIndex = 0
-while epithelial.getComponent(eIndex) != None:
+for eIndex in range(epithelial.componentCount()):
     compName = epithelial.getComponent(eIndex)
-    vIndex = 0
-    while compName.getVariable(vIndex) != None:
+    for vIndex in range(compName.variableCount()):
         varName = compName.getVariable(vIndex)
         if varName.getName() in epithelial_var_list and varName.getInitialValue() != "":
             epithelial.removeVariable(varName.getName())
-        vIndex += 1
-    eIndex += 1
 
 # remove multiple instances of MathML in lumen, cytosol and interstitial fluid component
-i = 0
-while epithelial.getComponent(i) != None:
+for i in range(epithelial.componentCount()):
     c = epithelial.getComponent(i)
     str_math = c.getMath().splitlines()
     str_math_2 = ""
@@ -276,16 +280,13 @@ while epithelial.getComponent(i) != None:
                 continue
         str_math_2 += str_math[j]
     c.setMath(str_math_2)
-    i += 1
 
 # remove multiple instances of MathML in epithelial component
-i = 0
-while m.getComponent(i) != None:
+for i in range(m.componentCount()):
     c = m.getComponent(i)
     if c.getName() == "epithelial":
         str_math = c.getMath().splitlines()
         str_math_2 = ""
-        print("epithelial:", str_math)
         for j in range(len(str_math)):
             if "<math xmlns=\"http://www.w3.org/1998/Math/MathML\">" in str_math[j] or "</math>" in str_math[j]:
                 if j != 0 and j != len(str_math) - 1:
@@ -293,79 +294,93 @@ while m.getComponent(i) != None:
             str_math_2 += str_math[j]
         c.setMath(str_math_2)
         break
-    i += 1
 
 # mapping connection between epithelial and environment component
-i = 0
-while epithelial.getVariable(i) != None:
+for i in range(epithelial.variableCount()):
     v1 = epithelial.getVariable(i)
     v1_name = v1.getName()
-    j = 0
-    while environment.getVariable(j) != None:
+    for j in range(environment.variableCount()):
         v2 = environment.getVariable(j)
         v2_name = v2.getName()
-
         if v1_name == v2_name:
             variable = Variable()
             variable.addEquivalence(v1, v2)
-        # increment j to iterate next item in the while loop
-        j += 1
-    # increment i to iterate next item in the while loop
-    i += 1
 
 # mapping connection between epithelial and lumen component
-i = 0
-while epithelial.getVariable(i) != None:
+for i in range(epithelial.variableCount()):
     v1 = epithelial.getVariable(i)
     v1_name = v1.getName()
-    j = 0
-    while lumen.getVariable(j) != None:
+    for j in range(lumen.variableCount()):
         v2 = lumen.getVariable(j)
         v2_name = v2.getName()
-
         if v1_name == v2_name:
             variable = Variable()
             variable.addEquivalence(v1, v2)
-        # increment j to iterate next item in the while loop
-        j += 1
-    # increment i to iterate next item in the while loop
-    i += 1
 
 # mapping connection between epithelial and cytosol component
-i = 0
-while epithelial.getVariable(i) != None:
+for i in range(epithelial.variableCount()):
     v1 = epithelial.getVariable(i)
     v1_name = v1.getName()
-    j = 0
-    while cytosol.getVariable(j) != None:
+    for j in range(cytosol.variableCount()):
         v2 = cytosol.getVariable(j)
         v2_name = v2.getName()
-
         if v1_name == v2_name:
             variable = Variable()
             variable.addEquivalence(v1, v2)
-        # increment j to iterate next item in the while loop
-        j += 1
-    # increment i to iterate next item in the while loop
-    i += 1
 
 # mapping connection between epithelial and interstitial fluid component
-i = 0
-while epithelial.getVariable(i) != None:
+for i in range(epithelial.variableCount()):
     v1 = epithelial.getVariable(i)
     v1_name = v1.getName()
-    j = 0
-    while interstitialfluid.getVariable(j) != None:
+    for j in range(interstitialfluid.variableCount()):
         v2 = interstitialfluid.getVariable(j)
         v2_name = v2.getName()
-
         if v1_name == v2_name:
             variable = Variable()
             variable.addEquivalence(v1, v2)
-        # increment j to iterate next item in the while loop
-        j += 1
-    # increment i to iterate next item in the while loop
-    i += 1
+
+# mapping connection between lumen and its encapsulated components
+for i in range(lumen.componentCount()):
+    c = lumen.getComponent(i)
+    for j in range(c.variableCount()):
+        v1 = c.getVariable(j)
+        v1_name = v1.getName()
+        for k in range(lumen.variableCount()):
+            v2 = lumen.getVariable(k)
+            v2_name = v2.getName()
+            if v1_name == v2_name:
+                print("lumen.getName:", lumen.getName())
+                print("c.getName:", c.getName())
+                print("Variable:", v1_name, v2_name)
+                print("\n")
+                variable = Variable()
+                variable.addEquivalence(v1, v2)
+
+# mapping connection between cytosol and its encapsulated components
+for i in range(cytosol.componentCount()):
+    c = cytosol.getComponent(i)
+    for j in range(c.variableCount()):
+        v1 = c.getVariable(j)
+        v1_name = v1.getName()
+        for k in range(cytosol.variableCount()):
+            v2 = cytosol.getVariable(k)
+            v2_name = v2.getName()
+            if v1_name == v2_name:
+                variable = Variable()
+                variable.addEquivalence(v1, v2)
+
+# mapping connection between interstitial fluid and its encapsulated components
+for i in range(interstitialfluid.componentCount()):
+    c = interstitialfluid.getComponent(i)
+    for j in range(c.variableCount()):
+        v1 = c.getVariable(j)
+        v1_name = v1.getName()
+        for k in range(interstitialfluid.variableCount()):
+            v2 = interstitialfluid.getVariable(k)
+            v2_name = v2.getName()
+            if v1_name == v2_name:
+                variable = Variable()
+                variable.addEquivalence(v1, v2)
 
 # serialize and print a model
 printer = Printer()

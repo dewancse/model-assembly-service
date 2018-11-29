@@ -1,3 +1,4 @@
+import requests
 from libcellml import *
 
 # pre-generated JSON model recipe
@@ -337,26 +338,22 @@ def getChannelsEquation(str_channel, v, compartment, importedModel, m, epithelia
             break
 
     # remove variables if already exists in the component
-    i = 0
-    while compartment.getVariable(i) != None:
+    for i in range(compartment.variableCount()):
         var = compartment.getVariable(i)
         # we will remove C_c_Na from the list below after constructing lumen, cytosol and interstitial fluid component
         # e.g. ['C_c_Na', 'RT', 'psi_c', 'P_mc_Na', 'F', 'psi_m']
         if var.getName() in list_of_variables:
             list_of_variables.remove(var.getName())
-        i += 1
 
     # unique elements in the list
     list_of_variables = list(set(list_of_variables))
 
     for item in list_of_variables:
         # iterate over components
-        i = 0
-        while importedModel.getComponent(i) != None:
+        for i in range(importedModel.componentCount()):
             c = importedModel.getComponent(i)
             # variables within a component
-            j = 0
-            while c.getVariable(j) != None:
+            for j in range(c.variableCount()):
                 v = c.getVariable(j)
                 if v.getName() == item and v.getInitialValue() != "":
                     # add units
@@ -372,9 +369,6 @@ def getChannelsEquation(str_channel, v, compartment, importedModel, m, epithelia
                         v_compartment = Variable()
                         # insert this variable in the lumen/cytosol/interstitial fluid component
                         createComponent(v_compartment, v.getName(), v.getUnits(), "public", None, compartment, v)
-                j += 1
-            i += 1
-    # print("List of variables:", list_of_variables)
 
 
 # ODE based equation
@@ -496,6 +490,16 @@ def instantiateImportedComponent(sourceurl, component, m):
     importedComponent.setSourceComponent(imp, component)
 
     m.addComponent(importedComponent)
+
+    # making http request to the source model
+    r = requests.get(sourceurl)
+    # parse the string representation of the model to access by libcellml
+    p = Parser()
+    impModel = p.parseModel(r.text)
+    impComponent = impModel.getComponent(importedComponent.getName())
+    for i in range(impComponent.variableCount()):
+        impVariable = impComponent.getVariable(i)
+        importedComponent.addVariable(impVariable)
 
 
 # process model entities and source models' urls
