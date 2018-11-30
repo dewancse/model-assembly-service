@@ -16,14 +16,19 @@ m.setName(modelName)
 
 print("Model: ", m, "\nModel Id: ", m.getId(), "\nModel Name: ", m.getName())
 
+# epithelial component
+epithelial = Component()
+epithelial.setName("epithelial")
+m.addComponent(epithelial)
+
 # iterate through model recipe to import components from source models
 for item in model_recipe:
     if item["model_entity"] != "":
-        processModelEntity(item["model_entity"], m)
+        processModelEntity(item["model_entity"], m, epithelial)
     if item['model_entity2'] != "":
-        processModelEntity(item["model_entity2"], m)
+        processModelEntity(item["model_entity2"], m, epithelial)
     if item["model_entity3"] != "":
-        processModelEntity(item["model_entity3"], m)
+        processModelEntity(item["model_entity3"], m, epithelial)
 
 # math dictionary to store ODE based equations for lumen, cytosol and interstitial fluid component
 math_dict = [
@@ -44,28 +49,42 @@ def addImportedComponent(modelentity, fma, chebi, compartment, source_fma2, sour
     component_variable_flux = modelentity[modelentity.find('#') + 1:len(modelentity)]
     name_of_component_flux = component_variable_flux[:component_variable_flux.find('.')]
     name_of_variable_flux = component_variable_flux[component_variable_flux.find('.') + 1:]
+
     # add this flux's component in the lumen/cytosol/interstitial fluid component
-    compartment.addComponent(m.getComponent(name_of_component_flux))
+    # compartment.addComponent(m.getComponent(name_of_component_flux))
+    if epithelial.getComponent(name_of_component_flux) == None:
+        epithelial.addComponent(m.getComponent(name_of_component_flux))
+
+    print("\n")
+    print("MODELENTITY FLUX:", modelentity)
+
     # sparql
     query = concentrationSparql(fma, chebi)
     sparql = SPARQLWrapper(sparqlendpoint)
     sparql.setQuery(query)
     sparql.setReturnFormat(JSON)
     results = sparql.query().convert()
+
     # load this cellml model
     model_name_flux = modelentity[0:modelentity.find('#')]
+
     # store imported models' name and href
     # if name_of_component_flux not in importedModel_dict then append this in importedModel_dict
     storeImportedModelsNameAndHref(importedModel_dict, model_name_flux, name_of_component_flux, workspaceURL)
+
     # making http request to the source model
     r = requests.get(workspaceURL + model_name_flux)
     # parse the string representation of the model to access by libcellml
     p = Parser()
     importedModel = p.parseModel(r.text)
+
     # iterate over the sparql's each result in the results
     for result in results["results"]["bindings"]:
         model_entity_cons = result["modelEntity"]["value"]
         model_name_cons = model_entity_cons[0:model_entity_cons.find('#')]
+
+        print("MODELENTITY CONCENTRATION:", modelentity)
+
         # flags to keep track of flux and concentration in the same component
         flag_flux = False
         flag_concentration = False
@@ -74,6 +93,7 @@ def addImportedComponent(modelentity, fma, chebi, compartment, source_fma2, sour
             component_variable_cons = model_entity_cons[model_entity_cons.find('#') + 1:len(model_entity_cons)]
             name_of_component_cons = component_variable_cons[:component_variable_cons.find('.')]
             name_of_variable_cons = component_variable_cons[component_variable_cons.find('.') + 1:]
+
             # iteratively checking a flux and its associated concentration variable in a component
             c = importedModel.getComponent(name_of_component_cons)
             for i in range(c.variableCount()):
@@ -82,6 +102,7 @@ def addImportedComponent(modelentity, fma, chebi, compartment, source_fma2, sour
                 if v_flux.getName() == name_of_variable_flux:
                     flag_flux = True
                     break
+
             # find a concentration variable of the associated flux variable in the same component
             if flag_flux == True:
                 c = importedModel.getComponent(name_of_component_cons)
@@ -91,28 +112,35 @@ def addImportedComponent(modelentity, fma, chebi, compartment, source_fma2, sour
                         # add units of concentration and flux variables
                         addUnitsModel(v_cons.getUnits(), importedModel, m)
                         addUnitsModel(v_flux.getUnits(), importedModel, m)
+
                         # concentration variable
                         if compartment.getVariable(v_cons.getName()) == None:
                             v_cons_compartment = Variable()
                             createComponent(v_cons_compartment, v_cons.getName(), v_cons.getUnits(), "public",
                                             v_cons.getInitialValue(), compartment, v_cons)
+
                         # flux variable
                         if compartment.getVariable(v_flux.getName()) == None:
                             v_flux_compartment = Variable()
                             createComponent(v_flux_compartment, v_flux.getName(), v_flux.getUnits(), "public",
                                             v_flux.getInitialValue(), compartment, v_flux)
+
                         # assign plus or minus sign in the ODE based equations
                         sign = odeSignNotation(compartment, source_fma, sink_fma)
+
                         # exclude ODE based equations for channels and diffusive fluxes
                         if source_fma2 != "channel" and source_fma2 != "diffusiveflux":
                             # insert ODE math equations of lumen, cytosol and interstitial fluid component
                             insertODEMathEquation(math_dict, compartment, v_cons, v_flux, sign)
+
                         flag_concentration = True
                         break
+
             # if flux and concentration variables are in the same component
             # then exit from the for loop to iterate next item from the model recipe
             if flag_concentration == True:
                 break
+
     # ODE equations for channels and diffusive fluxes
     # Include all variables that are in the channels and diffusive fluxes equations
     if source_fma2 == "channel" or source_fma2 == "diffusiveflux":
@@ -126,10 +154,6 @@ environment.setName("environment")
 v_e = Variable()
 createComponent(v_e, "time", "second", "public", None, environment, None)
 m.addComponent(environment)
-
-# epithelial component
-epithelial = Component()
-epithelial.setName("epithelial")
 
 # lumen component
 lumen = Component()
@@ -268,14 +292,18 @@ for item in list_of_solutes:
 
 # add lumen component to epithelial component
 epithelial.addComponent(lumen)
+# m.addComponent(lumen)
 
 # add cytosol component to epithelial component
 epithelial.addComponent(cytosol)
+# m.addComponent(cytosol)
 
 # add interstitial component to epithelial component
 epithelial.addComponent(interstitialfluid)
+# m.addComponent(interstitialfluid)
 
-m.addComponent(epithelial)
+# add epithelial component to the m model
+# m.addComponent(epithelial)
 
 # remove concentration of solutes variable from the epithelial component which exist
 # in the lumen/cytosol/interstitial fluid component with initial value.
@@ -289,17 +317,17 @@ for i in range(epithelial.variableCount()):
 # remove C_c_Na from here ['C_c_Na', 'RT', 'psi_c', 'P_mc_Na', 'F', 'psi_m']
 for i in range(epithelial.componentCount()):
     compName = epithelial.getComponent(i)
-    for j in range(compName.variableCount()):
-        varName = compName.getVariable(j)
-        if varName.getName() in epithelial_var_list and varName.getInitialValue() != "":
-            epithelial.removeVariable(varName.getName())
+    if compName.getName() == "lumen" or compName.getName() == "cytosol" or compName.getName() == "interstitialfluid":
+        for j in range(compName.variableCount()):
+            varName = compName.getVariable(j)
+            if varName.getName() in epithelial_var_list and varName.getInitialValue() != "":
+                epithelial.removeVariable(varName.getName())
 
 # remove multiple instances of MathML in lumen, cytosol and interstitial fluid component
 for i in range(epithelial.componentCount()):
     c = epithelial.getComponent(i)
     str_math = c.getMath().splitlines()
     str_math_2 = ""
-    print("compartments:", str_math)
     for j in range(len(str_math)):
         if "<math xmlns=\"http://www.w3.org/1998/Math/MathML\">" in str_math[j] or "</math>" in str_math[j]:
             if j != 0 and j != len(str_math) - 1:
@@ -321,86 +349,24 @@ for i in range(m.componentCount()):
         c.setMath(str_math_2)
         break
 
-# mapping connection between epithelial and environment component
+# Mapping connections between components
+# Mapping connection between epithelial and environment component
 for i in range(epithelial.variableCount()):
     v1 = epithelial.getVariable(i)
-    v1_name = v1.getName()
     for j in range(environment.variableCount()):
         v2 = environment.getVariable(j)
-        v2_name = v2.getName()
-        if v1_name == v2_name:
+        if v1.getName() == v2.getName():
             variable = Variable()
             variable.addEquivalence(v1, v2)
 
-# mapping connection between epithelial and lumen component
+# Mapping connection between epithelial and its encapsulated components
 for i in range(epithelial.variableCount()):
     v1 = epithelial.getVariable(i)
-    v1_name = v1.getName()
-    for j in range(lumen.variableCount()):
-        v2 = lumen.getVariable(j)
-        v2_name = v2.getName()
-        if v1_name == v2_name:
-            variable = Variable()
-            variable.addEquivalence(v1, v2)
-
-# mapping connection between epithelial and cytosol component
-for i in range(epithelial.variableCount()):
-    v1 = epithelial.getVariable(i)
-    v1_name = v1.getName()
-    for j in range(cytosol.variableCount()):
-        v2 = cytosol.getVariable(j)
-        v2_name = v2.getName()
-        if v1_name == v2_name:
-            variable = Variable()
-            variable.addEquivalence(v1, v2)
-
-# mapping connection between epithelial and interstitial fluid component
-for i in range(epithelial.variableCount()):
-    v1 = epithelial.getVariable(i)
-    v1_name = v1.getName()
-    for j in range(interstitialfluid.variableCount()):
-        v2 = interstitialfluid.getVariable(j)
-        v2_name = v2.getName()
-        if v1_name == v2_name:
-            variable = Variable()
-            variable.addEquivalence(v1, v2)
-
-# mapping connection between lumen and its encapsulated components
-for i in range(lumen.componentCount()):
-    c = lumen.getComponent(i)
-    for j in range(c.variableCount()):
-        v1 = c.getVariable(j)
-        v1_name = v1.getName()
-        for k in range(lumen.variableCount()):
-            v2 = lumen.getVariable(k)
-            v2_name = v2.getName()
-            if v1_name == v2_name:
-                variable = Variable()
-                variable.addEquivalence(v1, v2)
-
-# mapping connection between cytosol and its encapsulated components
-for i in range(cytosol.componentCount()):
-    c = cytosol.getComponent(i)
-    for j in range(c.variableCount()):
-        v1 = c.getVariable(j)
-        v1_name = v1.getName()
-        for k in range(cytosol.variableCount()):
-            v2 = cytosol.getVariable(k)
-            v2_name = v2.getName()
-            if v1_name == v2_name:
-                variable = Variable()
-                variable.addEquivalence(v1, v2)
-
-# mapping connection between interstitial fluid and its encapsulated components
-for i in range(interstitialfluid.componentCount()):
-    c = interstitialfluid.getComponent(i)
-    for j in range(c.variableCount()):
-        v1 = c.getVariable(j)
-        v1_name = v1.getName()
-        for k in range(interstitialfluid.variableCount()):
-            v2 = interstitialfluid.getVariable(k)
-            v2_name = v2.getName()
-            if v1_name == v2_name:
+    for j in range(epithelial.componentCount()):
+        c_e = epithelial.getComponent(j)
+        for k in range(c_e.variableCount()):
+            v2 = c_e.getVariable(k)
+            if v1.getName() == v2.getName():
                 variable = Variable()
                 variable.addEquivalence(v1, v2)
 

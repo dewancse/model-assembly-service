@@ -530,7 +530,7 @@ def addUnitsModel(unit_name, importedModel, m):
 
 
 # instantiate source url and create an imported component in the new model
-def instantiateImportedComponent(sourceurl, component, m):
+def instantiateImportedComponent(sourceurl, component, m, epithelial):
     imp = ImportSource()
     imp.setUrl(sourceurl)
 
@@ -538,7 +538,9 @@ def instantiateImportedComponent(sourceurl, component, m):
     importedComponent.setName(component)
     importedComponent.setSourceComponent(imp, component)
 
-    m.addComponent(importedComponent)
+    # m.addComponent(importedComponent)
+    if epithelial.getComponent(importedComponent.getName()) == None:
+        epithelial.addComponent(importedComponent)
     # making http request to the source model
     r = requests.get(sourceurl)
     # parse the string representation of the model to access by libcellml
@@ -551,9 +553,9 @@ def instantiateImportedComponent(sourceurl, component, m):
 
 
 # process model entities and source models' urls
-def processModelEntity(modelentity, m):
+def processModelEntity(modelentity, m, epithelial):
     cellml_model_name = modelentity[0:modelentity.find('#')]
     component_variable = modelentity[modelentity.find('#') + 1:len(modelentity)]
     component = component_variable[:component_variable.find('.')]
     sourceurl = workspaceURL + cellml_model_name
-    instantiateImportedComponent(sourceurl, component, m)
+    instantiateImportedComponent(sourceurl, component, m, epithelial)
