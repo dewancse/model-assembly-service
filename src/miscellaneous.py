@@ -1,7 +1,7 @@
 import requests
 from libcellml import *
 
-# pre-generated JSON model recipe
+# pre-generated model recipe in JSON format
 model_recipe = [
     {
         "med_fma": "http://purl.obolibrary.org/obo/FMA_84666",
@@ -280,10 +280,10 @@ model_recipe = [
     }
 ]
 
-# PMR sparql endpoint
+# sparql endpoint in PMR
 sparqlendpoint = "https://models.physiomeproject.org/pmr2_virtuoso_search"
 
-# import component
+# workspace url where we have all models
 workspaceURL = "https://models.physiomeproject.org/workspace/267/rawfile/HEAD/"
 
 # reference URIs of anatomical locations
@@ -291,24 +291,17 @@ lumen_fma = "http://purl.obolibrary.org/obo/FMA_74550"
 cytosol_fma = "http://purl.obolibrary.org/obo/FMA_66836"
 interstitialfluid_fma = "http://purl.obolibrary.org/obo/FMA_9673"
 
-
-# store imported models' name and href
-# if name_of_component_flux not in importedModel_dict
-# then append this in importedModel_dict
-def storeImportedModelsNameAndHref(importedModel_dict, model_name_flux, name_of_component_flux, workspaceURL):
-    flag = False
-    for x in importedModel_dict:
-        if x["name"] == name_of_component_flux:
-            flag = True
-            break
-    if flag == False:
-        importedModel_dict.append({
-            "href": workspaceURL + model_name_flux,
-            "name": name_of_component_flux
-        })
+# solutes dictionary to map URI to name
+dict_solutes = [
+    {
+        "http://purl.obolibrary.org/obo/CHEBI_29101": "Na",
+        "http://purl.obolibrary.org/obo/CHEBI_17996": "Cl",
+        "http://purl.obolibrary.org/obo/CHEBI_29103": "K"
+    }
+]
 
 
-# get channel and diffusive fluxes equation from source model
+# get channels and diffusive fluxes equations from source model
 def getChannelsEquation(str_channel, v, compartment, importedModel, m, epithelial):
     # string index of "id=" and "</math>" inside MathML
     str_index = []
@@ -387,7 +380,7 @@ def getChannelsEquation(str_channel, v, compartment, importedModel, m, epithelia
                         createComponent(v_compartment, v.getName(), v.getUnits(), "public", None, compartment, v)
 
 
-# user-defined function to append a substring of an ODE math equation
+# user-defined function to append a substring of ODE based equations
 def subMath(sign, vFlux):
     return "            <apply>\n" \
            "                <" + sign + "/>\n" + \
@@ -395,7 +388,7 @@ def subMath(sign, vFlux):
            "            </apply>"
 
 
-# user-defined function to define an ODE math equation
+# user-defined function to define ODE based equations
 def fullMath(vConcentration, subMath):
     return "<math xmlns=\"http://www.w3.org/1998/Math/MathML\">\n" \
            "    <apply id=" + '"' + vConcentration + "_diff_eq" + '"' + ">\n" + \
@@ -415,7 +408,7 @@ def fullMath(vConcentration, subMath):
            "</math>\n"
 
 
-# insert ODE math equations of lumen, cytosol and interstitial fluid component
+# insert ODE equations for lumen, cytosol and interstitial fluid component
 def insertODEMathEquation(math_dict, compartment, v_cons, v_flux, sign):
     # ODE equations for lumen
     if compartment.getName() == "lumen":
@@ -440,13 +433,100 @@ def insertODEMathEquation(math_dict, compartment, v_cons, v_flux, sign):
                 math_dict[0]["interstitialfluid"][v_cons.getName()] + "\n" + subMath(sign, v_flux.getName())
 
 
-# assign plus or minus sign in the ODE based equations
+# math for total fluxes in the lumen, cytosol and interstitial fluid component
+def fullMathTotalFlux(vTotalFlux, sMath):
+    return "<math xmlns=\"http://www.w3.org/1998/Math/MathML\">\n" \
+           "    <apply id=" + '"' + vTotalFlux + "_calculation" + '"' + ">\n" + \
+           "        <eq/>\n" \
+           "        <ci>" + vTotalFlux + "</ci>\n" + \
+           "        <apply>\n" \
+           "            <plus/>\n" \
+           "" + sMath + "\n" + \
+           "        </apply>\n" \
+           "    </apply>\n" \
+           "</math>\n"
+
+
+# user-defined function to append a substring of total fluxes and channels equations
+def subMathTotalFluxAndChannel(sign, vFlux):
+    return "            <apply>\n" \
+           "                <" + sign + "/>\n" + \
+           "                <ci>" + vFlux + "</ci>\n" + \
+           "            </apply>"
+
+
+# insert equations for total fluxes
+def insertMathsForTotalFluxes(compartment, math_dict_Total_Flux, dict_solutes, chebi, sign, v_flux):
+    if compartment.getName() == "lumen":
+        lumen_flux = "J_" + dict_solutes[0][chebi] + "_lumen"
+        if lumen_flux not in math_dict_Total_Flux[0]["lumen"].keys():
+            math_dict_Total_Flux[0]["lumen"][lumen_flux] = subMathTotalFluxAndChannel(sign, v_flux.getName())
+        else:
+            math_dict_Total_Flux[0]["lumen"][lumen_flux] = \
+                math_dict_Total_Flux[0]["lumen"][lumen_flux] + "\n" + \
+                subMathTotalFluxAndChannel(sign, v_flux.getName())
+
+    if compartment.getName() == "cytosol":
+        cytosol_flux = "J_" + dict_solutes[0][chebi] + "_cytosol"
+        if cytosol_flux not in math_dict_Total_Flux[0]["cytosol"].keys():
+            math_dict_Total_Flux[0]["cytosol"][cytosol_flux] = \
+                subMathTotalFluxAndChannel(sign, v_flux.getName())
+        else:
+            math_dict_Total_Flux[0]["cytosol"][cytosol_flux] = \
+                math_dict_Total_Flux[0]["cytosol"][cytosol_flux] + "\n" + \
+                subMathTotalFluxAndChannel(sign, v_flux.getName())
+
+    if compartment.getName() == "interstitialfluid":
+        interstitialfluid_flux = "J_" + dict_solutes[0][chebi] + "_interstitialfluid"
+        if interstitialfluid_flux not in math_dict_Total_Flux[0]["interstitialfluid"].keys():
+            math_dict_Total_Flux[0]["interstitialfluid"][interstitialfluid_flux] = \
+                subMathTotalFluxAndChannel(sign, v_flux.getName())
+        else:
+            math_dict_Total_Flux[0]["interstitialfluid"][interstitialfluid_flux] = \
+                math_dict_Total_Flux[0]["interstitialfluid"][interstitialfluid_flux] + "\n" + \
+                subMathTotalFluxAndChannel(sign, v_flux.getName())
+
+
+# insert equations for channels and diffusive fluxes
+def insertMathsForTotalChannels(compartment, math_dict_Total_Flux, dict_solutes, chebi, sign, flux_name):
+    if compartment.getName() == "lumen":
+        lumen_flux = "J_" + dict_solutes[0][chebi] + "_lumen"
+        if lumen_flux not in math_dict_Total_Flux[0]["lumen"].keys():
+            math_dict_Total_Flux[0]["lumen"][lumen_flux] = subMathTotalFluxAndChannel(sign, flux_name)
+        else:
+            math_dict_Total_Flux[0]["lumen"][lumen_flux] = \
+                math_dict_Total_Flux[0]["lumen"][lumen_flux] + "\n" + subMathTotalFluxAndChannel(sign, flux_name)
+
+    if compartment.getName() == "cytosol":
+        cytosol_flux = "J_" + dict_solutes[0][chebi] + "_cytosol"
+        if cytosol_flux not in math_dict_Total_Flux[0]["cytosol"].keys():
+            math_dict_Total_Flux[0]["cytosol"][cytosol_flux] = subMathTotalFluxAndChannel(sign, flux_name)
+        else:
+            math_dict_Total_Flux[0]["cytosol"][cytosol_flux] = \
+                math_dict_Total_Flux[0]["cytosol"][cytosol_flux] + "\n" + subMathTotalFluxAndChannel(sign, flux_name)
+
+    if compartment.getName() == "interstitialfluid":
+        interstitialfluid_flux = "J_" + dict_solutes[0][chebi] + "_interstitialfluid"
+        if interstitialfluid_flux not in math_dict_Total_Flux[0]["interstitialfluid"].keys():
+            math_dict_Total_Flux[0]["interstitialfluid"][interstitialfluid_flux] = \
+                subMathTotalFluxAndChannel(sign, flux_name)
+        else:
+            math_dict_Total_Flux[0]["interstitialfluid"][interstitialfluid_flux] = \
+                math_dict_Total_Flux[0]["interstitialfluid"][interstitialfluid_flux] + "\n" + \
+                subMathTotalFluxAndChannel(sign, flux_name)
+
+
+# assign plus or minus sign in the equations
 def odeSignNotation(compartment, source_fma, sink_fma):
     # lumen
     if compartment.getName() == "lumen":
         if source_fma == lumen_fma and sink_fma == cytosol_fma:
             sign = "minus"
-        else:
+        elif source_fma == lumen_fma and sink_fma == interstitialfluid_fma:
+            sign = "minus"
+        elif source_fma == cytosol_fma and sink_fma == lumen_fma:
+            sign = "plus"
+        elif source_fma == interstitialfluid_fma and sink_fma == lumen_fma:
             sign = "plus"
 
     # cytosol
@@ -464,25 +544,18 @@ def odeSignNotation(compartment, source_fma, sink_fma):
     if compartment.getName() == "interstitialfluid":
         if source_fma == interstitialfluid_fma and sink_fma == cytosol_fma:
             sign = "minus"
-        else:
-            sign = "plus"
-
-    # epithelial
-    if compartment.getName() == "epithelial":
-        if source_fma == lumen_fma and sink_fma == cytosol_fma:
-            sign = "plus"
-        elif source_fma == cytosol_fma and sink_fma == lumen_fma:
+        elif source_fma == interstitialfluid_fma and sink_fma == lumen_fma:
             sign = "minus"
         elif source_fma == cytosol_fma and sink_fma == interstitialfluid_fma:
-            sign = "minus"
-        elif source_fma == interstitialfluid_fma and sink_fma == cytosol_fma:
+            sign = "plus"
+        elif source_fma == lumen_fma and sink_fma == interstitialfluid_fma:
             sign = "plus"
 
     return sign
 
 
 # user-defined function to instantiate a time component and its variable attributes
-# if v2 == None then this component's variable name, e.g. environment.time
+# if v2 == None then variable comes from this component, e.g. environment.time
 # else variable comes from other component, e.g. lumen.P_mc_Na where P_mc_Na comes from a source model
 def createComponent(v, name, unit, interface, initialvalue, component, v2):
     v.setName(name)
@@ -500,7 +573,8 @@ def createComponent(v, name, unit, interface, initialvalue, component, v2):
     component.addVariable(v)
 
 
-# concentration sparql to get a result for a given FMA and CHEBI
+# concentration sparql query to get a list of concentration of solutes (chebi) in the (fma) compartment
+# fma and chebi are two input values to this function
 def concentrationSparql(fma, chebi):
     return "PREFIX semsim: <http://www.bhi.washington.edu/SemSim#>" \
            "PREFIX ro: <http://www.obofoundry.org/ro/ro.owl#>" \
@@ -515,7 +589,7 @@ def concentrationSparql(fma, chebi):
            "?source_entity semsim:hasPhysicalDefinition <" + chebi + ">. " + \
            "}"
 
-
+# add required units from the imported models
 def addUnitsModel(unit_name, importedModel, m):
     i = 0
     while importedModel.getUnits(i) != None:
@@ -529,8 +603,8 @@ def addUnitsModel(unit_name, importedModel, m):
         i += 1
 
 
-# instantiate source url and create an imported component in the new model
-def instantiateImportedComponent(sourceurl, component, m, epithelial):
+# instantiate source url and create an imported component in the import section of the new model
+def instantiateImportedComponent(sourceurl, component, epithelial):
     imp = ImportSource()
     imp.setUrl(sourceurl)
 
@@ -553,9 +627,9 @@ def instantiateImportedComponent(sourceurl, component, m, epithelial):
 
 
 # process model entities and source models' urls
-def processModelEntity(modelentity, m, epithelial):
+def processModelEntity(modelentity, epithelial):
     cellml_model_name = modelentity[0:modelentity.find('#')]
     component_variable = modelentity[modelentity.find('#') + 1:len(modelentity)]
     component = component_variable[:component_variable.find('.')]
     sourceurl = workspaceURL + cellml_model_name
-    instantiateImportedComponent(sourceurl, component, m, epithelial)
+    instantiateImportedComponent(sourceurl, component, epithelial)
