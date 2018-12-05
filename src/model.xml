@@ -13,43 +13,43 @@
         <unit prefix="milli" units="mole"/>
         <unit exponent="-1" units="second"/>
     </units>
-    <units name="millivolt">
-        <unit prefix="milli" units="volt"/>
-    </units>
     <units name="cm_per_s">
         <unit exponent="-1" units="second"/>
         <unit prefix="centi" units="metre"/>
+    </units>
+    <units name="millivolt">
+        <unit prefix="milli" units="volt"/>
+    </units>
+    <units name="C_per_mmol">
+        <unit exponent="-1" prefix="milli" units="mole"/>
+        <unit units="coulomb"/>
     </units>
     <units name="J_per_mmol">
         <unit exponent="-1" units="kelvin"/>
         <unit units="joule"/>
         <unit exponent="-1" prefix="milli" units="mole"/>
     </units>
-    <units name="C_per_mmol">
-        <unit exponent="-1" prefix="milli" units="mole"/>
-        <unit units="coulomb"/>
-    </units>
     <component name="epithelial">
-        <variable name="psi_c" units="millivolt" initial_value="-86.4" interface="public_and_private"
-                  id="epithelial.psi_c"/>
-        <variable name="psi_m" units="millivolt" initial_value="-28.0" interface="public_and_private"
-                  id="epithelial.psi_m"/>
         <variable name="P_mc_Na" units="cm_per_s" initial_value="3.27E-6" interface="public_and_private"
                   id="epithelial.P_mc_Na"/>
-        <variable name="RT" units="J_per_mmol" initial_value="2.579" interface="public_and_private" id="epithelial.RT"/>
+        <variable name="psi_c" units="millivolt" initial_value="-86.4" interface="public_and_private"
+                  id="epithelial.psi_c"/>
         <variable name="F" units="C_per_mmol" initial_value="96.48" interface="public_and_private" id="epithelial.F"/>
+        <variable name="psi_m" units="millivolt" initial_value="-28.0" interface="public_and_private"
+                  id="epithelial.psi_m"/>
+        <variable name="RT" units="J_per_mmol" initial_value="2.579" interface="public_and_private" id="epithelial.RT"/>
         <variable name="P_mc_Cl" units="cm_per_s" initial_value="1.43E-6" interface="public_and_private"
                   id="epithelial.P_mc_Cl"/>
         <variable name="P_mc_K" units="cm_per_s" initial_value="4.90E-7" interface="public_and_private"
                   id="epithelial.P_mc_K"/>
-        <variable name="P_ms_Na" units="cm_per_s" initial_value="4.80E-6" interface="public_and_private"
-                  id="epithelial.P_ms_Na"/>
         <variable name="psi_s" units="millivolt" initial_value="0.0" interface="public_and_private"
                   id="epithelial.psi_s"/>
-        <variable name="C_s_Cl" units="mmol_per_cm3" initial_value="1.12E-1" interface="public_and_private"
-                  id="epithelial.C_s_Cl"/>
+        <variable name="P_ms_Na" units="cm_per_s" initial_value="4.80E-6" interface="public_and_private"
+                  id="epithelial.P_ms_Na"/>
         <variable name="P_ms_Cl" units="cm_per_s" initial_value="2.40E-6" interface="public_and_private"
                   id="epithelial.P_ms_Cl"/>
+        <variable name="C_s_Cl" units="mmol_per_cm3" initial_value="1.12E-1" interface="public_and_private"
+                  id="epithelial.C_s_Cl"/>
         <variable name="P_ms_K" units="cm_per_s" initial_value="4.80E-6" interface="public_and_private"
                   id="epithelial.P_ms_K"/>
         <variable name="P_sc_Cl" units="cm_per_s" initial_value="9.16E-5" interface="public_and_private"
@@ -67,27 +67,27 @@
         <variable name="J_mc_Cl" units="flux" interface="public" id="lumen.J_mc_Cl"/>
         <variable name="C_m_K" units="mmol_per_cm3" initial_value="0.002" interface="public" id="lumen.C_m_K"/>
         <variable name="J_mc_K" units="flux" interface="public" id="lumen.J_mc_K"/>
-        <variable name="psi_c" units="millivolt" interface="public" id="lumen.psi_c"/>
-        <variable name="psi_m" units="millivolt" interface="public" id="lumen.psi_m"/>
         <variable name="P_mc_Na" units="cm_per_s" interface="public" id="lumen.P_mc_Na"/>
+        <variable name="psi_c" units="millivolt" interface="public" id="lumen.psi_c"/>
+        <variable name="F" units="C_per_mmol" interface="public" id="lumen.F"/>
+        <variable name="psi_m" units="millivolt" interface="public" id="lumen.psi_m"/>
         <variable name="C_c_Na" units="mmol_per_cm3" interface="public" id="lumen.C_c_Na"/>
         <variable name="RT" units="J_per_mmol" interface="public" id="lumen.RT"/>
-        <variable name="F" units="C_per_mmol" interface="public" id="lumen.F"/>
         <variable name="C_c_Cl" units="mmol_per_cm3" interface="public" id="lumen.C_c_Cl"/>
         <variable name="P_mc_Cl" units="cm_per_s" interface="public" id="lumen.P_mc_Cl"/>
-        <variable name="P_mc_K" units="cm_per_s" interface="public" id="lumen.P_mc_K"/>
         <variable name="C_c_K" units="mmol_per_cm3" interface="public" id="lumen.C_c_K"/>
-        <variable name="P_ms_Na" units="cm_per_s" interface="public" id="lumen.P_ms_Na"/>
+        <variable name="P_mc_K" units="cm_per_s" interface="public" id="lumen.P_mc_K"/>
         <variable name="C_s_Na" units="mmol_per_cm3" interface="public" id="lumen.C_s_Na"/>
         <variable name="psi_s" units="millivolt" interface="public" id="lumen.psi_s"/>
-        <variable name="C_s_Cl" units="mmol_per_cm3" interface="public" id="lumen.C_s_Cl"/>
+        <variable name="P_ms_Na" units="cm_per_s" interface="public" id="lumen.P_ms_Na"/>
         <variable name="P_ms_Cl" units="cm_per_s" interface="public" id="lumen.P_ms_Cl"/>
-        <variable name="P_ms_K" units="cm_per_s" interface="public" id="lumen.P_ms_K"/>
+        <variable name="C_s_Cl" units="mmol_per_cm3" interface="public" id="lumen.C_s_Cl"/>
         <variable name="C_s_K" units="mmol_per_cm3" interface="public" id="lumen.C_s_K"/>
+        <variable name="P_ms_K" units="cm_per_s" interface="public" id="lumen.P_ms_K"/>
         <variable name="time" units="second" interface="public" id="lumen.time"/>
+        <variable name="J_Na_lumen" units="flux" interface="public" id="lumen.J_Na_lumen"/>
         <variable name="J_Cl_lumen" units="flux" interface="public" id="lumen.J_Cl_lumen"/>
         <variable name="J_K_lumen" units="flux" interface="public" id="lumen.J_K_lumen"/>
-        <variable name="J_Na_lumen" units="flux" interface="public" id="lumen.J_Na_lumen"/>
         <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="G_mc_Na_calculation">
                 <eq/>
@@ -684,27 +684,27 @@
         <variable name="J_mc_Cl" units="flux" interface="public" id="cytosol.J_mc_Cl"/>
         <variable name="C_c_K" units="mmol_per_cm3" initial_value="0.1637" interface="public" id="cytosol.C_c_K"/>
         <variable name="J_mc_K" units="flux" interface="public" id="cytosol.J_mc_K"/>
-        <variable name="C_m_Na" units="mmol_per_cm3" interface="public" id="cytosol.C_m_Na"/>
-        <variable name="psi_c" units="millivolt" interface="public" id="cytosol.psi_c"/>
-        <variable name="psi_m" units="millivolt" interface="public" id="cytosol.psi_m"/>
         <variable name="P_mc_Na" units="cm_per_s" interface="public" id="cytosol.P_mc_Na"/>
-        <variable name="RT" units="J_per_mmol" interface="public" id="cytosol.RT"/>
+        <variable name="psi_c" units="millivolt" interface="public" id="cytosol.psi_c"/>
         <variable name="F" units="C_per_mmol" interface="public" id="cytosol.F"/>
+        <variable name="psi_m" units="millivolt" interface="public" id="cytosol.psi_m"/>
+        <variable name="C_m_Na" units="mmol_per_cm3" interface="public" id="cytosol.C_m_Na"/>
+        <variable name="RT" units="J_per_mmol" interface="public" id="cytosol.RT"/>
         <variable name="C_m_Cl" units="mmol_per_cm3" interface="public" id="cytosol.C_m_Cl"/>
         <variable name="P_mc_Cl" units="cm_per_s" interface="public" id="cytosol.P_mc_Cl"/>
-        <variable name="C_m_K" units="mmol_per_cm3" interface="public" id="cytosol.C_m_K"/>
         <variable name="P_mc_K" units="cm_per_s" interface="public" id="cytosol.P_mc_K"/>
+        <variable name="C_m_K" units="mmol_per_cm3" interface="public" id="cytosol.C_m_K"/>
         <variable name="J_sc_Na" units="flux" interface="public" id="cytosol.J_sc_Na"/>
         <variable name="J_sc_K" units="flux" interface="public" id="cytosol.J_sc_K"/>
-        <variable name="C_s_Cl" units="mmol_per_cm3" interface="public" id="cytosol.C_s_Cl"/>
         <variable name="P_sc_Cl" units="cm_per_s" interface="public" id="cytosol.P_sc_Cl"/>
         <variable name="psi_s" units="millivolt" interface="public" id="cytosol.psi_s"/>
-        <variable name="P_sc_K" units="cm_per_s" interface="public" id="cytosol.P_sc_K"/>
+        <variable name="C_s_Cl" units="mmol_per_cm3" interface="public" id="cytosol.C_s_Cl"/>
         <variable name="C_s_K" units="mmol_per_cm3" interface="public" id="cytosol.C_s_K"/>
+        <variable name="P_sc_K" units="cm_per_s" interface="public" id="cytosol.P_sc_K"/>
         <variable name="time" units="second" interface="public" id="cytosol.time"/>
+        <variable name="J_Na_cytosol" units="flux" interface="public" id="cytosol.J_Na_cytosol"/>
         <variable name="J_Cl_cytosol" units="flux" interface="public" id="cytosol.J_Cl_cytosol"/>
         <variable name="J_K_cytosol" units="flux" interface="public" id="cytosol.J_K_cytosol"/>
-        <variable name="J_Na_cytosol" units="flux" interface="public" id="cytosol.J_Na_cytosol"/>
         <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="G_mc_Na_calculation">
                 <eq/>
@@ -1240,28 +1240,28 @@
                   id="interstitialfluid.C_s_K"/>
         <variable name="J_sc_K" units="flux" interface="public" id="interstitialfluid.J_sc_K"/>
         <variable name="psi_c" units="millivolt" interface="public" id="interstitialfluid.psi_c"/>
-        <variable name="C_s_Cl" units="mmol_per_cm3" interface="public" id="interstitialfluid.C_s_Cl"/>
+        <variable name="F" units="C_per_mmol" interface="public" id="interstitialfluid.F"/>
         <variable name="P_sc_Cl" units="cm_per_s" interface="public" id="interstitialfluid.P_sc_Cl"/>
         <variable name="psi_s" units="millivolt" interface="public" id="interstitialfluid.psi_s"/>
+        <variable name="C_s_Cl" units="mmol_per_cm3" interface="public" id="interstitialfluid.C_s_Cl"/>
         <variable name="C_c_Cl" units="mmol_per_cm3" interface="public" id="interstitialfluid.C_c_Cl"/>
         <variable name="RT" units="J_per_mmol" interface="public" id="interstitialfluid.RT"/>
-        <variable name="F" units="C_per_mmol" interface="public" id="interstitialfluid.F"/>
-        <variable name="P_sc_K" units="cm_per_s" interface="public" id="interstitialfluid.P_sc_K"/>
         <variable name="C_c_K" units="mmol_per_cm3" interface="public" id="interstitialfluid.C_c_K"/>
+        <variable name="P_sc_K" units="cm_per_s" interface="public" id="interstitialfluid.P_sc_K"/>
+        <variable name="psi_m" units="millivolt" interface="public" id="interstitialfluid.psi_m"/>
         <variable name="C_m_Na" units="mmol_per_cm3" interface="public" id="interstitialfluid.C_m_Na"/>
         <variable name="P_ms_Na" units="cm_per_s" interface="public" id="interstitialfluid.P_ms_Na"/>
-        <variable name="psi_m" units="millivolt" interface="public" id="interstitialfluid.psi_m"/>
-        <variable name="C_m_Cl" units="mmol_per_cm3" interface="public" id="interstitialfluid.C_m_Cl"/>
         <variable name="P_ms_Cl" units="cm_per_s" interface="public" id="interstitialfluid.P_ms_Cl"/>
-        <variable name="C_m_K" units="mmol_per_cm3" interface="public" id="interstitialfluid.C_m_K"/>
+        <variable name="C_m_Cl" units="mmol_per_cm3" interface="public" id="interstitialfluid.C_m_Cl"/>
         <variable name="P_ms_K" units="cm_per_s" interface="public" id="interstitialfluid.P_ms_K"/>
+        <variable name="C_m_K" units="mmol_per_cm3" interface="public" id="interstitialfluid.C_m_K"/>
         <variable name="time" units="second" interface="public" id="interstitialfluid.time"/>
+        <variable name="J_Na_interstitialfluid" units="flux" interface="public"
+                  id="interstitialfluid.J_Na_interstitialfluid"/>
         <variable name="J_Cl_interstitialfluid" units="flux" interface="public"
                   id="interstitialfluid.J_Cl_interstitialfluid"/>
         <variable name="J_K_interstitialfluid" units="flux" interface="public"
                   id="interstitialfluid.J_K_interstitialfluid"/>
-        <variable name="J_Na_interstitialfluid" units="flux" interface="public"
-                  id="interstitialfluid.J_Na_interstitialfluid"/>
         <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply id="G_sc_Cl_calculation">
                 <eq/>
@@ -1745,26 +1745,12 @@
         </math>
     </component>
     <connection component_1="epithelial">
-        <map_variables variable_1="psi_c" variable_2="psi_c"/>
-        <map_variables variable_1="psi_c" variable_2="psi_c"/>
-        <map_variables variable_1="psi_c" variable_2="psi_c"/>
-        <map_variables variable_1="psi_c" variable_2="psi_c"/>
-        <map_variables variable_1="psi_c" variable_2="psi_c"/>
-        <map_variables variable_1="psi_m" variable_2="psi_m"/>
-        <map_variables variable_1="psi_m" variable_2="psi_m"/>
-        <map_variables variable_1="psi_m" variable_2="psi_m"/>
-        <map_variables variable_1="psi_m" variable_2="psi_m"/>
-        <map_variables variable_1="psi_m" variable_2="psi_m"/>
-        <map_variables variable_1="psi_m" variable_2="psi_m"/>
         <map_variables variable_1="P_mc_Na" variable_2="P_mc_Na"/>
-        <map_variables variable_1="RT" variable_2="RT"/>
-        <map_variables variable_1="RT" variable_2="RT"/>
-        <map_variables variable_1="RT" variable_2="RT"/>
-        <map_variables variable_1="RT" variable_2="RT"/>
-        <map_variables variable_1="RT" variable_2="RT"/>
-        <map_variables variable_1="RT" variable_2="RT"/>
-        <map_variables variable_1="RT" variable_2="RT"/>
-        <map_variables variable_1="RT" variable_2="RT"/>
+        <map_variables variable_1="psi_c" variable_2="psi_c"/>
+        <map_variables variable_1="psi_c" variable_2="psi_c"/>
+        <map_variables variable_1="psi_c" variable_2="psi_c"/>
+        <map_variables variable_1="psi_c" variable_2="psi_c"/>
+        <map_variables variable_1="psi_c" variable_2="psi_c"/>
         <map_variables variable_1="F" variable_2="F"/>
         <map_variables variable_1="F" variable_2="F"/>
         <map_variables variable_1="F" variable_2="F"/>
@@ -1773,42 +1759,56 @@
         <map_variables variable_1="F" variable_2="F"/>
         <map_variables variable_1="F" variable_2="F"/>
         <map_variables variable_1="F" variable_2="F"/>
+        <map_variables variable_1="psi_m" variable_2="psi_m"/>
+        <map_variables variable_1="psi_m" variable_2="psi_m"/>
+        <map_variables variable_1="psi_m" variable_2="psi_m"/>
+        <map_variables variable_1="psi_m" variable_2="psi_m"/>
+        <map_variables variable_1="psi_m" variable_2="psi_m"/>
+        <map_variables variable_1="psi_m" variable_2="psi_m"/>
+        <map_variables variable_1="RT" variable_2="RT"/>
+        <map_variables variable_1="RT" variable_2="RT"/>
+        <map_variables variable_1="RT" variable_2="RT"/>
+        <map_variables variable_1="RT" variable_2="RT"/>
+        <map_variables variable_1="RT" variable_2="RT"/>
+        <map_variables variable_1="RT" variable_2="RT"/>
+        <map_variables variable_1="RT" variable_2="RT"/>
+        <map_variables variable_1="RT" variable_2="RT"/>
         <map_variables variable_1="P_mc_Cl" variable_2="P_mc_Cl"/>
         <map_variables variable_1="P_mc_K" variable_2="P_mc_K"/>
+        <map_variables variable_1="psi_s" variable_2="psi_s"/>
+        <map_variables variable_1="psi_s" variable_2="psi_s"/>
+        <map_variables variable_1="psi_s" variable_2="psi_s"/>
+        <map_variables variable_1="psi_s" variable_2="psi_s"/>
+        <map_variables variable_1="psi_s" variable_2="psi_s"/>
         <map_variables variable_1="P_ms_Na" variable_2="P_ms_Na"/>
-        <map_variables variable_1="psi_s" variable_2="psi_s"/>
-        <map_variables variable_1="psi_s" variable_2="psi_s"/>
-        <map_variables variable_1="psi_s" variable_2="psi_s"/>
-        <map_variables variable_1="psi_s" variable_2="psi_s"/>
-        <map_variables variable_1="psi_s" variable_2="psi_s"/>
-        <map_variables variable_1="C_s_Cl" variable_2="C_s_Cl"/>
-        <map_variables variable_1="C_s_Cl" variable_2="C_s_Cl"/>
-        <map_variables variable_1="C_s_Cl" variable_2="C_s_Cl"/>
         <map_variables variable_1="P_ms_Cl" variable_2="P_ms_Cl"/>
+        <map_variables variable_1="C_s_Cl" variable_2="C_s_Cl"/>
+        <map_variables variable_1="C_s_Cl" variable_2="C_s_Cl"/>
+        <map_variables variable_1="C_s_Cl" variable_2="C_s_Cl"/>
         <map_variables variable_1="P_ms_K" variable_2="P_ms_K"/>
         <map_variables variable_1="P_sc_Cl" variable_2="P_sc_Cl"/>
         <map_variables variable_1="P_sc_K" variable_2="P_sc_K"/>
     </connection>
     <connection component_1="epithelial" component_2="lumen">
-        <map_variables variable_1="psi_c" variable_2="psi_c"/>
-        <map_variables variable_1="psi_m" variable_2="psi_m"/>
         <map_variables variable_1="P_mc_Na" variable_2="P_mc_Na"/>
-        <map_variables variable_1="RT" variable_2="RT"/>
+        <map_variables variable_1="psi_c" variable_2="psi_c"/>
         <map_variables variable_1="F" variable_2="F"/>
+        <map_variables variable_1="psi_m" variable_2="psi_m"/>
+        <map_variables variable_1="RT" variable_2="RT"/>
         <map_variables variable_1="P_mc_Cl" variable_2="P_mc_Cl"/>
         <map_variables variable_1="P_mc_K" variable_2="P_mc_K"/>
-        <map_variables variable_1="P_ms_Na" variable_2="P_ms_Na"/>
         <map_variables variable_1="psi_s" variable_2="psi_s"/>
-        <map_variables variable_1="C_s_Cl" variable_2="C_s_Cl"/>
+        <map_variables variable_1="P_ms_Na" variable_2="P_ms_Na"/>
         <map_variables variable_1="P_ms_Cl" variable_2="P_ms_Cl"/>
+        <map_variables variable_1="C_s_Cl" variable_2="C_s_Cl"/>
         <map_variables variable_1="P_ms_K" variable_2="P_ms_K"/>
     </connection>
     <connection component_1="epithelial" component_2="cytosol">
-        <map_variables variable_1="psi_c" variable_2="psi_c"/>
-        <map_variables variable_1="psi_m" variable_2="psi_m"/>
         <map_variables variable_1="P_mc_Na" variable_2="P_mc_Na"/>
-        <map_variables variable_1="RT" variable_2="RT"/>
+        <map_variables variable_1="psi_c" variable_2="psi_c"/>
         <map_variables variable_1="F" variable_2="F"/>
+        <map_variables variable_1="psi_m" variable_2="psi_m"/>
+        <map_variables variable_1="RT" variable_2="RT"/>
         <map_variables variable_1="P_mc_Cl" variable_2="P_mc_Cl"/>
         <map_variables variable_1="P_mc_K" variable_2="P_mc_K"/>
         <map_variables variable_1="psi_s" variable_2="psi_s"/>
@@ -1818,13 +1818,13 @@
     </connection>
     <connection component_1="epithelial" component_2="interstitialfluid">
         <map_variables variable_1="psi_c" variable_2="psi_c"/>
+        <map_variables variable_1="F" variable_2="F"/>
         <map_variables variable_1="psi_m" variable_2="psi_m"/>
         <map_variables variable_1="RT" variable_2="RT"/>
-        <map_variables variable_1="F" variable_2="F"/>
-        <map_variables variable_1="P_ms_Na" variable_2="P_ms_Na"/>
         <map_variables variable_1="psi_s" variable_2="psi_s"/>
-        <map_variables variable_1="C_s_Cl" variable_2="C_s_Cl"/>
+        <map_variables variable_1="P_ms_Na" variable_2="P_ms_Na"/>
         <map_variables variable_1="P_ms_Cl" variable_2="P_ms_Cl"/>
+        <map_variables variable_1="C_s_Cl" variable_2="C_s_Cl"/>
         <map_variables variable_1="P_ms_K" variable_2="P_ms_K"/>
         <map_variables variable_1="P_sc_Cl" variable_2="P_sc_Cl"/>
         <map_variables variable_1="P_sc_K" variable_2="P_sc_K"/>

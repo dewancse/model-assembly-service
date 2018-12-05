@@ -402,6 +402,26 @@ for i in range(epithelial.variableCount()):
                 variable = Variable()
                 variable.addEquivalence(v1, v2)
 
+# Mapping connection between siblings of epithelial component
+for i in range(epithelial.componentCount()):
+    if i == epithelial.componentCount() - 1:
+        break
+    c1 = epithelial.getComponent(i)
+    for j in range(epithelial.componentCount()):
+        if j + i == epithelial.componentCount():
+            break
+        c2 = epithelial.getComponent(j + i)
+        if c1.getName() == c2.getName():
+            continue
+        for k in range(c1.variableCount()):
+            v_c1 = c1.getVariable(k)
+            for l in range(c2.variableCount()):
+                v_c2 = c2.getVariable(l)
+                if v_c1.getName() == v_c2.getName():
+                    # print(c1.getName(), c2.getName(), v_c1.getName(), v_c2.getName())
+                    variable = Variable()
+                    variable.addEquivalence(v_c1, v_c2)
+
 # serialize and print this new model
 printer = Printer()
 model = printer.printModel(m)
