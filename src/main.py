@@ -4,7 +4,7 @@ from miscellaneous import *
 from SPARQLWrapper import SPARQLWrapper, JSON
 
 
-def modelAssemblyService():
+def modelAssemblyService(model_recipe):
     # Instantiate a model
     m = Model()
 
