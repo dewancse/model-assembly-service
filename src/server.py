@@ -1,6 +1,6 @@
-from main import *
+# from main import *
 from sanic import Sanic, response
-from sanic.response import text
+from sanic.response import json, text
 
 app = Sanic()
 
@@ -8,11 +8,16 @@ app.config.REQUEST_TIMEOUT = 600
 app.config.RESPONSE_TIMEOUT = 600
 
 
+@app.route("/")
+async def test(request):
+    return json({"hello": "world"})
+
+
 @app.route('/post', methods=['POST'])
 async def post_handler(request):
     print("PRINT:", request.json)
     obj = request.json
-    modelAssemblyService(obj)
+    # modelAssemblyService(obj)
     return text('New model is at this addreess: <a href=http://127.0.0.1:8000/model target=_blank>Click Here</a>')
 
 
