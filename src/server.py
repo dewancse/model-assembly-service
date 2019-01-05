@@ -1,4 +1,4 @@
-# from main import *
+from main import *
 from sanic import Sanic, response
 from sanic.response import json, text
 
@@ -17,7 +17,7 @@ async def test(request):
 async def post_handler(request):
     print("PRINT:", request.json)
     obj = request.json
-    # modelAssemblyService(obj)
+    modelAssemblyService(obj)
     return text('New model is at this addreess: <a href=http://127.0.0.1:8000/model target=_blank>Click Here</a>')
 
 
