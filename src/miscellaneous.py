@@ -626,6 +626,10 @@ def instantiateImportedComponent(sourceurl, component, epithelial, m):
     p = Parser()
     impModel = p.parseModel(r.text)
     impComponent = impModel.getComponent(importedComponent.getName())
+
+    print("###impComponent: ", impComponent.getName())
+    print("###impComponent count: ", impComponent.variableCount())
+
     for i in range(impComponent.variableCount()):
         impVariable = impComponent.getVariable(i)
         importedComponent.addVariable(impVariable)
