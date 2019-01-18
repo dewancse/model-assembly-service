@@ -117,37 +117,37 @@ def addComponentFromModelRecipe(modelentity, fma, chebi, compartment, source_fma
                 c = importedModel.getComponent(name_of_component_cons)
                 if c != None:
                     for i in range(c.variableCount()):
-                    v_cons = c.getVariable(i)
-                    if v_cons.getName() == name_of_variable_cons and v_cons.getInitialValue() != "":
-                        # add units of concentration and flux variables
-                        addUnitsModel(v_cons.getUnits(), importedModel, m)
-                        addUnitsModel(v_flux.getUnits(), importedModel, m)
+                        v_cons = c.getVariable(i)
+                        if v_cons.getName() == name_of_variable_cons and v_cons.getInitialValue() != "":
+                            # add units of concentration and flux variables
+                            addUnitsModel(v_cons.getUnits(), importedModel, m)
+                            addUnitsModel(v_flux.getUnits(), importedModel, m)
 
-                        # concentration variable
-                        if compartment.getVariable(v_cons.getName()) == None:
-                            v_cons_compartment = Variable()
-                            createComponent(v_cons_compartment, v_cons.getName(), v_cons.getUnits(), "public",
-                                            v_cons.getInitialValue(), compartment, v_cons)
+                            # concentration variable
+                            if compartment.getVariable(v_cons.getName()) == None:
+                                v_cons_compartment = Variable()
+                                createComponent(v_cons_compartment, v_cons.getName(), v_cons.getUnits(), "public",
+                                                v_cons.getInitialValue(), compartment, v_cons)
 
-                        # flux variable
-                        if compartment.getVariable(v_flux.getName()) == None:
-                            v_flux_compartment = Variable()
-                            createComponent(v_flux_compartment, v_flux.getName(), v_flux.getUnits(), "public",
-                                            v_flux.getInitialValue(), compartment, v_flux)
+                            # flux variable
+                            if compartment.getVariable(v_flux.getName()) == None:
+                                v_flux_compartment = Variable()
+                                createComponent(v_flux_compartment, v_flux.getName(), v_flux.getUnits(), "public",
+                                                v_flux.getInitialValue(), compartment, v_flux)
 
-                        # assign plus or minus sign in the ODE based equations
-                        sign = odeSignNotation(compartment, source_fma, sink_fma)
+                            # assign plus or minus sign in the ODE based equations
+                            sign = odeSignNotation(compartment, source_fma, sink_fma)
 
-                        # exclude ODE based equations for channels and diffusive fluxes
-                        if source_fma2 != "channel" and source_fma2 != "diffusiveflux":
-                            # insert ODE math equations of lumen, cytosol and interstitial fluid component
-                            insertODEMathEquation(math_dict, compartment, v_cons, v_flux, sign)
-                            # insert equations for total fluxes
-                            insertMathsForTotalFluxes(compartment, math_dict_Total_Flux, dict_solutes, chebi, sign,
-                                                      v_flux)
+                            # exclude ODE based equations for channels and diffusive fluxes
+                            if source_fma2 != "channel" and source_fma2 != "diffusiveflux":
+                                # insert ODE math equations of lumen, cytosol and interstitial fluid component
+                                insertODEMathEquation(math_dict, compartment, v_cons, v_flux, sign)
+                                # insert equations for total fluxes
+                                insertMathsForTotalFluxes(compartment, math_dict_Total_Flux, dict_solutes, chebi, sign,
+                                                          v_flux)
 
-                        flag_concentration = True
-                        break
+                            flag_concentration = True
+                            break
 
             # if flux and concentration variables are in the same component
             # then exit from the for loop to iterate next item from the model recipe
@@ -158,7 +158,8 @@ def addComponentFromModelRecipe(modelentity, fma, chebi, compartment, source_fma
     # Include all variables that are in the channels and diffusive fluxes equations
     if source_fma2 == "channel" or source_fma2 == "diffusiveflux":
         c = importedModel.getComponent(name_of_component_flux)
-        getChannelsEquation(c.getMath().splitlines(), name_of_variable_flux, compartment, importedModel, m,
+        if c != None:
+            getChannelsEquation(c.getMath().splitlines(), name_of_variable_flux, compartment, importedModel, m,
                             epithelial)
         # assign plus or minus sign in the equations
         sign = odeSignNotation(compartment, source_fma, sink_fma)
@@ -386,7 +387,8 @@ for i in range(epithelial.componentCount()):
 # remove multiple instances of MathML tag in the lumen, cytosol and interstitial fluid component
 for i in range(epithelial.componentCount()):
     c = epithelial.getComponent(i)
-    str_math = c.getMath().splitlines()
+    if c != None:
+        str_math = c.getMath().splitlines()
     str_math_2 = ""
     for j in range(len(str_math)):
         if "<math xmlns=\"http://www.w3.org/1998/Math/MathML\">" in str_math[j] or "</math>" in str_math[j]:
