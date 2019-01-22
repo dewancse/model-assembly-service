@@ -1,4 +1,5 @@
 import requests
+import lxml.etree as ET
 from libcellml import *
 from miscellaneous import *
 from SPARQLWrapper import SPARQLWrapper, JSON
@@ -14,7 +15,7 @@ m.setId(modelId)
 modelName = "epithelialModel"
 m.setName(modelName)
 
-print("Model: ", m, "\nModel Id: ", m.getId(), "\nModel Name: ", m.getName())
+# print("Model: ", m, "\nModel Id: ", m.getId(), "\nModel Name: ", m.getName())
 
 # epithelial component which encapsulates other components
 epithelial = Component()
@@ -82,9 +83,19 @@ def addComponentFromModelRecipe(modelentity, fma, chebi, compartment, source_fma
 
     # making http request to the source model
     r = requests.get(workspaceURL + model_name_flux)
+
+    dom = ET.fromstring(r.text.encode("utf-8"))
+    xslt = ET.parse("cellml1to2.xsl")
+    transform = ET.XSLT(xslt)
+    newdom = transform(dom)
+    # print(ET.tostring(newdom, pretty_print=True))
+
+    mstr = ET.tostring(newdom, pretty_print=True)
+    mstr = mstr.decode("utf-8")
+
     # parse the string representation of the model to access by libcellml
     p = Parser()
-    importedModel = p.parseModel(r.text)
+    importedModel = p.parseModel(mstr)
 
     # iterate over the sparql's each result in the results
     for result in results["results"]["bindings"]:
@@ -418,12 +429,22 @@ for i in range(epithelial.componentCount()):
             for l in range(c2.variableCount()):
                 v_c2 = c2.getVariable(l)
                 if v_c1.getName() == v_c2.getName():
-                    print(c1.getName(), c2.getName(), v_c1.getName(), v_c2.getName())
+                    # print(c1.getName(), c2.getName(), v_c1.getName(), v_c2.getName())
                     variable = Variable()
                     variable.addEquivalence(v_c1, v_c2)
 
-# serialize and print this new model
+print("\nModel:", model)
+
 printer = Printer()
+for i in range(m.componentCount()):
+    print("##### m comp: ", m.getComponent(i).getName())
+    c = m.getComponent(i)
+    s = printer.printComponent(c)
+    print(s)
+    for j in range(c.variableCount()):
+        print("m variable: ", c.getVariable(j).getName())
+
+# serialize and print this new model
 model = printer.printModel(m)
 
 print("\nModel:", model)

@@ -1,5 +1,6 @@
 import requests
 from libcellml import *
+import lxml.etree as ET
 
 # pre-generated model recipe in JSON format
 model_recipe = [
@@ -53,232 +54,232 @@ model_recipe = [
         "variable_text2": "J_mc_K",
         "variable_text3": ""
     }
-    ,
-    {
-        "med_fma": "http://purl.obolibrary.org/obo/FMA_84666",
-        "med_pr": "http://purl.obolibrary.org/obo/PR_P37089",
-        "med_pr_text": "amiloride-sensitive sodium channel subunit alpha (rat)",
-        "med_pr_text_syn": "RENAC",
-        "model_entity": "chang_fujita_b_1999.cellml#mc_sodium_flux.G_mc_Na",
-        "model_entity2": "",
-        "model_entity3": "",
-        "protein_name": "http://purl.obolibrary.org/obo/CL_0000066",
-        "sink_fma": "http://purl.obolibrary.org/obo/FMA_66836",
-        "sink_fma2": "channel",
-        "sink_fma3": "channel",
-        "solute_chebi": "http://purl.obolibrary.org/obo/CHEBI_29101",
-        "solute_chebi2": "channel",
-        "solute_chebi3": "channel",
-        "solute_text": "Na+",
-        "solute_text2": "channel",
-        "solute_text3": "channel",
-        "source_fma": "http://purl.obolibrary.org/obo/FMA_74550",
-        "source_fma2": "channel",
-        "source_fma3": "channel",
-        "variable_text": "G_mc_Na",
-        "variable_text2": "channel",
-        "variable_text3": "channel"
-    },
-    {
-        "med_fma": "http://purl.obolibrary.org/obo/FMA_84666",
-        "med_pr": "http://purl.obolibrary.org/obo/PR_Q06393",
-        "med_pr_text": "chloride channel protein ClC-Ka (rat)",
-        "med_pr_text_syn": "CLCNK1",
-        "model_entity": "chang_fujita_b_1999.cellml#mc_chloride_flux.G_mc_Cl",
-        "model_entity2": "",
-        "model_entity3": "",
-        "protein_name": "http://purl.obolibrary.org/obo/CL_0000066",
-        "sink_fma": "http://purl.obolibrary.org/obo/FMA_66836",
-        "sink_fma2": "channel",
-        "sink_fma3": "channel",
-        "solute_chebi": "http://purl.obolibrary.org/obo/CHEBI_17996",
-        "solute_chebi2": "channel",
-        "solute_chebi3": "channel",
-        "solute_text": "Cl-",
-        "solute_text2": "channel",
-        "solute_text3": "channel",
-        "source_fma": "http://purl.obolibrary.org/obo/FMA_74550",
-        "source_fma2": "channel",
-        "source_fma3": "channel",
-        "variable_text": "G_mc_Cl",
-        "variable_text2": "channel",
-        "variable_text3": "channel"
-    },
-    {
-        "med_fma": "http://purl.obolibrary.org/obo/FMA_84666",
-        "med_pr": "http://purl.obolibrary.org/obo/PR_P15387",
-        "med_pr_text": "potassium voltage-gated channel subfamily B member 1 (rat)",
-        "med_pr_text_syn": "P15387",
-        "model_entity": "chang_fujita_b_1999.cellml#mc_potassium_flux.G_mc_K",
-        "model_entity2": "",
-        "model_entity3": "",
-        "protein_name": "http://purl.obolibrary.org/obo/CL_0000066",
-        "sink_fma": "http://purl.obolibrary.org/obo/FMA_66836",
-        "sink_fma2": "channel",
-        "sink_fma3": "channel",
-        "solute_chebi": "http://purl.obolibrary.org/obo/CHEBI_29103",
-        "solute_chebi2": "channel",
-        "solute_chebi3": "channel",
-        "solute_text": "K+",
-        "solute_text2": "channel",
-        "solute_text3": "channel",
-        "source_fma": "http://purl.obolibrary.org/obo/FMA_74550",
-        "source_fma2": "channel",
-        "source_fma3": "channel",
-        "variable_text": "G_mc_K",
-        "variable_text2": "channel",
-        "variable_text3": "channel"
-    },
-    {
-        "med_fma": "http://purl.obolibrary.org/obo/FMA_84669",
-        "med_pr": "http://purl.obolibrary.org/obo/PR_P06685",
-        "med_pr_text": "sodium/potassium-transporting ATPase subunit alpha-1 (rat)",
-        "med_pr_text_syn": "P06685",
-        "model_entity": "chang_fujita_b_1999.cellml#solute_concentrations.J_sc_Na",
-        "model_entity2": "chang_fujita_b_1999.cellml#sc_potassium_flux.J_sc_K",
-        "model_entity3": "",
-        "protein_name": "http://purl.obolibrary.org/obo/CL_0000066",
-        "sink_fma": "http://purl.obolibrary.org/obo/FMA_9673",
-        "sink_fma2": "http://purl.obolibrary.org/obo/FMA_66836",
-        "sink_fma3": "",
-        "solute_chebi": "http://purl.obolibrary.org/obo/CHEBI_29101",
-        "solute_chebi2": "http://purl.obolibrary.org/obo/CHEBI_29103",
-        "solute_chebi3": "",
-        "solute_text": "Na+",
-        "solute_text2": "K+",
-        "solute_text3": "",
-        "source_fma": "http://purl.obolibrary.org/obo/FMA_66836",
-        "source_fma2": "http://purl.obolibrary.org/obo/FMA_9673",
-        "source_fma3": "",
-        "variable_text": "J_sc_Na",
-        "variable_text2": "J_sc_K",
-        "variable_text3": ""
-    },
-    {
-        "med_fma": "http://purl.obolibrary.org/obo/FMA_84669",
-        "med_pr": "http://purl.obolibrary.org/obo/PR_Q06393",
-        "med_pr_text": "chloride channel protein ClC-Ka (rat)",
-        "med_pr_text_syn": "CLCNK1",
-        "model_entity": "chang_fujita_b_1999.cellml#sc_chloride_flux.G_sc_Cl",
-        "model_entity2": "",
-        "model_entity3": "",
-        "protein_name": "http://purl.obolibrary.org/obo/CL_0000066",
-        "sink_fma": "http://purl.obolibrary.org/obo/FMA_66836",
-        "sink_fma2": "channel",
-        "sink_fma3": "channel",
-        "solute_chebi": "http://purl.obolibrary.org/obo/CHEBI_17996",
-        "solute_chebi2": "channel",
-        "solute_chebi3": "channel",
-        "solute_text": "Cl-",
-        "solute_text2": "channel",
-        "solute_text3": "channel",
-        "source_fma": "http://purl.obolibrary.org/obo/FMA_9673",
-        "source_fma2": "channel",
-        "source_fma3": "channel",
-        "variable_text": "G_sc_Cl",
-        "variable_text2": "channel",
-        "variable_text3": "channel"
-    },
-    {
-        "med_fma": "http://purl.obolibrary.org/obo/FMA_84669",
-        "med_pr": "http://purl.obolibrary.org/obo/PR_P15387",
-        "med_pr_text": "potassium voltage-gated channel subfamily B member 1 (rat)",
-        "med_pr_text_syn": "P15387",
-        "model_entity": "chang_fujita_b_1999.cellml#sc_potassium_flux.G_sc_K",
-        "model_entity2": "",
-        "model_entity3": "",
-        "protein_name": "http://purl.obolibrary.org/obo/CL_0000066",
-        "sink_fma": "http://purl.obolibrary.org/obo/FMA_66836",
-        "sink_fma2": "channel",
-        "sink_fma3": "channel",
-        "solute_chebi": "http://purl.obolibrary.org/obo/CHEBI_29103",
-        "solute_chebi2": "channel",
-        "solute_chebi3": "channel",
-        "solute_text": "K+",
-        "solute_text2": "channel",
-        "solute_text3": "channel",
-        "source_fma": "http://purl.obolibrary.org/obo/FMA_9673",
-        "source_fma2": "channel",
-        "source_fma3": "channel",
-        "variable_text": "G_sc_K",
-        "variable_text2": "channel",
-        "variable_text3": "channel"
-    },
-    {
-        "med_fma": "http://purl.obolibrary.org/obo/FMA_67394",
-        "med_pr": "http://purl.obolibrary.org/obo/PR_Q9Z0S6",
-        "med_pr_text": "claudin-10 (mouse)",
-        "med_pr_text_syn": "CLDN10A",
-        "model_entity": "chang_fujita_b_1999.cellml#ms_sodium_flux.G_ms_Na",
-        "model_entity2": "",
-        "model_entity3": "",
-        "protein_name": "http://purl.obolibrary.org/obo/CL_0000066",
-        "sink_fma": "http://purl.obolibrary.org/obo/FMA_9673",
-        "sink_fma2": "diffusiveflux",
-        "sink_fma3": "diffusiveflux",
-        "solute_chebi": "http://purl.obolibrary.org/obo/CHEBI_29101",
-        "solute_chebi2": "diffusiveflux",
-        "solute_chebi3": "diffusiveflux",
-        "solute_text": "Na+",
-        "solute_text2": "diffusiveflux",
-        "solute_text3": "diffusiveflux",
-        "source_fma": "http://purl.obolibrary.org/obo/FMA_74550",
-        "source_fma2": "diffusiveflux",
-        "source_fma3": "diffusiveflux",
-        "variable_text": "G_ms_Na",
-        "variable_text2": "diffusiveflux",
-        "variable_text3": "diffusiveflux"
-    },
-    {
-        "med_fma": "http://purl.obolibrary.org/obo/FMA_67394",
-        "med_pr": "http://purl.obolibrary.org/obo/PR_O35054",
-        "med_pr_text": "claudin-4 (mouse)",
-        "med_pr_text_syn": "CPETR1",
-        "model_entity": "chang_fujita_b_1999.cellml#ms_chloride_flux.G_ms_Cl",
-        "model_entity2": "",
-        "model_entity3": "",
-        "protein_name": "http://purl.obolibrary.org/obo/CL_0000066",
-        "sink_fma": "http://purl.obolibrary.org/obo/FMA_9673",
-        "sink_fma2": "diffusiveflux",
-        "sink_fma3": "diffusiveflux",
-        "solute_chebi": "http://purl.obolibrary.org/obo/CHEBI_17996",
-        "solute_chebi2": "diffusiveflux",
-        "solute_chebi3": "diffusiveflux",
-        "solute_text": "Cl-",
-        "solute_text2": "diffusiveflux",
-        "solute_text3": "diffusiveflux",
-        "source_fma": "http://purl.obolibrary.org/obo/FMA_74550",
-        "source_fma2": "diffusiveflux",
-        "source_fma3": "diffusiveflux",
-        "variable_text": "G_ms_Cl",
-        "variable_text2": "diffusiveflux",
-        "variable_text3": "diffusiveflux"
-    },
-    {
-        "med_fma": "http://purl.obolibrary.org/obo/FMA_67394",
-        "med_pr": "http://purl.obolibrary.org/obo/PR_F1LZ52",
-        "med_pr_text": "kelch-like protein 3 (rat)",
-        "med_pr_text_syn": "F1LZ52",
-        "model_entity": "chang_fujita_b_1999.cellml#ms_potassium_flux.G_ms_K",
-        "model_entity2": "",
-        "model_entity3": "",
-        "protein_name": "http://purl.obolibrary.org/obo/CL_0000066",
-        "sink_fma": "http://purl.obolibrary.org/obo/FMA_9673",
-        "sink_fma2": "diffusiveflux",
-        "sink_fma3": "diffusiveflux",
-        "solute_chebi": "http://purl.obolibrary.org/obo/CHEBI_29103",
-        "solute_chebi2": "diffusiveflux",
-        "solute_chebi3": "diffusiveflux",
-        "solute_text": "K+",
-        "solute_text2": "diffusiveflux",
-        "solute_text3": "diffusiveflux",
-        "source_fma": "http://purl.obolibrary.org/obo/FMA_74550",
-        "source_fma2": "diffusiveflux",
-        "source_fma3": "diffusiveflux",
-        "variable_text": "G_ms_K",
-        "variable_text2": "diffusiveflux",
-        "variable_text3": "diffusiveflux"
-    }
+    # ,
+    # {
+    #     "med_fma": "http://purl.obolibrary.org/obo/FMA_84666",
+    #     "med_pr": "http://purl.obolibrary.org/obo/PR_P37089",
+    #     "med_pr_text": "amiloride-sensitive sodium channel subunit alpha (rat)",
+    #     "med_pr_text_syn": "RENAC",
+    #     "model_entity": "chang_fujita_b_1999.cellml#mc_sodium_flux.G_mc_Na",
+    #     "model_entity2": "",
+    #     "model_entity3": "",
+    #     "protein_name": "http://purl.obolibrary.org/obo/CL_0000066",
+    #     "sink_fma": "http://purl.obolibrary.org/obo/FMA_66836",
+    #     "sink_fma2": "channel",
+    #     "sink_fma3": "channel",
+    #     "solute_chebi": "http://purl.obolibrary.org/obo/CHEBI_29101",
+    #     "solute_chebi2": "channel",
+    #     "solute_chebi3": "channel",
+    #     "solute_text": "Na+",
+    #     "solute_text2": "channel",
+    #     "solute_text3": "channel",
+    #     "source_fma": "http://purl.obolibrary.org/obo/FMA_74550",
+    #     "source_fma2": "channel",
+    #     "source_fma3": "channel",
+    #     "variable_text": "G_mc_Na",
+    #     "variable_text2": "channel",
+    #     "variable_text3": "channel"
+    # },
+    # {
+    #     "med_fma": "http://purl.obolibrary.org/obo/FMA_84666",
+    #     "med_pr": "http://purl.obolibrary.org/obo/PR_Q06393",
+    #     "med_pr_text": "chloride channel protein ClC-Ka (rat)",
+    #     "med_pr_text_syn": "CLCNK1",
+    #     "model_entity": "chang_fujita_b_1999.cellml#mc_chloride_flux.G_mc_Cl",
+    #     "model_entity2": "",
+    #     "model_entity3": "",
+    #     "protein_name": "http://purl.obolibrary.org/obo/CL_0000066",
+    #     "sink_fma": "http://purl.obolibrary.org/obo/FMA_66836",
+    #     "sink_fma2": "channel",
+    #     "sink_fma3": "channel",
+    #     "solute_chebi": "http://purl.obolibrary.org/obo/CHEBI_17996",
+    #     "solute_chebi2": "channel",
+    #     "solute_chebi3": "channel",
+    #     "solute_text": "Cl-",
+    #     "solute_text2": "channel",
+    #     "solute_text3": "channel",
+    #     "source_fma": "http://purl.obolibrary.org/obo/FMA_74550",
+    #     "source_fma2": "channel",
+    #     "source_fma3": "channel",
+    #     "variable_text": "G_mc_Cl",
+    #     "variable_text2": "channel",
+    #     "variable_text3": "channel"
+    # },
+    # {
+    #     "med_fma": "http://purl.obolibrary.org/obo/FMA_84666",
+    #     "med_pr": "http://purl.obolibrary.org/obo/PR_P15387",
+    #     "med_pr_text": "potassium voltage-gated channel subfamily B member 1 (rat)",
+    #     "med_pr_text_syn": "P15387",
+    #     "model_entity": "chang_fujita_b_1999.cellml#mc_potassium_flux.G_mc_K",
+    #     "model_entity2": "",
+    #     "model_entity3": "",
+    #     "protein_name": "http://purl.obolibrary.org/obo/CL_0000066",
+    #     "sink_fma": "http://purl.obolibrary.org/obo/FMA_66836",
+    #     "sink_fma2": "channel",
+    #     "sink_fma3": "channel",
+    #     "solute_chebi": "http://purl.obolibrary.org/obo/CHEBI_29103",
+    #     "solute_chebi2": "channel",
+    #     "solute_chebi3": "channel",
+    #     "solute_text": "K+",
+    #     "solute_text2": "channel",
+    #     "solute_text3": "channel",
+    #     "source_fma": "http://purl.obolibrary.org/obo/FMA_74550",
+    #     "source_fma2": "channel",
+    #     "source_fma3": "channel",
+    #     "variable_text": "G_mc_K",
+    #     "variable_text2": "channel",
+    #     "variable_text3": "channel"
+    # },
+    # {
+    #     "med_fma": "http://purl.obolibrary.org/obo/FMA_84669",
+    #     "med_pr": "http://purl.obolibrary.org/obo/PR_P06685",
+    #     "med_pr_text": "sodium/potassium-transporting ATPase subunit alpha-1 (rat)",
+    #     "med_pr_text_syn": "P06685",
+    #     "model_entity": "chang_fujita_b_1999.cellml#solute_concentrations.J_sc_Na",
+    #     "model_entity2": "chang_fujita_b_1999.cellml#sc_potassium_flux.J_sc_K",
+    #     "model_entity3": "",
+    #     "protein_name": "http://purl.obolibrary.org/obo/CL_0000066",
+    #     "sink_fma": "http://purl.obolibrary.org/obo/FMA_9673",
+    #     "sink_fma2": "http://purl.obolibrary.org/obo/FMA_66836",
+    #     "sink_fma3": "",
+    #     "solute_chebi": "http://purl.obolibrary.org/obo/CHEBI_29101",
+    #     "solute_chebi2": "http://purl.obolibrary.org/obo/CHEBI_29103",
+    #     "solute_chebi3": "",
+    #     "solute_text": "Na+",
+    #     "solute_text2": "K+",
+    #     "solute_text3": "",
+    #     "source_fma": "http://purl.obolibrary.org/obo/FMA_66836",
+    #     "source_fma2": "http://purl.obolibrary.org/obo/FMA_9673",
+    #     "source_fma3": "",
+    #     "variable_text": "J_sc_Na",
+    #     "variable_text2": "J_sc_K",
+    #     "variable_text3": ""
+    # },
+    # {
+    #     "med_fma": "http://purl.obolibrary.org/obo/FMA_84669",
+    #     "med_pr": "http://purl.obolibrary.org/obo/PR_Q06393",
+    #     "med_pr_text": "chloride channel protein ClC-Ka (rat)",
+    #     "med_pr_text_syn": "CLCNK1",
+    #     "model_entity": "chang_fujita_b_1999.cellml#sc_chloride_flux.G_sc_Cl",
+    #     "model_entity2": "",
+    #     "model_entity3": "",
+    #     "protein_name": "http://purl.obolibrary.org/obo/CL_0000066",
+    #     "sink_fma": "http://purl.obolibrary.org/obo/FMA_66836",
+    #     "sink_fma2": "channel",
+    #     "sink_fma3": "channel",
+    #     "solute_chebi": "http://purl.obolibrary.org/obo/CHEBI_17996",
+    #     "solute_chebi2": "channel",
+    #     "solute_chebi3": "channel",
+    #     "solute_text": "Cl-",
+    #     "solute_text2": "channel",
+    #     "solute_text3": "channel",
+    #     "source_fma": "http://purl.obolibrary.org/obo/FMA_9673",
+    #     "source_fma2": "channel",
+    #     "source_fma3": "channel",
+    #     "variable_text": "G_sc_Cl",
+    #     "variable_text2": "channel",
+    #     "variable_text3": "channel"
+    # },
+    # {
+    #     "med_fma": "http://purl.obolibrary.org/obo/FMA_84669",
+    #     "med_pr": "http://purl.obolibrary.org/obo/PR_P15387",
+    #     "med_pr_text": "potassium voltage-gated channel subfamily B member 1 (rat)",
+    #     "med_pr_text_syn": "P15387",
+    #     "model_entity": "chang_fujita_b_1999.cellml#sc_potassium_flux.G_sc_K",
+    #     "model_entity2": "",
+    #     "model_entity3": "",
+    #     "protein_name": "http://purl.obolibrary.org/obo/CL_0000066",
+    #     "sink_fma": "http://purl.obolibrary.org/obo/FMA_66836",
+    #     "sink_fma2": "channel",
+    #     "sink_fma3": "channel",
+    #     "solute_chebi": "http://purl.obolibrary.org/obo/CHEBI_29103",
+    #     "solute_chebi2": "channel",
+    #     "solute_chebi3": "channel",
+    #     "solute_text": "K+",
+    #     "solute_text2": "channel",
+    #     "solute_text3": "channel",
+    #     "source_fma": "http://purl.obolibrary.org/obo/FMA_9673",
+    #     "source_fma2": "channel",
+    #     "source_fma3": "channel",
+    #     "variable_text": "G_sc_K",
+    #     "variable_text2": "channel",
+    #     "variable_text3": "channel"
+    # },
+    # {
+    #     "med_fma": "http://purl.obolibrary.org/obo/FMA_67394",
+    #     "med_pr": "http://purl.obolibrary.org/obo/PR_Q9Z0S6",
+    #     "med_pr_text": "claudin-10 (mouse)",
+    #     "med_pr_text_syn": "CLDN10A",
+    #     "model_entity": "chang_fujita_b_1999.cellml#ms_sodium_flux.G_ms_Na",
+    #     "model_entity2": "",
+    #     "model_entity3": "",
+    #     "protein_name": "http://purl.obolibrary.org/obo/CL_0000066",
+    #     "sink_fma": "http://purl.obolibrary.org/obo/FMA_9673",
+    #     "sink_fma2": "diffusiveflux",
+    #     "sink_fma3": "diffusiveflux",
+    #     "solute_chebi": "http://purl.obolibrary.org/obo/CHEBI_29101",
+    #     "solute_chebi2": "diffusiveflux",
+    #     "solute_chebi3": "diffusiveflux",
+    #     "solute_text": "Na+",
+    #     "solute_text2": "diffusiveflux",
+    #     "solute_text3": "diffusiveflux",
+    #     "source_fma": "http://purl.obolibrary.org/obo/FMA_74550",
+    #     "source_fma2": "diffusiveflux",
+    #     "source_fma3": "diffusiveflux",
+    #     "variable_text": "G_ms_Na",
+    #     "variable_text2": "diffusiveflux",
+    #     "variable_text3": "diffusiveflux"
+    # },
+    # {
+    #     "med_fma": "http://purl.obolibrary.org/obo/FMA_67394",
+    #     "med_pr": "http://purl.obolibrary.org/obo/PR_O35054",
+    #     "med_pr_text": "claudin-4 (mouse)",
+    #     "med_pr_text_syn": "CPETR1",
+    #     "model_entity": "chang_fujita_b_1999.cellml#ms_chloride_flux.G_ms_Cl",
+    #     "model_entity2": "",
+    #     "model_entity3": "",
+    #     "protein_name": "http://purl.obolibrary.org/obo/CL_0000066",
+    #     "sink_fma": "http://purl.obolibrary.org/obo/FMA_9673",
+    #     "sink_fma2": "diffusiveflux",
+    #     "sink_fma3": "diffusiveflux",
+    #     "solute_chebi": "http://purl.obolibrary.org/obo/CHEBI_17996",
+    #     "solute_chebi2": "diffusiveflux",
+    #     "solute_chebi3": "diffusiveflux",
+    #     "solute_text": "Cl-",
+    #     "solute_text2": "diffusiveflux",
+    #     "solute_text3": "diffusiveflux",
+    #     "source_fma": "http://purl.obolibrary.org/obo/FMA_74550",
+    #     "source_fma2": "diffusiveflux",
+    #     "source_fma3": "diffusiveflux",
+    #     "variable_text": "G_ms_Cl",
+    #     "variable_text2": "diffusiveflux",
+    #     "variable_text3": "diffusiveflux"
+    # },
+    # {
+    #     "med_fma": "http://purl.obolibrary.org/obo/FMA_67394",
+    #     "med_pr": "http://purl.obolibrary.org/obo/PR_F1LZ52",
+    #     "med_pr_text": "kelch-like protein 3 (rat)",
+    #     "med_pr_text_syn": "F1LZ52",
+    #     "model_entity": "chang_fujita_b_1999.cellml#ms_potassium_flux.G_ms_K",
+    #     "model_entity2": "",
+    #     "model_entity3": "",
+    #     "protein_name": "http://purl.obolibrary.org/obo/CL_0000066",
+    #     "sink_fma": "http://purl.obolibrary.org/obo/FMA_9673",
+    #     "sink_fma2": "diffusiveflux",
+    #     "sink_fma3": "diffusiveflux",
+    #     "solute_chebi": "http://purl.obolibrary.org/obo/CHEBI_29103",
+    #     "solute_chebi2": "diffusiveflux",
+    #     "solute_chebi3": "diffusiveflux",
+    #     "solute_text": "K+",
+    #     "solute_text2": "diffusiveflux",
+    #     "solute_text3": "diffusiveflux",
+    #     "source_fma": "http://purl.obolibrary.org/obo/FMA_74550",
+    #     "source_fma2": "diffusiveflux",
+    #     "source_fma3": "diffusiveflux",
+    #     "variable_text": "G_ms_K",
+    #     "variable_text2": "diffusiveflux",
+    #     "variable_text3": "diffusiveflux"
+    # }
 ]
 
 # sparql endpoint in PMR
@@ -618,21 +619,53 @@ def instantiateImportedComponent(sourceurl, component, epithelial, m):
     if m.getComponent(importedComponent.getName()) == None:
         m.addComponent(importedComponent)
 
+        print("m.componentCount:", m.componentCount())
+        # Testing
+        printer = Printer()
+        for i in range(m.componentCount()):
+            print("## component of m: ", m.getComponent(i).getName())
+            c = m.getComponent(i)
+            s = printer.printComponent(c)
+            print("## print component:", s)
+            for j in range(c.variableCount()):
+                print("## variable: ", c.getVariable(j).getName())
+
+        # serialize and print this new model
+        model = printer.printModel(m)
+
+        print("print model:", model)
+
     # if epithelial.getComponent(importedComponent.getName()) == None:
     #     epithelial.addComponent(importedComponent)
     # making http request to the source model
     r = requests.get(sourceurl)
+
+    # parsing cellml 1.0 or 1.1 to 2.0
+    dom = ET.fromstring(r.text.encode("utf-8"))
+    xslt = ET.parse("cellml1to2.xsl")
+    transform = ET.XSLT(xslt)
+    newdom = transform(dom)
+
+    mstr = ET.tostring(newdom, pretty_print=True)
+    mstr = mstr.decode("utf-8")
+
     # parse the string representation of the model to access by libcellml
     p = Parser()
-    impModel = p.parseModel(r.text)
-    impComponent = impModel.getComponent(importedComponent.getName())
+    impModel = p.parseModel(mstr)
 
-    print("###impComponent: ", impComponent.getName())
-    print("###impComponent count: ", impComponent.variableCount())
+    # check a valid model
+    if p.errorCount() > 0:
+        for i in range(p.errorCount()):
+            print("## p.getError: ", p.getError(i).getDescription())
+
+    impComponent = impModel.getComponent(importedComponent.getName())
 
     for i in range(impComponent.variableCount()):
         impVariable = impComponent.getVariable(i)
         importedComponent.addVariable(impVariable)
+
+    print("impComponent: ", impComponent)
+    print("\n")
 
 
 # process model entities and source models' urls
