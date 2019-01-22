@@ -25,10 +25,13 @@ m.addComponent(epithelial)
 # iterate through model recipe to import components from source models
 for item in model_recipe:
     if item["model_entity"] != "":
+        print("model_entity: ", item["model_entity"])
         processModelEntity(item["model_entity"], epithelial, m)
     if item['model_entity2'] != "":
+        print("model_entity2: ", item["model_entity2"])
         processModelEntity(item["model_entity2"], epithelial, m)
     if item["model_entity3"] != "":
+        print("model_entity3: ", item["model_entity3"])
         processModelEntity(item["model_entity3"], epithelial, m)
 
 # math dictionary to store ODE based equations for lumen, cytosol and interstitial fluid component
