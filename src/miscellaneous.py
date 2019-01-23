@@ -608,6 +608,8 @@ def addUnitsModel(unit_name, importedModel, m):
 
 # instantiate source url and create an imported component in the import section of the new model
 def instantiateImportedComponent(sourceurl, component, epithelial, m):
+    print("Instantiating imported component: " + sourceurl + "; component: " + component)
+
     imp = ImportSource()
     imp.setUrl(sourceurl)
 
@@ -616,24 +618,15 @@ def instantiateImportedComponent(sourceurl, component, epithelial, m):
     importedComponent.setSourceComponent(imp, component)
 
     # m.addComponent(importedComponent)
-    if m.getComponent(importedComponent.getName()) == None:
+    if m.getComponent(importedComponent.getName()) is None:
         m.addComponent(importedComponent)
 
         print("m.componentCount:", m.componentCount())
-        # Testing
-        printer = Printer()
         for i in range(m.componentCount()):
             print("## component of m: ", m.getComponent(i).getName())
             c = m.getComponent(i)
-            s = printer.printComponent(c)
-            print("## print component:", s)
             for j in range(c.variableCount()):
                 print("## variable: ", c.getVariable(j).getName())
-
-        # serialize and print this new model
-        model = printer.printModel(m)
-
-        print("print model:", model)
 
     # if epithelial.getComponent(importedComponent.getName()) == None:
     #     epithelial.addComponent(importedComponent)
@@ -660,9 +653,14 @@ def instantiateImportedComponent(sourceurl, component, epithelial, m):
 
     impComponent = impModel.getComponent(importedComponent.getName())
 
+    # in order to later define the connections we need, we must make sure all the variables from
+    # the source model are present in the imported component, we only need the name so just grab
+    # that from the source.
     for i in range(impComponent.variableCount()):
         impVariable = impComponent.getVariable(i)
-        importedComponent.addVariable(impVariable)
+        v = Variable()
+        v.setName(impVariable.getName())
+        importedComponent.addVariable(v)
 
     print("impComponent: ", impComponent)
     print("\n")
