@@ -87,18 +87,38 @@ def addComponentFromModelRecipe(modelentity, fma, chebi, compartment, source_fma
     # making http request to the source model
     r = requests.get(workspaceURL + model_name_flux)
 
-    dom = ET.fromstring(r.text.encode("utf-8"))
-    xslt = ET.parse("cellml1to2.xsl")
-    transform = ET.XSLT(xslt)
-    newdom = transform(dom)
-    # print(ET.tostring(newdom, pretty_print=True))
-
-    mstr = ET.tostring(newdom, pretty_print=True)
-    mstr = mstr.decode("utf-8")
-
     # parse the string representation of the model to access by libcellml
     p = Parser()
-    importedModel = p.parseModel(mstr)
+    importedModel = p.parseModel(r.text)
+
+    # check a valid model
+    if p.errorCount() > 0:
+        for i in range(p.errorCount()):
+            desc = p.getError(i).getDescription()
+            cellmlNullNamespace = "Model element is in invalid namespace 'null'"
+            cellml10Namespace = "Model element is in invalid namespace 'http://www.cellml.org/cellml/1.0#'"
+            cellml11Namespace = "Model element is in invalid namespace 'http://www.cellml.org/cellml/1.1#'"
+
+            if desc.find(cellmlNullNamespace) != -1 :
+                print("Error in main.py: ", p.getError(i).getDescription())
+                exit()
+            elif desc.find(cellml10Namespace) != -1 or desc.find(cellml11Namespace) != -1:
+                print("Msg in main.py: ", p.getError(i).getDescription())
+
+                # parsing cellml 1.0 or 1.1 to 2.0
+                dom = ET.fromstring(r.text.encode("utf-8"))
+                xslt = ET.parse("cellml1to2.xsl")
+                transform = ET.XSLT(xslt)
+                newdom = transform(dom)
+
+                mstr = ET.tostring(newdom, pretty_print=True)
+                mstr = mstr.decode("utf-8")
+
+                # parse the string representation of the model to access by libcellml
+                importedModel = p.parseModel(mstr)
+            else:
+                print("Error in main.py: ", p.getError(i).getDescription())
+                exit()
 
     # iterate over the sparql's each result in the results
     for result in results["results"]["bindings"]:
