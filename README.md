@@ -1,7 +1,7 @@
 ## Model Assembly Service
 Model assembly service is an application to compose CellML model entities from disparate source models in order to serialize a new CellML model. To perform model composition, this application utilizes the python bindings of the [libcellML](https://github.com/cellml/libcellml) library.
 
-## Installing
+## Installation
 ### libCellML in Linux
 Our model assembly service utilizes the libCellML library to compose CellML model entities. For convenience, we have described here the installation process of libCellml in Linux environment. For Windows 10 environment, please follow a link mentioned below.
 
