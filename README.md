@@ -36,6 +36,15 @@ For testing, please run a test file to make sure libcellml is working.
 python ~/libcellml/tests/bindings/python/test_model.py
 ```
 
+After following the above instructions, enter the commands mentioned below:
+```
+git clone https://github.com/dewancse/model-assembly-service.git
+cd model-assembly-service
+cd src
+```
+
+And then execute `main.py`
+
 ### libcellml in Windows 10
 Please navigate to the following link to get a detailed instruction on how to install (under-development) Python bindings on Windows 10.
 ``` 
